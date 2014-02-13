@@ -1,0 +1,219 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>TlmAccountPlugin</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+<link rel="home" href="index.html" title="Tizen Login Manager Reference Manual">
+<link rel="up" href="ch02.html" title="Tlm plugins reference">
+<link rel="prev" href="ch02.html" title="Tlm plugins reference">
+<link rel="next" href="tlm-TlmAccountPluginDefault.html" title="TlmAccountPluginDefault">
+<meta name="generator" content="GTK-Doc V1.18 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="ch02.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch02.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Tizen Login Manager Reference Manual</th>
+<td><a accesskey="n" href="tlm-TlmAccountPluginDefault.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#tlm-TlmAccountPlugin.synopsis" class="shortcut">Top</a>
+                   | 
+                  <a href="#tlm-TlmAccountPlugin.description" class="shortcut">Description</a>
+</td></tr>
+</table>
+<div class="refentry">
+<a name="tlm-TlmAccountPlugin"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="tlm-TlmAccountPlugin.top_of_page"></a>TlmAccountPlugin</span></h2>
+<p>TlmAccountPlugin — an interface for implementing tlm account plugins</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<a name="tlm-TlmAccountPlugin.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+#include &lt;tlm-account-plugin.h&gt;
+
+struct              <a class="link" href="tlm-TlmAccountPlugin.html#TlmAccountPluginInterface" title="struct TlmAccountPluginInterface">TlmAccountPluginInterface</a>;
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="tlm-TlmAccountPlugin.html#tlm-account-plugin-cleanup-guest-user" title="tlm_account_plugin_cleanup_guest_user ()">tlm_account_plugin_cleanup_guest_user</a>
+                                                        (<em class="parameter"><code><span class="type">TlmAccountPlugin</span> *self</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *user_name</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> delete_account</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="tlm-TlmAccountPlugin.html#tlm-account-plugin-is-valid-user" title="tlm_account_plugin_is_valid_user ()">tlm_account_plugin_is_valid_user</a>    (<em class="parameter"><code><span class="type">TlmAccountPlugin</span> *self</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *user_name</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="tlm-TlmAccountPlugin.html#tlm-account-plugin-setup-guest-user-account" title="tlm_account_plugin_setup_guest_user_account ()">tlm_account_plugin_setup_guest_user_account</a>
+                                                        (<em class="parameter"><code><span class="type">TlmAccountPlugin</span> *self</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *user_name</code></em>);
+</pre>
+</div>
+<div class="refsect1">
+<a name="tlm-TlmAccountPlugin.description"></a><h2>Description</h2>
+<p>
+<span class="type">TlmAccountPlugin</span> is an interface for implementing tlm account plugins.
+</p>
+<p>
+</p>
+<div class="refsect1">
+<a name="idp9699824"></a><h2>The plugin API</h2>
+</div>
+<p>
+</p>
+<p>
+Tlm account plugins provide an API for system-specific account operations:
+setting up and cleaning up guest user account, and checking username validity.
+They should implement the plugin interface specified here.
+</p>
+<p>
+</p>
+<div class="refsect1">
+<a name="idp9043392"></a><h2>Example plugins</h2>
+</div>
+<p>
+</p>
+<p>
+See example plugin implementation here:
+<a class="ulink" href="https://github.com/01org/tlm/tree/master/src/plugins/default" target="_top">
+https://github.com/01org/tlm/tree/master/src/plugins/default</a> and here:
+<a class="ulink" href="https://github.com/01org/tlm/tree/master/src/plugins/gumd" target="_top">
+https://github.com/01org/tlm/tree/master/src/plugins/gumd</a>.
+</p>
+</div>
+<div class="refsect1">
+<a name="tlm-TlmAccountPlugin.details"></a><h2>Details</h2>
+<div class="refsect2">
+<a name="TlmAccountPluginInterface"></a><h3>struct TlmAccountPluginInterface</h3>
+<pre class="programlisting">struct TlmAccountPluginInterface {
+   GTypeInterface parent;
+
+    gboolean (*setup_guest_user_account) (TlmAccountPlugin *self,
+                                          const gchar *user_name);
+    gboolean (*is_valid_user) (TlmAccountPlugin *self,
+                               const gchar *user_name);
+
+   gboolean  (*cleanup_guest_user) (TlmAccountPlugin *self,
+                                    const gchar *guest_user,
+                                    gboolean delete_account);
+};
+</pre>
+<p>
+<a class="link" href="tlm-TlmAccountPlugin.html#TlmAccountPluginInterface" title="struct TlmAccountPluginInterface"><span class="type">TlmAccountPluginInterface</span></a> interface containing pointers to methods that all
+plugin implementations should provide.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><a href="http://library.gnome.org/devel/gobject/unstable/gobject-Type-Information.html#GTypeInterface"><span class="type">GTypeInterface</span></a> <em class="structfield"><code><a name="TlmAccountPluginInterface.parent"></a>parent</code></em>;</span></p></td>
+<td>parent interface type.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="structfield"><code><a name="TlmAccountPluginInterface.setup-guest-user-account"></a>setup_guest_user_account</code></em> ()</span></p></td>
+<td>implementation of <a class="link" href="tlm-TlmAccountPlugin.html#tlm-account-plugin-setup-guest-user-account" title="tlm_account_plugin_setup_guest_user_account ()"><code class="function">tlm_account_plugin_setup_guest_user_account()</code></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="structfield"><code><a name="TlmAccountPluginInterface.is-valid-user"></a>is_valid_user</code></em> ()</span></p></td>
+<td>implementation of <a class="link" href="tlm-TlmAccountPlugin.html#tlm-account-plugin-is-valid-user" title="tlm_account_plugin_is_valid_user ()"><code class="function">tlm_account_plugin_is_valid_user()</code></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="structfield"><code><a name="TlmAccountPluginInterface.cleanup-guest-user"></a>cleanup_guest_user</code></em> ()</span></p></td>
+<td>implementation of <a class="link" href="tlm-TlmAccountPlugin.html#tlm-account-plugin-cleanup-guest-user" title="tlm_account_plugin_cleanup_guest_user ()"><code class="function">tlm_account_plugin_cleanup_guest_user()</code></a>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="tlm-account-plugin-cleanup-guest-user"></a><h3>tlm_account_plugin_cleanup_guest_user ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            tlm_account_plugin_cleanup_guest_user
+                                                        (<em class="parameter"><code><span class="type">TlmAccountPlugin</span> *self</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *user_name</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> delete_account</code></em>);</pre>
+<p>
+When a guest user logs out, this method is called. It should clean up the
+home directory of the user, and, if delete_user is set, delete the user
+account.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>self</code></em> :</span></p></td>
+<td>plugin instance</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_name</code></em> :</span></p></td>
+<td>user name to clean up</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>delete_account</code></em> :</span></p></td>
+<td>whether the user account should be deleted</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="tlm-account-plugin-is-valid-user"></a><h3>tlm_account_plugin_is_valid_user ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            tlm_account_plugin_is_valid_user    (<em class="parameter"><code><span class="type">TlmAccountPlugin</span> *self</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *user_name</code></em>);</pre>
+<p>
+Checks if the user with a given <em class="parameter"><code>user_name</code></em> exists.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>self</code></em> :</span></p></td>
+<td>plugin instance</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_name</code></em> :</span></p></td>
+<td>user name to check</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="tlm-account-plugin-setup-guest-user-account"></a><h3>tlm_account_plugin_setup_guest_user_account ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            tlm_account_plugin_setup_guest_user_account
+                                                        (<em class="parameter"><code><span class="type">TlmAccountPlugin</span> *self</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *user_name</code></em>);</pre>
+<p>
+This method creates and sets up a guest user account with a provided
+<em class="parameter"><code>user_name</code></em>.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>self</code></em> :</span></p></td>
+<td>plugin instance</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_name</code></em> :</span></p></td>
+<td>the user name</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>whether the operation succeeded.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.18</div>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>TlmAuthPlugin</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+<link rel="home" href="index.html" title="Tizen Login Manager Reference Manual">
+<link rel="up" href="ch02.html" title="Tlm plugins reference">
+<link rel="prev" href="TlmAccountPluginGumd.html" title="TlmAccountPluginGumd">
+<link rel="next" href="tlm-TlmAuthPluginDefault.html" title="TlmAuthPluginDefault">
+<meta name="generator" content="GTK-Doc V1.18 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="TlmAccountPluginGumd.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch02.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Tizen Login Manager Reference Manual</th>
+<td><a accesskey="n" href="tlm-TlmAuthPluginDefault.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#tlm-TlmAuthPlugin.synopsis" class="shortcut">Top</a>
+                   | 
+                  <a href="#tlm-TlmAuthPlugin.description" class="shortcut">Description</a>
+</td></tr>
+</table>
+<div class="refentry">
+<a name="tlm-TlmAuthPlugin"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="tlm-TlmAuthPlugin.top_of_page"></a>TlmAuthPlugin</span></h2>
+<p>TlmAuthPlugin — an interface for implementing tlm authentication plugins</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<a name="tlm-TlmAuthPlugin.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+#include &lt;tlm-auth-plugin.h&gt;
+
+struct              <a class="link" href="tlm-TlmAuthPlugin.html#TlmAuthPluginInterface" title="struct TlmAuthPluginInterface">TlmAuthPluginInterface</a>;
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="tlm-TlmAuthPlugin.html#tlm-auth-plugin-start-authentication" title="tlm_auth_plugin_start_authentication ()">tlm_auth_plugin_start_authentication</a>
+                                                        (<em class="parameter"><code><span class="type">TlmAuthPlugin</span> *self</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *seat_id</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *pam_service</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *user_name</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *password</code></em>);
+</pre>
+</div>
+<div class="refsect1">
+<a name="tlm-TlmAuthPlugin.description"></a><h2>Description</h2>
+<p>
+<span class="type">TlmAuthPlugin</span> is an interface for implementing tlm authentication plugins.
+</p>
+<p>
+</p>
+<div class="refsect1">
+<a name="idp8207920"></a><h2>The plugin API</h2>
+</div>
+<p>
+</p>
+<p>
+Tlm authentication plugins provide authentication events: when they detect a user's
+intention to login, they issue a signal, containing user's credentials. Tlm
+acts upon this signal, by checking the credentials and starting a new session.
+</p>
+<p>
+</p>
+<div class="refsect1">
+<a name="idp6675856"></a><h2>Example plugins</h2>
+</div>
+<p>
+</p>
+<p>
+See example plugin implementation here:
+<a class="ulink" href="https://github.com/01org/tlm/tree/master/src/plugins/default" target="_top">
+https://github.com/01org/tlm/tree/master/src/plugins/default</a> and here:
+<a class="ulink" href="https://github.com/01org/tlm/tree/master/src/plugins/nfc" target="_top">
+https://github.com/01org/tlm/tree/master/src/plugins/nfc</a>.
+</p>
+</div>
+<div class="refsect1">
+<a name="tlm-TlmAuthPlugin.details"></a><h2>Details</h2>
+<div class="refsect2">
+<a name="TlmAuthPluginInterface"></a><h3>struct TlmAuthPluginInterface</h3>
+<pre class="programlisting">struct TlmAuthPluginInterface {
+   GTypeInterface parent;
+};
+</pre>
+<p>
+<a class="link" href="tlm-TlmAuthPlugin.html#TlmAuthPluginInterface" title="struct TlmAuthPluginInterface"><span class="type">TlmAuthPluginInterface</span></a> interface.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><a href="http://library.gnome.org/devel/gobject/unstable/gobject-Type-Information.html#GTypeInterface"><span class="type">GTypeInterface</span></a> <em class="structfield"><code><a name="TlmAuthPluginInterface.parent"></a>parent</code></em>;</span></p></td>
+<td>parent interface type.</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="tlm-auth-plugin-start-authentication"></a><h3>tlm_auth_plugin_start_authentication ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            tlm_auth_plugin_start_authentication
+                                                        (<em class="parameter"><code><span class="type">TlmAuthPlugin</span> *self</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *seat_id</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *pam_service</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *user_name</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *password</code></em>);</pre>
+<p>
+This method should be used by plugin implementations to issue TlmAuthPlugin::authenticate
+signal.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>self</code></em> :</span></p></td>
+<td>a plugin instance</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>seat_id</code></em> :</span></p></td>
+<td>seat id</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>pam_service</code></em> :</span></p></td>
+<td>PAM service</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_name</code></em> :</span></p></td>
+<td>user name</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>password</code></em> :</span></p></td>
+<td>password</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.18</div>
+</body>
+</html>

@@ -1,0 +1,603 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>TlmConfig</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+<link rel="home" href="index.html" title="Tizen Login Manager Reference Manual">
+<link rel="up" href="ch01.html" title="Introduction">
+<link rel="prev" href="tlm-intro.html" title="Introduction">
+<link rel="next" href="tlm-General-configuration.html" title="General configuration">
+<meta name="generator" content="GTK-Doc V1.18 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="tlm-intro.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Tizen Login Manager Reference Manual</th>
+<td><a accesskey="n" href="tlm-General-configuration.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#TlmConfig.synopsis" class="shortcut">Top</a>
+                   | 
+                  <a href="#TlmConfig.description" class="shortcut">Description</a>
+                   | 
+                  <a href="#TlmConfig.object-hierarchy" class="shortcut">Object Hierarchy</a>
+</td></tr>
+</table>
+<div class="refentry">
+<a name="TlmConfig"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="TlmConfig.top_of_page"></a>TlmConfig</span></h2>
+<p>TlmConfig — tlm configuration information</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<a name="TlmConfig.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+#include &lt;tlm-config.h&gt;
+
+struct              <a class="link" href="TlmConfig.html#TlmConfig-struct" title="struct TlmConfig">TlmConfig</a>;
+struct              <a class="link" href="TlmConfig.html#TlmConfigClass" title="struct TlmConfigClass">TlmConfigClass</a>;
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="TlmConfig.html#tlm-config-get-boolean" title="tlm_config_get_boolean ()">tlm_config_get_boolean</a>              (<em class="parameter"><code><a class="link" href="TlmConfig.html" title="TlmConfig"><span class="type">TlmConfig</span></a> *self</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *group</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *key</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> retval</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Hash-Tables.html#GHashTable"><span class="returnvalue">GHashTable</span></a> *        <a class="link" href="TlmConfig.html#tlm-config-get-group" title="tlm_config_get_group ()">tlm_config_get_group</a>                (<em class="parameter"><code><a class="link" href="TlmConfig.html" title="TlmConfig"><span class="type">TlmConfig</span></a> *self</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *group</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a>                <a class="link" href="TlmConfig.html#tlm-config-get-int" title="tlm_config_get_int ()">tlm_config_get_int</a>                  (<em class="parameter"><code><a class="link" href="TlmConfig.html" title="TlmConfig"><span class="type">TlmConfig</span></a> *self</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *group</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *key</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="type">gint</span></a> retval</code></em>);
+const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *       <a class="link" href="TlmConfig.html#tlm-config-get-string" title="tlm_config_get_string ()">tlm_config_get_string</a>               (<em class="parameter"><code><a class="link" href="TlmConfig.html" title="TlmConfig"><span class="type">TlmConfig</span></a> *self</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *group</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *key</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint"><span class="returnvalue">guint</span></a>               <a class="link" href="TlmConfig.html#tlm-config-get-uint" title="tlm_config_get_uint ()">tlm_config_get_uint</a>                 (<em class="parameter"><code><a class="link" href="TlmConfig.html" title="TlmConfig"><span class="type">TlmConfig</span></a> *self</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *group</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *key</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint"><span class="type">guint</span></a> retval</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="TlmConfig.html#tlm-config-has-group" title="tlm_config_has_group ()">tlm_config_has_group</a>                (<em class="parameter"><code><a class="link" href="TlmConfig.html" title="TlmConfig"><span class="type">TlmConfig</span></a> *self</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *group</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="TlmConfig.html#tlm-config-has-key" title="tlm_config_has_key ()">tlm_config_has_key</a>                  (<em class="parameter"><code><a class="link" href="TlmConfig.html" title="TlmConfig"><span class="type">TlmConfig</span></a> *self</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *group</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *key</code></em>);
+<a class="link" href="TlmConfig.html" title="TlmConfig"><span class="returnvalue">TlmConfig</span></a> *         <a class="link" href="TlmConfig.html#tlm-config-new" title="tlm_config_new ()">tlm_config_new</a>                      ();
+<span class="returnvalue">void</span>                <a class="link" href="TlmConfig.html#tlm-config-reload" title="tlm_config_reload ()">tlm_config_reload</a>                   (<em class="parameter"><code><a class="link" href="TlmConfig.html" title="TlmConfig"><span class="type">TlmConfig</span></a> *self</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="TlmConfig.html#tlm-config-set-boolean" title="tlm_config_set_boolean ()">tlm_config_set_boolean</a>              (<em class="parameter"><code><a class="link" href="TlmConfig.html" title="TlmConfig"><span class="type">TlmConfig</span></a> *self</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *group</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *key</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> value</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="TlmConfig.html#tlm-config-set-int" title="tlm_config_set_int ()">tlm_config_set_int</a>                  (<em class="parameter"><code><a class="link" href="TlmConfig.html" title="TlmConfig"><span class="type">TlmConfig</span></a> *self</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *group</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *key</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="type">gint</span></a> value</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="TlmConfig.html#tlm-config-set-string" title="tlm_config_set_string ()">tlm_config_set_string</a>               (<em class="parameter"><code><a class="link" href="TlmConfig.html" title="TlmConfig"><span class="type">TlmConfig</span></a> *self</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *group</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *key</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *value</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="TlmConfig.html#tlm-config-set-uint" title="tlm_config_set_uint ()">tlm_config_set_uint</a>                 (<em class="parameter"><code><a class="link" href="TlmConfig.html" title="TlmConfig"><span class="type">TlmConfig</span></a> *self</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *group</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *key</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint"><span class="type">guint</span></a> value</code></em>);
+</pre>
+</div>
+<div class="refsect1">
+<a name="TlmConfig.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="synopsis">
+  <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject">GObject</a>
+   +----TlmConfig
+</pre>
+</div>
+<div class="refsect1">
+<a name="TlmConfig.description"></a><h2>Description</h2>
+<p>
+<a class="link" href="TlmConfig.html" title="TlmConfig"><span class="type">TlmConfig</span></a> holds configuration information as a set of keys and values
+(integer or strings). The key names are defined in
+<a class="link" href="tlm-General-configuration.html" title="General configuration">General config keys</a>.
+Note that authentication and account plugins may use plugin-specific
+configuration keys; see plugins' documentation for specifics.
+</p>
+<p>
+The configuration is retrieved from the tlm configuration file. See below
+for where the file is searched for.
+</p>
+<p>
+</p>
+<div class="refsect1">
+<a name="idp10014048"></a><h2>Usage</h2>
+</div>
+<p>
+Following code snippet demonstrates how to create and use config object:
+</p>
+<div class="informalexample"><pre class="programlisting">
+
+TlmConfig* config = tlm_config_new ();
+const gchar *str = tlm_config_get_string (config,
+ TLM_CONFIG_GENERAL, TLM_CONFIG_GENERAL_PAM_SERVICE, 0);
+g_object_unref(config);
+
+</pre></div>
+<p>
+</p>
+<p>
+</p>
+<div class="refsect1">
+<a name="idp7277520"></a><h2>Where the configuration file is searched for</h2>
+</div>
+<p>
+</p>
+<p>
+If tlm has been compiled with --enable-debug, then these locations are used,
+in decreasing order of priority:
+</p>
+<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<li class="listitem"><p>TLM_CONF_FILE environment variable</p></li>
+<li class="listitem"><p><a href="http://library.gnome.org/devel/glib/unstable/glib-Miscellaneous-Utility-Functions.html#g-get-user-config-dir"><code class="function">g_get_user_config_dir()</code></a> + "tlm.conf"</p></li>
+<li class="listitem"><p>each of <a href="http://library.gnome.org/devel/glib/unstable/glib-Miscellaneous-Utility-Functions.html#g-get-system-config-dirs"><code class="function">g_get_system_config_dirs()</code></a> + "tlm.conf"</p></li>
+</ul></div>
+<p>
+</p>
+<p>
+Otherwise, the config file location is determined at compilation time as
+$(sysconfdir) + "tlm.conf"
+</p>
+<p>
+</p>
+<div class="refsect1">
+<a name="idp10633040"></a><h2>Example configuration file</h2>
+</div>
+<p>
+</p>
+<p>
+See example configuration file here:
+<a class="ulink" href="https://github.com/01org/tlm/blob/master/data/tlm.conf.in" target="_top">
+tlm configuration file</a>
+</p>
+</div>
+<div class="refsect1">
+<a name="TlmConfig.details"></a><h2>Details</h2>
+<div class="refsect2">
+<a name="TlmConfig-struct"></a><h3>struct TlmConfig</h3>
+<pre class="programlisting">struct TlmConfig;</pre>
+<p>
+Opaque structure for the object.
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="TlmConfigClass"></a><h3>struct TlmConfigClass</h3>
+<pre class="programlisting">struct TlmConfigClass {
+    GObjectClass parent_class;
+};
+</pre>
+<p>
+Opaque structure for the class.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObjectClass"><span class="type">GObjectClass</span></a> <em class="structfield"><code><a name="TlmConfigClass.parent-class"></a>parent_class</code></em>;</span></p></td>
+<td>parent class object</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="tlm-config-get-boolean"></a><h3>tlm_config_get_boolean ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            tlm_config_get_boolean              (<em class="parameter"><code><a class="link" href="TlmConfig.html" title="TlmConfig"><span class="type">TlmConfig</span></a> *self</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *group</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *key</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> retval</code></em>);</pre>
+<p>
+Get a boolean configuration value.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>self</code></em> :</span></p></td>
+<td>an instance of <a class="link" href="TlmConfig.html" title="TlmConfig"><span class="type">TlmConfig</span></a>. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>group</code></em> :</span></p></td>
+<td>the group name. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
+<td>the key name. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>retval</code></em> :</span></p></td>
+<td>value to be returned in case key is not found</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the value corresponding to the key as boolean. If the
+key does not exist or cannot be converted to boolean, retval is returned.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="tlm-config-get-group"></a><h3>tlm_config_get_group ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Hash-Tables.html#GHashTable"><span class="returnvalue">GHashTable</span></a> *        tlm_config_get_group                (<em class="parameter"><code><a class="link" href="TlmConfig.html" title="TlmConfig"><span class="type">TlmConfig</span></a> *self</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *group</code></em>);</pre>
+<p>
+Retrives the configuration in given <span class="type">group</span> as <a href="http://library.gnome.org/devel/glib/unstable/glib-Hash-Tables.html#GHashTable"><span class="type">GHashTable</span></a>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>self</code></em> :</span></p></td>
+<td>an instance of <a class="link" href="TlmConfig.html" title="TlmConfig"><span class="type">TlmConfig</span></a>. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>group</code></em> :</span></p></td>
+<td>the group name</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the key, value paired dictionary if found,
+NULL otherwise. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="tlm-config-get-int"></a><h3>tlm_config_get_int ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a>                tlm_config_get_int                  (<em class="parameter"><code><a class="link" href="TlmConfig.html" title="TlmConfig"><span class="type">TlmConfig</span></a> *self</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *group</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *key</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="type">gint</span></a> retval</code></em>);</pre>
+<p>
+Get an integer configuration value.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>self</code></em> :</span></p></td>
+<td>an instance of <a class="link" href="TlmConfig.html" title="TlmConfig"><span class="type">TlmConfig</span></a>. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>group</code></em> :</span></p></td>
+<td>the group name</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
+<td>the key name</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>retval</code></em> :</span></p></td>
+<td>value to be returned in case key is not found</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the value corresponding to the key as an integer. If the key does
+not exist or cannot be converted to the integer, retval is returned.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="tlm-config-get-string"></a><h3>tlm_config_get_string ()</h3>
+<pre class="programlisting">const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *       tlm_config_get_string               (<em class="parameter"><code><a class="link" href="TlmConfig.html" title="TlmConfig"><span class="type">TlmConfig</span></a> *self</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *group</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *key</code></em>);</pre>
+<p>
+Get a string configuration value.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>self</code></em> :</span></p></td>
+<td>an instance of <a class="link" href="TlmConfig.html" title="TlmConfig"><span class="type">TlmConfig</span></a>. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>group</code></em> :</span></p></td>
+<td>the group name, NULL refers to General. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
+<td>the key name. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the value corresponding to the key as an string. If the
+key does not exist or cannot be converted to the integer, NULL is returned.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="tlm-config-get-uint"></a><h3>tlm_config_get_uint ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint"><span class="returnvalue">guint</span></a>               tlm_config_get_uint                 (<em class="parameter"><code><a class="link" href="TlmConfig.html" title="TlmConfig"><span class="type">TlmConfig</span></a> *self</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *group</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *key</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint"><span class="type">guint</span></a> retval</code></em>);</pre>
+<p>
+Get an unsigned integer configuration value.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>self</code></em> :</span></p></td>
+<td>an instance of <a class="link" href="TlmConfig.html" title="TlmConfig"><span class="type">TlmConfig</span></a>. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>group</code></em> :</span></p></td>
+<td>the group name. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
+<td>the key name. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>retval</code></em> :</span></p></td>
+<td>value to be returned in case key is not found</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the value corresponding to the key as an unsigned integer. If the
+key does not exist or cannot be converted to the integer, retval is returned.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="tlm-config-has-group"></a><h3>tlm_config_has_group ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            tlm_config_has_group                (<em class="parameter"><code><a class="link" href="TlmConfig.html" title="TlmConfig"><span class="type">TlmConfig</span></a> *self</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *group</code></em>);</pre>
+<p>
+Checks if any configuration available for <span class="type">group</span>.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>self</code></em> :</span></p></td>
+<td>an instance of <a class="link" href="TlmConfig.html" title="TlmConfig"><span class="type">TlmConfig</span></a>. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>group</code></em> :</span></p></td>
+<td>the group name</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>TRUE if found, FALSE otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="tlm-config-has-key"></a><h3>tlm_config_has_key ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            tlm_config_has_key                  (<em class="parameter"><code><a class="link" href="TlmConfig.html" title="TlmConfig"><span class="type">TlmConfig</span></a> *self</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *group</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *key</code></em>);</pre>
+<p>
+Checks if <span class="type">key</span> is in given <span class="type">group</span>.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>self</code></em> :</span></p></td>
+<td>an instance of <a class="link" href="TlmConfig.html" title="TlmConfig"><span class="type">TlmConfig</span></a>. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>group</code></em> :</span></p></td>
+<td>the group name</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
+<td>the key name</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>TRUE, if found, FALSE otherwise.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="tlm-config-new"></a><h3>tlm_config_new ()</h3>
+<pre class="programlisting"><a class="link" href="TlmConfig.html" title="TlmConfig"><span class="returnvalue">TlmConfig</span></a> *         tlm_config_new                      ();</pre>
+<p>
+Create a <a class="link" href="TlmConfig.html" title="TlmConfig"><span class="type">TlmConfig</span></a> object.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>an instance of <a class="link" href="TlmConfig.html" title="TlmConfig"><span class="type">TlmConfig</span></a>.</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="tlm-config-reload"></a><h3>tlm_config_reload ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                tlm_config_reload                   (<em class="parameter"><code><a class="link" href="TlmConfig.html" title="TlmConfig"><span class="type">TlmConfig</span></a> *self</code></em>);</pre>
+<p>
+Reloads the configuration.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>self</code></em> :</span></p></td>
+<td>an instance of <a class="link" href="TlmConfig.html" title="TlmConfig"><span class="type">TlmConfig</span></a>. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="tlm-config-set-boolean"></a><h3>tlm_config_set_boolean ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                tlm_config_set_boolean              (<em class="parameter"><code><a class="link" href="TlmConfig.html" title="TlmConfig"><span class="type">TlmConfig</span></a> *self</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *group</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *key</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> value</code></em>);</pre>
+<p>
+Sets the configuration value to the provided <span class="type">value</span>.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>self</code></em> :</span></p></td>
+<td>an instance of <a class="link" href="TlmConfig.html" title="TlmConfig"><span class="type">TlmConfig</span></a>. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>group</code></em> :</span></p></td>
+<td>the group name</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
+<td>the key name</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
+<td>the value</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="tlm-config-set-int"></a><h3>tlm_config_set_int ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                tlm_config_set_int                  (<em class="parameter"><code><a class="link" href="TlmConfig.html" title="TlmConfig"><span class="type">TlmConfig</span></a> *self</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *group</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *key</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="type">gint</span></a> value</code></em>);</pre>
+<p>
+Sets the configuration value to the provided integer.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>self</code></em> :</span></p></td>
+<td>an instance of <a class="link" href="TlmConfig.html" title="TlmConfig"><span class="type">TlmConfig</span></a>. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>group</code></em> :</span></p></td>
+<td>the group name</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
+<td>the key name</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
+<td>the value</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="tlm-config-set-string"></a><h3>tlm_config_set_string ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                tlm_config_set_string               (<em class="parameter"><code><a class="link" href="TlmConfig.html" title="TlmConfig"><span class="type">TlmConfig</span></a> *self</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *group</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *key</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *value</code></em>);</pre>
+<p>
+Sets the configuration value to the provided string.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>self</code></em> :</span></p></td>
+<td>an instance of <a class="link" href="TlmConfig.html" title="TlmConfig"><span class="type">TlmConfig</span></a>. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>group</code></em> :</span></p></td>
+<td>the group name. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
+<td>the key name. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
+<td>the value. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="tlm-config-set-uint"></a><h3>tlm_config_set_uint ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                tlm_config_set_uint                 (<em class="parameter"><code><a class="link" href="TlmConfig.html" title="TlmConfig"><span class="type">TlmConfig</span></a> *self</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *group</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *key</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint"><span class="type">guint</span></a> value</code></em>);</pre>
+<p>
+Sets the configuration value to the provided unsigned integer.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>self</code></em> :</span></p></td>
+<td>an instance of <a class="link" href="TlmConfig.html" title="TlmConfig"><span class="type">TlmConfig</span></a>. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>group</code></em> :</span></p></td>
+<td>the group name. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
+<td>the key name</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
+<td>the value</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.18</div>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE book PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "">
+<book xmlns="http://www.devhelp.net/book" title="Tizen Login Manager Reference Manual" link="index.html" author="" name="tlm" version="2" language="c">
+  <chapters>
+    <sub name="Introduction" link="ch01.html">
+      <sub name="Introduction" link="tlm-intro.html"/>
+      <sub name="TlmConfig" link="TlmConfig.html"/>
+      <sub name="General configuration" link="tlm-General-configuration.html"/>
+      <sub name="org.tizen.Tlm.Login" link="gdbus-org.tizen.Tlm.Login.html"/>
+    </sub>
+    <sub name="Tlm plugins reference" link="ch02.html">
+      <sub name="TlmAccountPlugin" link="tlm-TlmAccountPlugin.html"/>
+      <sub name="TlmAccountPluginDefault" link="tlm-TlmAccountPluginDefault.html"/>
+      <sub name="TlmAccountPluginGumd" link="TlmAccountPluginGumd.html"/>
+      <sub name="TlmAuthPlugin" link="tlm-TlmAuthPlugin.html"/>
+      <sub name="TlmAuthPluginDefault" link="tlm-TlmAuthPluginDefault.html"/>
+    </sub>
+    <sub name="Tlm miscellaneous" link="ch03.html">
+      <sub name="tlm-log" link="tlm-tlm-log.html"/>
+      <sub name="Errors" link="tlm-Errors.html"/>
+    </sub>
+    <sub name="Object Hierarchy" link="object-tree.html"/>
+    <sub name="" link="ch05.html">
+      <sub name="Annotation Glossary" link="ch05.html#annotation-glossary"/>
+    </sub>
+    <sub name="API Index" link="api-index-full.html"/>
+    <sub name="Index of deprecated API" link="deprecated-api-index.html"/>
+  </chapters>
+  <functions>
+    <keyword type="struct" name="struct TlmConfig" link="TlmConfig.html#TlmConfig-struct"/>
+    <keyword type="struct" name="struct TlmConfigClass" link="TlmConfig.html#TlmConfigClass"/>
+    <keyword type="function" name="tlm_config_get_boolean ()" link="TlmConfig.html#tlm-config-get-boolean"/>
+    <keyword type="function" name="tlm_config_get_group ()" link="TlmConfig.html#tlm-config-get-group"/>
+    <keyword type="function" name="tlm_config_get_int ()" link="TlmConfig.html#tlm-config-get-int"/>
+    <keyword type="function" name="tlm_config_get_string ()" link="TlmConfig.html#tlm-config-get-string"/>
+    <keyword type="function" name="tlm_config_get_uint ()" link="TlmConfig.html#tlm-config-get-uint"/>
+    <keyword type="function" name="tlm_config_has_group ()" link="TlmConfig.html#tlm-config-has-group"/>
+    <keyword type="function" name="tlm_config_has_key ()" link="TlmConfig.html#tlm-config-has-key"/>
+    <keyword type="function" name="tlm_config_new ()" link="TlmConfig.html#tlm-config-new"/>
+    <keyword type="function" name="tlm_config_reload ()" link="TlmConfig.html#tlm-config-reload"/>
+    <keyword type="function" name="tlm_config_set_boolean ()" link="TlmConfig.html#tlm-config-set-boolean"/>
+    <keyword type="function" name="tlm_config_set_int ()" link="TlmConfig.html#tlm-config-set-int"/>
+    <keyword type="function" name="tlm_config_set_string ()" link="TlmConfig.html#tlm-config-set-string"/>
+    <keyword type="function" name="tlm_config_set_uint ()" link="TlmConfig.html#tlm-config-set-uint"/>
+    <keyword type="macro" name="TLM_CONFIG_GENERAL" link="tlm-General-configuration.html#TLM-CONFIG-GENERAL:CAPS"/>
+    <keyword type="macro" name="TLM_CONFIG_GENERAL_ACCOUNTS_PLUGIN" link="tlm-General-configuration.html#TLM-CONFIG-GENERAL-ACCOUNTS-PLUGIN:CAPS"/>
+    <keyword type="macro" name="TLM_CONFIG_GENERAL_AUTO_LOGIN" link="tlm-General-configuration.html#TLM-CONFIG-GENERAL-AUTO-LOGIN:CAPS"/>
+    <keyword type="macro" name="TLM_CONFIG_GENERAL_DATA_DIRS" link="tlm-General-configuration.html#TLM-CONFIG-GENERAL-DATA-DIRS:CAPS"/>
+    <keyword type="macro" name="TLM_CONFIG_GENERAL_DEFAULT_USER" link="tlm-General-configuration.html#TLM-CONFIG-GENERAL-DEFAULT-USER:CAPS"/>
+    <keyword type="macro" name="TLM_CONFIG_GENERAL_PAM_SERVICE" link="tlm-General-configuration.html#TLM-CONFIG-GENERAL-PAM-SERVICE:CAPS"/>
+    <keyword type="macro" name="TLM_CONFIG_GENERAL_PREPARE_DEFAULT" link="tlm-General-configuration.html#TLM-CONFIG-GENERAL-PREPARE-DEFAULT:CAPS"/>
+    <keyword type="macro" name="TLM_CONFIG_GENERAL_SESSION_CMD" link="tlm-General-configuration.html#TLM-CONFIG-GENERAL-SESSION-CMD:CAPS"/>
+    <keyword type="macro" name="TLM_CONFIG_GENERAL_SESSION_PATH" link="tlm-General-configuration.html#TLM-CONFIG-GENERAL-SESSION-PATH:CAPS"/>
+    <keyword type="macro" name="TLM_CONFIG_GENERAL_SETUP_TERMINAL" link="tlm-General-configuration.html#TLM-CONFIG-GENERAL-SETUP-TERMINAL:CAPS"/>
+    <keyword type="macro" name="TLM_CONFIG_GENERAL_TERMINATE_TIMEOUT" link="tlm-General-configuration.html#TLM-CONFIG-GENERAL-TERMINATE-TIMEOUT:CAPS"/>
+    <keyword type="method" name="The loginUser() method" link="gdbus-org.tizen.Tlm.Login.html#gdbus-method-org-tizen-Tlm-Login.loginUser"/>
+    <keyword type="method" name="The logoutUser() method" link="gdbus-org.tizen.Tlm.Login.html#gdbus-method-org-tizen-Tlm-Login.logoutUser"/>
+    <keyword type="method" name="The switchUser() method" link="gdbus-org.tizen.Tlm.Login.html#gdbus-method-org-tizen-Tlm-Login.switchUser"/>
+    <keyword type="struct" name="struct TlmAccountPluginInterface" link="tlm-TlmAccountPlugin.html#TlmAccountPluginInterface"/>
+    <keyword type="function" name="tlm_account_plugin_cleanup_guest_user ()" link="tlm-TlmAccountPlugin.html#tlm-account-plugin-cleanup-guest-user"/>
+    <keyword type="function" name="tlm_account_plugin_is_valid_user ()" link="tlm-TlmAccountPlugin.html#tlm-account-plugin-is-valid-user"/>
+    <keyword type="function" name="tlm_account_plugin_setup_guest_user_account ()" link="tlm-TlmAccountPlugin.html#tlm-account-plugin-setup-guest-user-account"/>
+    <keyword type="struct" name="struct TlmAccountPluginDefaultClass" link="tlm-TlmAccountPluginDefault.html#TlmAccountPluginDefaultClass"/>
+    <keyword type="struct" name="struct TlmAccountPluginGumd" link="TlmAccountPluginGumd.html#TlmAccountPluginGumd-struct"/>
+    <keyword type="struct" name="struct TlmAccountPluginGumdClass" link="TlmAccountPluginGumd.html#TlmAccountPluginGumdClass"/>
+    <keyword type="struct" name="struct TlmAuthPluginInterface" link="tlm-TlmAuthPlugin.html#TlmAuthPluginInterface"/>
+    <keyword type="function" name="tlm_auth_plugin_start_authentication ()" link="tlm-TlmAuthPlugin.html#tlm-auth-plugin-start-authentication"/>
+    <keyword type="struct" name="struct TlmAuthPluginDefaultClass" link="tlm-TlmAuthPluginDefault.html#TlmAuthPluginDefaultClass"/>
+    <keyword type="macro" name="CRITICAL()" link="tlm-tlm-log.html#CRITICAL:CAPS"/>
+    <keyword type="macro" name="DBG()" link="tlm-tlm-log.html#DBG:CAPS"/>
+    <keyword type="macro" name="ERR()" link="tlm-tlm-log.html#ERR:CAPS"/>
+    <keyword type="macro" name="EXPAND_LOG_MSG()" link="tlm-tlm-log.html#EXPAND-LOG-MSG:CAPS"/>
+    <keyword type="macro" name="INFO()" link="tlm-tlm-log.html#INFO:CAPS"/>
+    <keyword type="macro" name="WARN()" link="tlm-tlm-log.html#WARN:CAPS"/>
+    <keyword type="function" name="tlm_log_close ()" link="tlm-tlm-log.html#tlm-log-close"/>
+    <keyword type="function" name="tlm_log_init ()" link="tlm-tlm-log.html#tlm-log-init"/>
+    <keyword type="macro" name="TLM_ERROR" link="tlm-Errors.html#TLM-ERROR:CAPS"/>
+    <keyword type="macro" name="TLM_GET_ERROR_FOR_ID()" link="tlm-Errors.html#TLM-GET-ERROR-FOR-ID:CAPS"/>
+    <keyword type="enum" name="enum TlmError" link="tlm-Errors.html#TlmError"/>
+    <keyword type="function" name="tlm_error_quark ()" link="tlm-Errors.html#tlm-error-quark"/>
+    <keyword type="constant" name="TLM_ERROR_NONE" link="tlm-Errors.html#TLM-ERROR-NONE:CAPS"/>
+    <keyword type="constant" name="TLM_ERROR_UNKNOWN" link="tlm-Errors.html#TLM-ERROR-UNKNOWN:CAPS"/>
+    <keyword type="constant" name="TLM_ERROR_INTERNAL_SERVER" link="tlm-Errors.html#TLM-ERROR-INTERNAL-SERVER:CAPS"/>
+    <keyword type="constant" name="TLM_ERROR_PERMISSION_DENIED" link="tlm-Errors.html#TLM-ERROR-PERMISSION-DENIED:CAPS"/>
+    <keyword type="constant" name="TLM_ERROR_INVALID_INPUT" link="tlm-Errors.html#TLM-ERROR-INVALID-INPUT:CAPS"/>
+    <keyword type="constant" name="TLM_ERROR_SEAT_NOT_FOUND" link="tlm-Errors.html#TLM-ERROR-SEAT-NOT-FOUND:CAPS"/>
+    <keyword type="constant" name="TLM_ERROR_SESSION_CREATION_FAILURE" link="tlm-Errors.html#TLM-ERROR-SESSION-CREATION-FAILURE:CAPS"/>
+    <keyword type="constant" name="TLM_ERROR_SESSION_ALREADY_EXISTS" link="tlm-Errors.html#TLM-ERROR-SESSION-ALREADY-EXISTS:CAPS"/>
+    <keyword type="constant" name="TLM_ERROR_SESSION_NOT_VALID" link="tlm-Errors.html#TLM-ERROR-SESSION-NOT-VALID:CAPS"/>
+    <keyword type="constant" name="TLM_ERROR_DBUS_SERVER_START_FAILURE" link="tlm-Errors.html#TLM-ERROR-DBUS-SERVER-START-FAILURE:CAPS"/>
+    <keyword type="constant" name="TLM_ERROR_DBUS_REQ_ABORTED" link="tlm-Errors.html#TLM-ERROR-DBUS-REQ-ABORTED:CAPS"/>
+    <keyword type="constant" name="TLM_ERROR_DBUS_REQ_NOT_SUPPORTED" link="tlm-Errors.html#TLM-ERROR-DBUS-REQ-NOT-SUPPORTED:CAPS"/>
+    <keyword type="constant" name="TLM_ERROR_DBUS_REQ_UNKNOWN" link="tlm-Errors.html#TLM-ERROR-DBUS-REQ-UNKNOWN:CAPS"/>
+    <keyword type="constant" name="TLM_ERROR_LAST_ERR" link="tlm-Errors.html#TLM-ERROR-LAST-ERR:CAPS"/>
+  </functions>
+</book>

@@ -1,0 +1,226 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Errors</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+<link rel="home" href="index.html" title="Tizen Login Manager Reference Manual">
+<link rel="up" href="ch03.html" title="Tlm miscellaneous">
+<link rel="prev" href="tlm-tlm-log.html" title="tlm-log">
+<link rel="next" href="object-tree.html" title="Object Hierarchy">
+<meta name="generator" content="GTK-Doc V1.18 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="tlm-tlm-log.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch03.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Tizen Login Manager Reference Manual</th>
+<td><a accesskey="n" href="object-tree.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#tlm-Errors.synopsis" class="shortcut">Top</a>
+                   | 
+                  <a href="#tlm-Errors.description" class="shortcut">Description</a>
+</td></tr>
+</table>
+<div class="refentry">
+<a name="tlm-Errors"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="tlm-Errors.top_of_page"></a>Errors</span></h2>
+<p>Errors — error definitions and utilities</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<a name="tlm-Errors.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">#define             <a class="link" href="tlm-Errors.html#TLM-ERROR:CAPS" title="TLM_ERROR">TLM_ERROR</a>
+#define             <a class="link" href="tlm-Errors.html#TLM-GET-ERROR-FOR-ID:CAPS" title="TLM_GET_ERROR_FOR_ID()">TLM_GET_ERROR_FOR_ID</a>                (code,
+                                                         message,
+                                                         ...)
+enum                <a class="link" href="tlm-Errors.html#TlmError" title="enum TlmError">TlmError</a>;
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Quarks.html#GQuark"><span class="returnvalue">GQuark</span></a>              <a class="link" href="tlm-Errors.html#tlm-error-quark" title="tlm_error_quark ()">tlm_error_quark</a>                     (<em class="parameter"><code><span class="type">void</span></code></em>);
+</pre>
+</div>
+<div class="refsect1">
+<a name="tlm-Errors.description"></a><h2>Description</h2>
+<p>
+This file provides Tlm error definitions and utilities.
+When creating an error, use <a class="link" href="tlm-Errors.html#TLM-ERROR:CAPS" title="TLM_ERROR"><span class="type">TLM_ERROR</span></a> for the error domain and errors
+from <a class="link" href="tlm-Errors.html#TlmError" title="enum TlmError"><span class="type">TlmError</span></a> for the error code.
+</p>
+<p>
+</p>
+<div class="informalexample"><pre class="programlisting">
+    GError* err = g_error_new(TLM_ERROR, TLM_ERROR_INVALID_INPUT,
+    "Invalid input");
+</pre></div>
+<p>
+</p>
+</div>
+<div class="refsect1">
+<a name="tlm-Errors.details"></a><h2>Details</h2>
+<div class="refsect2">
+<a name="TLM-ERROR:CAPS"></a><h3>TLM_ERROR</h3>
+<pre class="programlisting">#define TLM_ERROR   (tlm_error_quark())
+</pre>
+<p>
+This macro should be used when creating a <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> (for example with
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#g-error-new"><code class="function">g_error_new()</code></a>).
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="TLM-GET-ERROR-FOR-ID:CAPS"></a><h3>TLM_GET_ERROR_FOR_ID()</h3>
+<pre class="programlisting">#define             TLM_GET_ERROR_FOR_ID(code, message, args...)</pre>
+<p>
+A helper macro that creates a <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> with the proper tlm domain
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>code</code></em> :</span></p></td>
+<td>A <a class="link" href="tlm-Errors.html#TlmError" title="enum TlmError"><span class="type">TlmError</span></a> specifying the error</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>message</code></em> :</span></p></td>
+<td>Format string for the error message</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>...</code></em> :</span></p></td>
+<td>parameters for the error string</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="TlmError"></a><h3>enum TlmError</h3>
+<pre class="programlisting">typedef enum {
+    TLM_ERROR_NONE,
+
+    TLM_ERROR_UNKNOWN = 1,
+    TLM_ERROR_INTERNAL_SERVER,
+    TLM_ERROR_PERMISSION_DENIED,
+
+    TLM_ERROR_INVALID_INPUT = 32,
+    TLM_ERROR_SEAT_NOT_FOUND,
+    TLM_ERROR_SESSION_CREATION_FAILURE,
+    TLM_ERROR_SESSION_ALREADY_EXISTS,
+    TLM_ERROR_SESSION_NOT_VALID,
+    TLM_ERROR_DBUS_SERVER_START_FAILURE,
+
+    TLM_ERROR_DBUS_REQ_ABORTED = 40,
+    TLM_ERROR_DBUS_REQ_NOT_SUPPORTED,
+    TLM_ERROR_DBUS_REQ_UNKNOWN,
+
+    TLM_ERROR_LAST_ERR = 400
+} TlmError;
+</pre>
+<p>
+This enumeration provides a list of errors
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><a name="TLM-ERROR-NONE:CAPS"></a><span class="term"><code class="literal">TLM_ERROR_NONE</code></span></p></td>
+<td>No error
+</td>
+</tr>
+<tr>
+<td><p><a name="TLM-ERROR-UNKNOWN:CAPS"></a><span class="term"><code class="literal">TLM_ERROR_UNKNOWN</code></span></p></td>
+<td>Catch-all for errors not distinguished by another error
+code
+</td>
+</tr>
+<tr>
+<td><p><a name="TLM-ERROR-INTERNAL-SERVER:CAPS"></a><span class="term"><code class="literal">TLM_ERROR_INTERNAL_SERVER</code></span></p></td>
+<td>Server internal error
+</td>
+</tr>
+<tr>
+<td><p><a name="TLM-ERROR-PERMISSION-DENIED:CAPS"></a><span class="term"><code class="literal">TLM_ERROR_PERMISSION_DENIED</code></span></p></td>
+<td>Permission denied
+</td>
+</tr>
+<tr>
+<td><p><a name="TLM-ERROR-INVALID-INPUT:CAPS"></a><span class="term"><code class="literal">TLM_ERROR_INVALID_INPUT</code></span></p></td>
+<td>Invalid input
+</td>
+</tr>
+<tr>
+<td><p><a name="TLM-ERROR-SEAT-NOT-FOUND:CAPS"></a><span class="term"><code class="literal">TLM_ERROR_SEAT_NOT_FOUND</code></span></p></td>
+<td>Seat not found
+</td>
+</tr>
+<tr>
+<td><p><a name="TLM-ERROR-SESSION-CREATION-FAILURE:CAPS"></a><span class="term"><code class="literal">TLM_ERROR_SESSION_CREATION_FAILURE</code></span></p></td>
+<td>Session creation failed
+</td>
+</tr>
+<tr>
+<td><p><a name="TLM-ERROR-SESSION-ALREADY-EXISTS:CAPS"></a><span class="term"><code class="literal">TLM_ERROR_SESSION_ALREADY_EXISTS</code></span></p></td>
+<td>Session already exists
+</td>
+</tr>
+<tr>
+<td><p><a name="TLM-ERROR-SESSION-NOT-VALID:CAPS"></a><span class="term"><code class="literal">TLM_ERROR_SESSION_NOT_VALID</code></span></p></td>
+<td>session is not valid anymore
+</td>
+</tr>
+<tr>
+<td><p><a name="TLM-ERROR-DBUS-SERVER-START-FAILURE:CAPS"></a><span class="term"><code class="literal">TLM_ERROR_DBUS_SERVER_START_FAILURE</code></span></p></td>
+<td>dbus-server startup failed
+</td>
+</tr>
+<tr>
+<td><p><a name="TLM-ERROR-DBUS-REQ-ABORTED:CAPS"></a><span class="term"><code class="literal">TLM_ERROR_DBUS_REQ_ABORTED</code></span></p></td>
+<td>Dbus request aborted
+</td>
+</tr>
+<tr>
+<td><p><a name="TLM-ERROR-DBUS-REQ-NOT-SUPPORTED:CAPS"></a><span class="term"><code class="literal">TLM_ERROR_DBUS_REQ_NOT_SUPPORTED</code></span></p></td>
+<td>Dbus request not supported
+</td>
+</tr>
+<tr>
+<td><p><a name="TLM-ERROR-DBUS-REQ-UNKNOWN:CAPS"></a><span class="term"><code class="literal">TLM_ERROR_DBUS_REQ_UNKNOWN</code></span></p></td>
+<td>Dbus request failed with unknown error
+</td>
+</tr>
+<tr>
+<td><p><a name="TLM-ERROR-LAST-ERR:CAPS"></a><span class="term"><code class="literal">TLM_ERROR_LAST_ERR</code></span></p></td>
+<td>Placeholder to rearrange enumeration
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="tlm-error-quark"></a><h3>tlm_error_quark ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Quarks.html#GQuark"><span class="returnvalue">GQuark</span></a>              tlm_error_quark                     (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
+<p>
+Creates and returns a domain for Tlm errors.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Quarks.html#GQuark"><span class="type">GQuark</span></a> for Tlm errors</td>
+</tr></tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.18</div>
+</body>
+</html>

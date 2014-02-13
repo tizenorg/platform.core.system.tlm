@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
+               "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+]>
+<refentry id="gdbus-org.tizen.Tlm.Login">
+  <refmeta>    <refentrytitle role="top_of_page" id="gdbus-interface-org-tizen-Tlm-Login.top_of_page">org.tizen.Tlm.Login</refentrytitle>
+  <indexterm zone="gdbus-interface-org-tizen-Tlm-Login.top_of_page"><primary sortas="Login">org.tizen.Tlm.Login</primary></indexterm>
+  </refmeta>  <refnamediv>    <refname>org.tizen.Tlm.Login</refname>    <refpurpose>a D-Bus interface to TLM</refpurpose>  </refnamediv>  <refsynopsisdiv role="synopsis">
+    <title role="synopsis.title">Methods</title>
+    <synopsis>
+<link linkend="gdbus-method-org-tizen-Tlm-Login.loginUser">loginUser</link>  (IN  s     seat_id,
+            IN  s     username,
+            IN  s     password,
+            IN  a{ss} environ);
+<link linkend="gdbus-method-org-tizen-Tlm-Login.logoutUser">logoutUser</link> (IN  s     seat_id);
+<link linkend="gdbus-method-org-tizen-Tlm-Login.switchUser">switchUser</link> (IN  s     seat_id,
+            IN  s     username,
+            IN  s     password,
+            IN  a{ss} environ);
+</synopsis>
+  </refsynopsisdiv>
+<refsect1 role="desc" id="gdbus-interface-org-tizen-Tlm-Login">
+  <title role="desc.title">Description</title>
+  <para><para>    Login objects can be used to login, logout and switch users. Login object
+    with root access is exported at TLM_DBUS_ROOT_SOCKET_ADDRESS which can be
+    used to login, logout and switch any user. TLM_DBUS_ROOT_SOCKET_ADDRESS can
+    be fetched as a variable from package configuration file tlm.pc.
+    Besides whenever a user is logged in, a dbus login object is also exported
+    which can be used for 'logout-user' and 'switch-user' functionalities by
+    that user. The dbus object can be accessed at
+    TLM_DBUS_SOCKET_PATH/&lt;seat_id-uid&gt; by the user (uid) who is logged in
+    at the seat (seat_id).
+</para></para>
+</refsect1>
+<refsect1 role="details" id="gdbus-methods-org.tizen.Tlm.Login">
+  <title role="details.title">Method Details</title>
+<refsect2 role="method" id="gdbus-method-org-tizen-Tlm-Login.loginUser">
+  <title>The loginUser() method</title>
+  <indexterm zone="gdbus-method-org-tizen-Tlm-Login.loginUser"><primary sortas="Login.loginUser">org.tizen.Tlm.Login.loginUser()</primary></indexterm>
+<programlisting>
+loginUser (IN  s     seat_id,
+           IN  s     username,
+           IN  s     password,
+           IN  a{ss} environ);
+</programlisting>
+<para><para>        Login the user. loginUser() will fail if the user is already logged in,
+        while switchUser() will not.
+</para></para>
+<variablelist role="params">
+<varlistentry>
+  <term><literal>IN s <parameter>seat_id</parameter></literal>:</term>
+  <listitem><para>id of the seat</para></listitem>
+</varlistentry>
+<varlistentry>
+  <term><literal>IN s <parameter>username</parameter></literal>:</term>
+  <listitem><para>name of the user</para></listitem>
+</varlistentry>
+<varlistentry>
+  <term><literal>IN s <parameter>password</parameter></literal>:</term>
+  <listitem><para>password to use for login</para></listitem>
+</varlistentry>
+<varlistentry>
+  <term><literal>IN a{ss} <parameter>environ</parameter></literal>:</term>
+  <listitem><para>key-value pairs of environment variables</para></listitem>
+</varlistentry>
+</variablelist>
+</refsect2>
+<refsect2 role="method" id="gdbus-method-org-tizen-Tlm-Login.logoutUser">
+  <title>The logoutUser() method</title>
+  <indexterm zone="gdbus-method-org-tizen-Tlm-Login.logoutUser"><primary sortas="Login.logoutUser">org.tizen.Tlm.Login.logoutUser()</primary></indexterm>
+<programlisting>
+logoutUser (IN  s seat_id);
+</programlisting>
+<para><para>        Logout the user.
+</para></para>
+<variablelist role="params">
+<varlistentry>
+  <term><literal>IN s <parameter>seat_id</parameter></literal>:</term>
+  <listitem><para>id of the seat</para></listitem>
+</varlistentry>
+</variablelist>
+</refsect2>
+<refsect2 role="method" id="gdbus-method-org-tizen-Tlm-Login.switchUser">
+  <title>The switchUser() method</title>
+  <indexterm zone="gdbus-method-org-tizen-Tlm-Login.switchUser"><primary sortas="Login.switchUser">org.tizen.Tlm.Login.switchUser()</primary></indexterm>
+<programlisting>
+switchUser (IN  s     seat_id,
+            IN  s     username,
+            IN  s     password,
+            IN  a{ss} environ);
+</programlisting>
+<para><para>        Logout the currently logged in user (if any), and login new user.
+        loginUser() will fail if the user is already logged in,
+        while switchUser() will not.
+</para></para>
+<variablelist role="params">
+<varlistentry>
+  <term><literal>IN s <parameter>seat_id</parameter></literal>:</term>
+  <listitem><para>id of the seat</para></listitem>
+</varlistentry>
+<varlistentry>
+  <term><literal>IN s <parameter>username</parameter></literal>:</term>
+  <listitem><para>name of the user</para></listitem>
+</varlistentry>
+<varlistentry>
+  <term><literal>IN s <parameter>password</parameter></literal>:</term>
+  <listitem><para>password to use for login</para></listitem>
+</varlistentry>
+<varlistentry>
+  <term><literal>IN a{ss} <parameter>environ</parameter></literal>:</term>
+  <listitem><para>key-value pairs of environment variables</para></listitem>
+</varlistentry>
+</variablelist>
+</refsect2>
+</refsect1>
+</refentry>
+

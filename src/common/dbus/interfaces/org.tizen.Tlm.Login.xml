@@ -1,0 +1,85 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node>
+
+    <!--
+    org.tizen.Tlm.Login:
+    @short_description: a D-Bus interface to TLM
+
+    Login objects can be used to login, logout and switch users. Login object
+    with root access is exported at TLM_DBUS_ROOT_SOCKET_ADDRESS which can be
+    used to login, logout and switch any user. TLM_DBUS_ROOT_SOCKET_ADDRESS can
+    be fetched as a variable from package configuration file tlm.pc.
+    Besides whenever a user is logged in, a dbus login object is also exported
+    which can be used for 'logout-user' and 'switch-user' functionalities by
+    that user. The dbus object can be accessed at
+    TLM_DBUS_SOCKET_PATH/&lt;seat_id-uid&gt; by the user (uid) who is logged in
+    at the seat (seat_id).
+    -->
+    <interface name="org.tizen.Tlm.Login">
+
+        <!--
+        loginUser:
+        @seat_id: id of the seat
+        @username: name of the user
+        @password: password to use for login
+        @environ: key-value pairs of environment variables
+
+        Login the user. loginUser() will fail if the user is already logged in,
+        while switchUser() will not.
+        -->
+        <method name="loginUser">
+            
+            <arg name="seat_id" type="s" direction="in">
+            </arg>
+
+            <arg name="username" type="s" direction="in">
+            </arg>
+
+            <arg name="password" type="s" direction="in">
+            </arg>
+
+            <arg name="environ" type="a{ss}" direction="in">
+            </arg>
+        </method>
+
+        <!--
+        logoutUser:
+        @seat_id: id of the seat
+        @username: name of the user
+
+        Logout the user.
+        -->
+        <method name="logoutUser">
+
+            <arg name="seat_id" type="s" direction="in">
+            </arg>
+        </method>
+
+        <!--
+        switchUser:
+        @seat_id: id of the seat
+        @username: name of the user
+        @password: password to use for login
+        @environ: key-value pairs of environment variables
+
+        Logout the currently logged in user (if any), and login new user.
+        loginUser() will fail if the user is already logged in,
+        while switchUser() will not.
+        -->
+        <method name="switchUser">
+
+            <arg name="seat_id" type="s" direction="in">
+            </arg>
+
+            <arg name="username" type="s" direction="in">
+            </arg>
+
+            <arg name="password" type="s" direction="in">
+            </arg>
+
+            <arg name="environ" type="a{ss}" direction="in">
+            </arg>
+        </method>
+
+    </interface>
+</node>
