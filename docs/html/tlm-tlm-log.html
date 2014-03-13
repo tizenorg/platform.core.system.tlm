@@ -2,30 +2,27 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>tlm-log</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+<title>Tizen Login Manager Reference Manual: tlm-log</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
 <link rel="home" href="index.html" title="Tizen Login Manager Reference Manual">
 <link rel="up" href="ch03.html" title="Tlm miscellaneous">
 <link rel="prev" href="ch03.html" title="Tlm miscellaneous">
 <link rel="next" href="tlm-Errors.html" title="Errors">
-<meta name="generator" content="GTK-Doc V1.18 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.20 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
-<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
-<tr valign="middle">
-<td><a accesskey="p" href="ch03.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
-<td><a accesskey="u" href="ch03.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
-<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
-<th width="100%" align="center">Tizen Login Manager Reference Manual</th>
-<td><a accesskey="n" href="tlm-Errors.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
-</tr>
-<tr><td colspan="5" class="shortcuts">
-<a href="#tlm-tlm-log.synopsis" class="shortcut">Top</a>
-                   | 
-                  <a href="#tlm-tlm-log.description" class="shortcut">Description</a>
-</td></tr>
-</table>
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="10"><tr valign="middle">
+<td width="100%" align="left" class="shortcuts">
+<a href="#" class="shortcut">Top</a><span id="nav_description"> <span class="dim">|</span> 
+                  <a href="#tlm-tlm-log.description" class="shortcut">Description</a></span><span id="nav_hierarchy"> <span class="dim">|</span> 
+                  <a href="#tlm-tlm-log.object-hierarchy" class="shortcut">Object Hierarchy</a></span>
+</td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="16" height="16" border="0" alt="Home"></a></td>
+<td><a accesskey="u" href="ch03.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
+<td><a accesskey="p" href="ch03.html"><img src="left.png" width="16" height="16" border="0" alt="Prev"></a></td>
+<td><a accesskey="n" href="tlm-Errors.html"><img src="right.png" width="16" height="16" border="0" alt="Next"></a></td>
+</tr></table>
 <div class="refentry">
 <a name="tlm-tlm-log"></a><div class="titlepage"></div>
 <div class="refnamediv"><table width="100%"><tr>
@@ -33,201 +30,310 @@
 <h2><span class="refentrytitle"><a name="tlm-tlm-log.top_of_page"></a>tlm-log</span></h2>
 <p>tlm-log — logging utilities</p>
 </td>
-<td valign="top" align="right"></td>
+<td class="gallery_image" valign="top" align="right"></td>
 </tr></table></div>
-<div class="refsynopsisdiv">
-<a name="tlm-tlm-log.synopsis"></a><h2>Synopsis</h2>
-<pre class="synopsis">
-#include &lt;tlm-log.h&gt;
-
-#define             <a class="link" href="tlm-tlm-log.html#CRITICAL:CAPS" title="CRITICAL()">CRITICAL</a>                            (frmt,
-                                                         ...)
-#define             <a class="link" href="tlm-tlm-log.html#DBG:CAPS" title="DBG()">DBG</a>                                 (frmt,
-                                                         ...)
-#define             <a class="link" href="tlm-tlm-log.html#ERR:CAPS" title="ERR()">ERR</a>                                 (frmt,
-                                                         ...)
-#define             <a class="link" href="tlm-tlm-log.html#EXPAND-LOG-MSG:CAPS" title="EXPAND_LOG_MSG()">EXPAND_LOG_MSG</a>                      (frmt,
-                                                         ...)
-#define             <a class="link" href="tlm-tlm-log.html#INFO:CAPS" title="INFO()">INFO</a>                                (frmt,
-                                                         ...)
-#define             <a class="link" href="tlm-tlm-log.html#WARN:CAPS" title="WARN()">WARN</a>                                (frmt,
-                                                         ...)
-<span class="returnvalue">void</span>                <a class="link" href="tlm-tlm-log.html#tlm-log-close" title="tlm_log_close ()">tlm_log_close</a>                       (<em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *domain</code></em>);
-<span class="returnvalue">void</span>                <a class="link" href="tlm-tlm-log.html#tlm-log-init" title="tlm_log_init ()">tlm_log_init</a>                        (<em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *domain</code></em>);
+<div class="refsect1">
+<a name="tlm-tlm-log.functions"></a><h2>Functions</h2>
+<div class="informaltable"><table width="100%" border="0">
+<colgroup>
+<col width="150px" class="functions_return">
+<col class="functions_name">
+</colgroup>
+<tbody>
+<tr>
+<td class="function_type">
+<span class="returnvalue">void</span>
+</td>
+<td class="function_name">
+<a class="link" href="tlm-tlm-log.html#tlm-log-init" title="tlm_log_init ()">tlm_log_init</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<span class="returnvalue">void</span>
+</td>
+<td class="function_name">
+<a class="link" href="tlm-tlm-log.html#tlm-log-close" title="tlm_log_close ()">tlm_log_close</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="define_keyword">#define</td>
+<td class="function_name">
+<a class="link" href="tlm-tlm-log.html#EXPAND-LOG-MSG:CAPS" title="EXPAND_LOG_MSG()">EXPAND_LOG_MSG</a><span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="define_keyword">#define</td>
+<td class="function_name">
+<a class="link" href="tlm-tlm-log.html#INFO:CAPS" title="INFO()">INFO</a><span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="define_keyword">#define</td>
+<td class="function_name">
+<a class="link" href="tlm-tlm-log.html#DBG:CAPS" title="DBG()">DBG</a><span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="define_keyword">#define</td>
+<td class="function_name">
+<a class="link" href="tlm-tlm-log.html#WARN:CAPS" title="WARN()">WARN</a><span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="define_keyword">#define</td>
+<td class="function_name">
+<a class="link" href="tlm-tlm-log.html#CRITICAL:CAPS" title="CRITICAL()">CRITICAL</a><span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="define_keyword">#define</td>
+<td class="function_name">
+<a class="link" href="tlm-tlm-log.html#ERR:CAPS" title="ERR()">ERR</a><span class="c_punctuation">()</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="refsect1">
+<a name="tlm-tlm-log.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="screen">
+</pre>
+</div>
+<div class="refsect1">
+<a name="tlm-tlm-log.includes"></a><h2>Includes</h2>
+<pre class="synopsis">#include &lt;tlm-log.h&gt;
 </pre>
 </div>
 <div class="refsect1">
 <a name="tlm-tlm-log.description"></a><h2>Description</h2>
-<p>
-This section describes various logging utilities that TLM plugins can use.
-</p>
+<p>This section describes various logging utilities that TLM plugins can use.</p>
 </div>
 <div class="refsect1">
-<a name="tlm-tlm-log.details"></a><h2>Details</h2>
+<a name="tlm-tlm-log.functions_details"></a><h2>Functions</h2>
 <div class="refsect2">
-<a name="CRITICAL:CAPS"></a><h3>CRITICAL()</h3>
-<pre class="programlisting">#define CRITICAL(frmt, args...) g_critical(EXPAND_LOG_MSG(frmt, ##args))
-</pre>
-<p>
-Logs a critical message
-</p>
-<div class="variablelist"><table border="0">
-<col align="left" valign="top">
-<tbody>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>frmt</code></em> :</span></p></td>
-<td>log message format</td>
-</tr>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>...</code></em> :</span></p></td>
-<td>arguments</td>
-</tr>
-</tbody>
+<a name="tlm-log-init"></a><h3>tlm_log_init ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>
+tlm_log_init (<em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *domain</code></em>);</pre>
+<p>Call this function before logging any messages to initialize the logging system.</p>
+<div class="refsect3">
+<a name="id-1.4.2.7.2.5"></a><h4>Parameters</h4>
+<div class="informaltable"><table width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody><tr>
+<td class="parameter_name"><p>domain</p></td>
+<td class="parameter_description"><p>log message domain</p></td>
+<td class="parameter_annotations"> </td>
+</tr></tbody>
 </table></div>
+</div>
 </div>
 <hr>
 <div class="refsect2">
-<a name="DBG:CAPS"></a><h3>DBG()</h3>
-<pre class="programlisting">#define DBG(frmt, args...)      g_debug("debug:"EXPAND_LOG_MSG(frmt, ##args))
-</pre>
-<p>
-Logs a debugging message
-</p>
-<div class="variablelist"><table border="0">
-<col align="left" valign="top">
-<tbody>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>frmt</code></em> :</span></p></td>
-<td>log message format</td>
-</tr>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>...</code></em> :</span></p></td>
-<td>arguments</td>
-</tr>
-</tbody>
+<a name="tlm-log-close"></a><h3>tlm_log_close ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>
+tlm_log_close (<em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *domain</code></em>);</pre>
+<p>Call this function to clean up the logging system (e.g. in an object destructor).</p>
+<div class="refsect3">
+<a name="id-1.4.2.7.3.5"></a><h4>Parameters</h4>
+<div class="informaltable"><table width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody><tr>
+<td class="parameter_name"><p>domain</p></td>
+<td class="parameter_description"><p>log message domain</p></td>
+<td class="parameter_annotations"> </td>
+</tr></tbody>
 </table></div>
 </div>
-<hr>
-<div class="refsect2">
-<a name="ERR:CAPS"></a><h3>ERR()</h3>
-<pre class="programlisting">#define ERR(frmt, args...)      g_error(EXPAND_LOG_MSG(frmt, ##args))
-</pre>
-<p>
-Logs an error message
-</p>
-<div class="variablelist"><table border="0">
-<col align="left" valign="top">
-<tbody>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>frmt</code></em> :</span></p></td>
-<td>log message format</td>
-</tr>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>...</code></em> :</span></p></td>
-<td>arguments</td>
-</tr>
-</tbody>
-</table></div>
 </div>
 <hr>
 <div class="refsect2">
 <a name="EXPAND-LOG-MSG:CAPS"></a><h3>EXPAND_LOG_MSG()</h3>
 <pre class="programlisting">#define             EXPAND_LOG_MSG(frmt, args...)</pre>
-<p>
-Internal macro; do not use.
-</p>
-<div class="variablelist"><table border="0">
-<col align="left" valign="top">
+<p>Internal macro; do not use.</p>
+<div class="refsect3">
+<a name="id-1.4.2.7.4.5"></a><h4>Parameters</h4>
+<div class="informaltable"><table width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
 <tbody>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>frmt</code></em> :</span></p></td>
-<td>log message format</td>
+<td class="parameter_name"><p>frmt</p></td>
+<td class="parameter_description"><p>log message format</p></td>
+<td class="parameter_annotations"> </td>
 </tr>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>...</code></em> :</span></p></td>
-<td>arguments</td>
+<td class="parameter_name"><p>...</p></td>
+<td class="parameter_description"><p>arguments</p></td>
+<td class="parameter_annotations"> </td>
 </tr>
 </tbody>
 </table></div>
 </div>
+</div>
 <hr>
 <div class="refsect2">
 <a name="INFO:CAPS"></a><h3>INFO()</h3>
-<pre class="programlisting">#define INFO(frmt, args...)     g_print(EXPAND_LOG_MSG(frmt, ##args))
+<pre class="programlisting"># define INFO(frmt, args...)     g_print(EXPAND_LOG_MSG(frmt, ##args))
 </pre>
-<p>
-Logs an info message
-</p>
-<div class="variablelist"><table border="0">
-<col align="left" valign="top">
+<p>Logs an info message</p>
+<div class="refsect3">
+<a name="id-1.4.2.7.5.5"></a><h4>Parameters</h4>
+<div class="informaltable"><table width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
 <tbody>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>frmt</code></em> :</span></p></td>
-<td>log message format</td>
+<td class="parameter_name"><p>frmt</p></td>
+<td class="parameter_description"><p>log message format</p></td>
+<td class="parameter_annotations"> </td>
 </tr>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>...</code></em> :</span></p></td>
-<td>arguments</td>
+<td class="parameter_name"><p>...</p></td>
+<td class="parameter_description"><p>arguments</p></td>
+<td class="parameter_annotations"> </td>
 </tr>
 </tbody>
 </table></div>
+</div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="DBG:CAPS"></a><h3>DBG()</h3>
+<pre class="programlisting"># define DBG(frmt, args...)      g_debug("debug:"EXPAND_LOG_MSG(frmt, ##args))
+</pre>
+<p>Logs a debugging message</p>
+<div class="refsect3">
+<a name="id-1.4.2.7.6.5"></a><h4>Parameters</h4>
+<div class="informaltable"><table width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>frmt</p></td>
+<td class="parameter_description"><p>log message format</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>...</p></td>
+<td class="parameter_description"><p>arguments</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
+</table></div>
+</div>
 </div>
 <hr>
 <div class="refsect2">
 <a name="WARN:CAPS"></a><h3>WARN()</h3>
 <pre class="programlisting">#define WARN(frmt, args...)     g_warning("warning:"EXPAND_LOG_MSG(frmt, ##args))
 </pre>
-<p>
-Logs a warning message
-</p>
-<div class="variablelist"><table border="0">
-<col align="left" valign="top">
+<p>Logs a warning message</p>
+<div class="refsect3">
+<a name="id-1.4.2.7.7.5"></a><h4>Parameters</h4>
+<div class="informaltable"><table width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
 <tbody>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>frmt</code></em> :</span></p></td>
-<td>log message format</td>
+<td class="parameter_name"><p>frmt</p></td>
+<td class="parameter_description"><p>log message format</p></td>
+<td class="parameter_annotations"> </td>
 </tr>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>...</code></em> :</span></p></td>
-<td>arguments</td>
+<td class="parameter_name"><p>...</p></td>
+<td class="parameter_description"><p>arguments</p></td>
+<td class="parameter_annotations"> </td>
 </tr>
 </tbody>
 </table></div>
 </div>
-<hr>
-<div class="refsect2">
-<a name="tlm-log-close"></a><h3>tlm_log_close ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                tlm_log_close                       (<em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *domain</code></em>);</pre>
-<p>
-Call this function to clean up the logging system (e.g. in an object destructor).
-</p>
-<div class="variablelist"><table border="0">
-<col align="left" valign="top">
-<tbody><tr>
-<td><p><span class="term"><em class="parameter"><code>domain</code></em> :</span></p></td>
-<td>log message domain</td>
-</tr></tbody>
-</table></div>
 </div>
 <hr>
 <div class="refsect2">
-<a name="tlm-log-init"></a><h3>tlm_log_init ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                tlm_log_init                        (<em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *domain</code></em>);</pre>
-<p>
-Call this function before logging any messages to initialize the logging system.
-</p>
-<div class="variablelist"><table border="0">
-<col align="left" valign="top">
-<tbody><tr>
-<td><p><span class="term"><em class="parameter"><code>domain</code></em> :</span></p></td>
-<td>log message domain</td>
-</tr></tbody>
+<a name="CRITICAL:CAPS"></a><h3>CRITICAL()</h3>
+<pre class="programlisting">#define CRITICAL(frmt, args...) g_critical(EXPAND_LOG_MSG(frmt, ##args))
+</pre>
+<p>Logs a critical message</p>
+<div class="refsect3">
+<a name="id-1.4.2.7.8.5"></a><h4>Parameters</h4>
+<div class="informaltable"><table width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>frmt</p></td>
+<td class="parameter_description"><p>log message format</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>...</p></td>
+<td class="parameter_description"><p>arguments</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
 </table></div>
 </div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="ERR:CAPS"></a><h3>ERR()</h3>
+<pre class="programlisting">#define ERR(frmt, args...)      g_error(EXPAND_LOG_MSG(frmt, ##args))
+</pre>
+<p>Logs an error message</p>
+<div class="refsect3">
+<a name="id-1.4.2.7.9.5"></a><h4>Parameters</h4>
+<div class="informaltable"><table width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>frmt</p></td>
+<td class="parameter_description"><p>log message format</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>...</p></td>
+<td class="parameter_description"><p>arguments</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="refsect1">
+<a name="tlm-tlm-log.other_details"></a><h2>Types and Values</h2>
 </div>
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.18</div>
+          Generated by GTK-Doc V1.20</div>
 </body>
 </html>

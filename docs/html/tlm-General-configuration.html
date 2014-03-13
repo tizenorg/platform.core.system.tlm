@@ -2,30 +2,27 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>General configuration</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+<title>Tizen Login Manager Reference Manual: General configuration</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
 <link rel="home" href="index.html" title="Tizen Login Manager Reference Manual">
 <link rel="up" href="ch01.html" title="Introduction">
 <link rel="prev" href="TlmConfig.html" title="TlmConfig">
 <link rel="next" href="gdbus-org.tizen.Tlm.Login.html" title="org.tizen.Tlm.Login">
-<meta name="generator" content="GTK-Doc V1.18 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.20 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
-<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
-<tr valign="middle">
-<td><a accesskey="p" href="TlmConfig.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
-<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
-<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
-<th width="100%" align="center">Tizen Login Manager Reference Manual</th>
-<td><a accesskey="n" href="gdbus-org.tizen.Tlm.Login.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
-</tr>
-<tr><td colspan="5" class="shortcuts">
-<a href="#tlm-General-configuration.synopsis" class="shortcut">Top</a>
-                   | 
-                  <a href="#tlm-General-configuration.description" class="shortcut">Description</a>
-</td></tr>
-</table>
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="10"><tr valign="middle">
+<td width="100%" align="left" class="shortcuts">
+<a href="#" class="shortcut">Top</a><span id="nav_description"> <span class="dim">|</span> 
+                  <a href="#tlm-General-configuration.description" class="shortcut">Description</a></span><span id="nav_hierarchy"> <span class="dim">|</span> 
+                  <a href="#tlm-General-configuration.object-hierarchy" class="shortcut">Object Hierarchy</a></span>
+</td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="16" height="16" border="0" alt="Home"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
+<td><a accesskey="p" href="TlmConfig.html"><img src="left.png" width="16" height="16" border="0" alt="Prev"></a></td>
+<td><a accesskey="n" href="gdbus-org.tizen.Tlm.Login.html"><img src="right.png" width="16" height="16" border="0" alt="Next"></a></td>
+</tr></table>
 <div class="refentry">
 <a name="tlm-General-configuration"></a><div class="titlepage"></div>
 <div class="refnamediv"><table width="100%"><tr>
@@ -33,159 +30,198 @@
 <h2><span class="refentrytitle"><a name="tlm-General-configuration.top_of_page"></a>General configuration</span></h2>
 <p>General configuration — tlm general configuration keys</p>
 </td>
-<td valign="top" align="right"></td>
+<td class="gallery_image" valign="top" align="right"></td>
 </tr></table></div>
-<div class="refsynopsisdiv">
-<a name="tlm-General-configuration.synopsis"></a><h2>Synopsis</h2>
-<pre class="synopsis">#define             <a class="link" href="tlm-General-configuration.html#TLM-CONFIG-GENERAL:CAPS" title="TLM_CONFIG_GENERAL">TLM_CONFIG_GENERAL</a>
-#define             <a class="link" href="tlm-General-configuration.html#TLM-CONFIG-GENERAL-ACCOUNTS-PLUGIN:CAPS" title="TLM_CONFIG_GENERAL_ACCOUNTS_PLUGIN">TLM_CONFIG_GENERAL_ACCOUNTS_PLUGIN</a>
-#define             <a class="link" href="tlm-General-configuration.html#TLM-CONFIG-GENERAL-AUTO-LOGIN:CAPS" title="TLM_CONFIG_GENERAL_AUTO_LOGIN">TLM_CONFIG_GENERAL_AUTO_LOGIN</a>
-#define             <a class="link" href="tlm-General-configuration.html#TLM-CONFIG-GENERAL-DATA-DIRS:CAPS" title="TLM_CONFIG_GENERAL_DATA_DIRS">TLM_CONFIG_GENERAL_DATA_DIRS</a>
-#define             <a class="link" href="tlm-General-configuration.html#TLM-CONFIG-GENERAL-DEFAULT-USER:CAPS" title="TLM_CONFIG_GENERAL_DEFAULT_USER">TLM_CONFIG_GENERAL_DEFAULT_USER</a>
-#define             <a class="link" href="tlm-General-configuration.html#TLM-CONFIG-GENERAL-PAM-SERVICE:CAPS" title="TLM_CONFIG_GENERAL_PAM_SERVICE">TLM_CONFIG_GENERAL_PAM_SERVICE</a>
-#define             <a class="link" href="tlm-General-configuration.html#TLM-CONFIG-GENERAL-PREPARE-DEFAULT:CAPS" title="TLM_CONFIG_GENERAL_PREPARE_DEFAULT">TLM_CONFIG_GENERAL_PREPARE_DEFAULT</a>
-#define             <a class="link" href="tlm-General-configuration.html#TLM-CONFIG-GENERAL-SESSION-CMD:CAPS" title="TLM_CONFIG_GENERAL_SESSION_CMD">TLM_CONFIG_GENERAL_SESSION_CMD</a>
-#define             <a class="link" href="tlm-General-configuration.html#TLM-CONFIG-GENERAL-SESSION-PATH:CAPS" title="TLM_CONFIG_GENERAL_SESSION_PATH">TLM_CONFIG_GENERAL_SESSION_PATH</a>
-#define             <a class="link" href="tlm-General-configuration.html#TLM-CONFIG-GENERAL-SETUP-TERMINAL:CAPS" title="TLM_CONFIG_GENERAL_SETUP_TERMINAL">TLM_CONFIG_GENERAL_SETUP_TERMINAL</a>
-#define             <a class="link" href="tlm-General-configuration.html#TLM-CONFIG-GENERAL-TERMINATE-TIMEOUT:CAPS" title="TLM_CONFIG_GENERAL_TERMINATE_TIMEOUT">TLM_CONFIG_GENERAL_TERMINATE_TIMEOUT</a>
+<div class="refsect1">
+<a name="tlm-General-configuration.other"></a><h2>Types and Values</h2>
+<div class="informaltable"><table width="100%" border="0">
+<colgroup>
+<col width="150px" class="name">
+<col class="description">
+</colgroup>
+<tbody>
+<tr>
+<td class="define_keyword">#define</td>
+<td class="function_name"><a class="link" href="tlm-General-configuration.html#TLM-CONFIG-GENERAL:CAPS" title="TLM_CONFIG_GENERAL">TLM_CONFIG_GENERAL</a></td>
+</tr>
+<tr>
+<td class="define_keyword">#define</td>
+<td class="function_name"><a class="link" href="tlm-General-configuration.html#TLM-CONFIG-GENERAL-ACCOUNTS-PLUGIN:CAPS" title="TLM_CONFIG_GENERAL_ACCOUNTS_PLUGIN">TLM_CONFIG_GENERAL_ACCOUNTS_PLUGIN</a></td>
+</tr>
+<tr>
+<td class="define_keyword">#define</td>
+<td class="function_name"><a class="link" href="tlm-General-configuration.html#TLM-CONFIG-GENERAL-SESSION-CMD:CAPS" title="TLM_CONFIG_GENERAL_SESSION_CMD">TLM_CONFIG_GENERAL_SESSION_CMD</a></td>
+</tr>
+<tr>
+<td class="define_keyword">#define</td>
+<td class="function_name"><a class="link" href="tlm-General-configuration.html#TLM-CONFIG-GENERAL-SESSION-PATH:CAPS" title="TLM_CONFIG_GENERAL_SESSION_PATH">TLM_CONFIG_GENERAL_SESSION_PATH</a></td>
+</tr>
+<tr>
+<td class="define_keyword">#define</td>
+<td class="function_name"><a class="link" href="tlm-General-configuration.html#TLM-CONFIG-GENERAL-DATA-DIRS:CAPS" title="TLM_CONFIG_GENERAL_DATA_DIRS">TLM_CONFIG_GENERAL_DATA_DIRS</a></td>
+</tr>
+<tr>
+<td class="define_keyword">#define</td>
+<td class="function_name"><a class="link" href="tlm-General-configuration.html#TLM-CONFIG-GENERAL-AUTO-LOGIN:CAPS" title="TLM_CONFIG_GENERAL_AUTO_LOGIN">TLM_CONFIG_GENERAL_AUTO_LOGIN</a></td>
+</tr>
+<tr>
+<td class="define_keyword">#define</td>
+<td class="function_name"><a class="link" href="tlm-General-configuration.html#TLM-CONFIG-GENERAL-PREPARE-DEFAULT:CAPS" title="TLM_CONFIG_GENERAL_PREPARE_DEFAULT">TLM_CONFIG_GENERAL_PREPARE_DEFAULT</a></td>
+</tr>
+<tr>
+<td class="define_keyword">#define</td>
+<td class="function_name"><a class="link" href="tlm-General-configuration.html#TLM-CONFIG-GENERAL-PAM-SERVICE:CAPS" title="TLM_CONFIG_GENERAL_PAM_SERVICE">TLM_CONFIG_GENERAL_PAM_SERVICE</a></td>
+</tr>
+<tr>
+<td class="define_keyword">#define</td>
+<td class="function_name"><a class="link" href="tlm-General-configuration.html#TLM-CONFIG-GENERAL-DEFAULT-USER:CAPS" title="TLM_CONFIG_GENERAL_DEFAULT_USER">TLM_CONFIG_GENERAL_DEFAULT_USER</a></td>
+</tr>
+<tr>
+<td class="define_keyword">#define</td>
+<td class="function_name"><a class="link" href="tlm-General-configuration.html#TLM-CONFIG-GENERAL-SETUP-TERMINAL:CAPS" title="TLM_CONFIG_GENERAL_SETUP_TERMINAL">TLM_CONFIG_GENERAL_SETUP_TERMINAL</a></td>
+</tr>
+<tr>
+<td class="define_keyword">#define</td>
+<td class="function_name"><a class="link" href="tlm-General-configuration.html#TLM-CONFIG-GENERAL-TERMINATE-TIMEOUT:CAPS" title="TLM_CONFIG_GENERAL_TERMINATE_TIMEOUT">TLM_CONFIG_GENERAL_TERMINATE_TIMEOUT</a></td>
+</tr>
+<tr>
+<td class="define_keyword">#define</td>
+<td class="function_name"><a class="link" href="tlm-General-configuration.html#TLM-CONFIG-GENERAL-X11-SESSION:CAPS" title="TLM_CONFIG_GENERAL_X11_SESSION">TLM_CONFIG_GENERAL_X11_SESSION</a></td>
+</tr>
+<tr>
+<td class="define_keyword">#define</td>
+<td class="function_name"><a class="link" href="tlm-General-configuration.html#TLM-CONFIG-GENERAL-PAUSE-SESSION:CAPS" title="TLM_CONFIG_GENERAL_PAUSE_SESSION">TLM_CONFIG_GENERAL_PAUSE_SESSION</a></td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="refsect1">
+<a name="tlm-General-configuration.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="screen">
 </pre>
 </div>
 <div class="refsect1">
 <a name="tlm-General-configuration.description"></a><h2>Description</h2>
-<p>
-General configuration keys are defined below. See <a class="link" href="TlmConfig.html" title="TlmConfig"><span class="type">TlmConfig</span></a> for how to use
-them.
-</p>
+<p>General configuration keys are defined below. See <a class="link" href="TlmConfig.html" title="TlmConfig"><span class="type">TlmConfig</span></a> for how to use
+them.</p>
 </div>
 <div class="refsect1">
-<a name="tlm-General-configuration.details"></a><h2>Details</h2>
+<a name="tlm-General-configuration.functions_details"></a><h2>Functions</h2>
+</div>
+<div class="refsect1">
+<a name="tlm-General-configuration.other_details"></a><h2>Types and Values</h2>
 <div class="refsect2">
 <a name="TLM-CONFIG-GENERAL:CAPS"></a><h3>TLM_CONFIG_GENERAL</h3>
 <pre class="programlisting">#define TLM_CONFIG_GENERAL                  "General"
 </pre>
-<p>
-A prefix for general keys. Should be used only when defining new keys.
-</p>
+<p>A prefix for general keys. Should be used only when defining new keys.</p>
 </div>
 <hr>
 <div class="refsect2">
 <a name="TLM-CONFIG-GENERAL-ACCOUNTS-PLUGIN:CAPS"></a><h3>TLM_CONFIG_GENERAL_ACCOUNTS_PLUGIN</h3>
 <pre class="programlisting">#define TLM_CONFIG_GENERAL_ACCOUNTS_PLUGIN  "ACCOUNTS_PLUGIN"
 </pre>
-<p>
-Accounts plugin (implementation of <span class="type">TlmAccountPlugin</span>) to use.
+<p>Accounts plugin (implementation of <a class="link" href="TlmAccountPlugin.html" title="TlmAccountPlugin"><span class="type">TlmAccountPlugin</span></a>) to use.
 Default value: "default". If Tlm has been configured with --enable-debug, the
-value can be overriden with TLM_ACCOUNT_PLUGIN environment variable.
-</p>
-</div>
-<hr>
-<div class="refsect2">
-<a name="TLM-CONFIG-GENERAL-AUTO-LOGIN:CAPS"></a><h3>TLM_CONFIG_GENERAL_AUTO_LOGIN</h3>
-<pre class="programlisting">#define TLM_CONFIG_GENERAL_AUTO_LOGIN       "AUTO_LOGIN"
-</pre>
-<p>
-Autologin to default user : TRUE/FALSE. TRUE if value is not set
-</p>
-<p>
-Whether to automatically log in the default user on startup and when another
-user session has been terminated.
-</p>
-</div>
-<hr>
-<div class="refsect2">
-<a name="TLM-CONFIG-GENERAL-DATA-DIRS:CAPS"></a><h3>TLM_CONFIG_GENERAL_DATA_DIRS</h3>
-<pre class="programlisting">#define TLM_CONFIG_GENERAL_DATA_DIRS        "XDG_DATA_DIRS"
-</pre>
-<p>
-Default value for XDG_DATA_DIRS environment variable. If not set,
-"/usr/share:/usr/local/share" is used.
-</p>
-</div>
-<hr>
-<div class="refsect2">
-<a name="TLM-CONFIG-GENERAL-DEFAULT-USER:CAPS"></a><h3>TLM_CONFIG_GENERAL_DEFAULT_USER</h3>
-<pre class="programlisting">#define TLM_CONFIG_GENERAL_DEFAULT_USER     "DEFAULT_USER"
-</pre>
-<p>
-Default username for autologin. Default value: "guest".
-</p>
-<p>
-The value can include: %S - seat number, %I - seat id string.
-</p>
-</div>
-<hr>
-<div class="refsect2">
-<a name="TLM-CONFIG-GENERAL-PAM-SERVICE:CAPS"></a><h3>TLM_CONFIG_GENERAL_PAM_SERVICE</h3>
-<pre class="programlisting">#define TLM_CONFIG_GENERAL_PAM_SERVICE      "PAM_SERVICE"
-</pre>
-<p>
-PAM service file to use for authentication and session setup. Default value: "tlm-login".
-</p>
-</div>
-<hr>
-<div class="refsect2">
-<a name="TLM-CONFIG-GENERAL-PREPARE-DEFAULT:CAPS"></a><h3>TLM_CONFIG_GENERAL_PREPARE_DEFAULT</h3>
-<pre class="programlisting">#define TLM_CONFIG_GENERAL_PREPARE_DEFAULT  "PREPARE_DEFAULT"
-</pre>
-<p>
-Prepare default user before auto-login: TRUE/FALSE (FALSE if value not set).
-</p>
-<p>
-If set to TRUE, methods of <span class="type">TlmAccountPlugin</span> are used to set up the default
-user's account before auto-login.
-</p>
+value can be overriden with TLM_ACCOUNT_PLUGIN environment variable.</p>
 </div>
 <hr>
 <div class="refsect2">
 <a name="TLM-CONFIG-GENERAL-SESSION-CMD:CAPS"></a><h3>TLM_CONFIG_GENERAL_SESSION_CMD</h3>
 <pre class="programlisting">#define TLM_CONFIG_GENERAL_SESSION_CMD      "SESSION_CMD"
 </pre>
-<p>
-Session command line: the command run after successfull login. If the value
+<p>Session command line: the command run after successfull login. If the value
 is not defined in the config file, user's shell from /etc/passwd is used,
-and if that is not defined, the fallback is "systemd --user"
-</p>
+and if that is not defined, the fallback is "systemd --user"</p>
 </div>
 <hr>
 <div class="refsect2">
 <a name="TLM-CONFIG-GENERAL-SESSION-PATH:CAPS"></a><h3>TLM_CONFIG_GENERAL_SESSION_PATH</h3>
 <pre class="programlisting">#define TLM_CONFIG_GENERAL_SESSION_PATH     "SESSION_PATH"
 </pre>
-<p>
-Default value for PATH environment variable in user's session. If not set,
-"/usr/local/bin:/usr/bin:/bin" is used.
-</p>
+<p>Default value for PATH environment variable in user's session. If not set,
+"/usr/local/bin:/usr/bin:/bin" is used.</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="TLM-CONFIG-GENERAL-DATA-DIRS:CAPS"></a><h3>TLM_CONFIG_GENERAL_DATA_DIRS</h3>
+<pre class="programlisting">#define TLM_CONFIG_GENERAL_DATA_DIRS        "XDG_DATA_DIRS"
+</pre>
+<p>Default value for XDG_DATA_DIRS environment variable. If not set,
+"/usr/share:/usr/local/share" is used.</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="TLM-CONFIG-GENERAL-AUTO-LOGIN:CAPS"></a><h3>TLM_CONFIG_GENERAL_AUTO_LOGIN</h3>
+<pre class="programlisting">#define TLM_CONFIG_GENERAL_AUTO_LOGIN       "AUTO_LOGIN"
+</pre>
+<p>Autologin to default user : TRUE/FALSE. TRUE if value is not set</p>
+<p>Whether to automatically log in the default user on startup and when another
+user session has been terminated.</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="TLM-CONFIG-GENERAL-PREPARE-DEFAULT:CAPS"></a><h3>TLM_CONFIG_GENERAL_PREPARE_DEFAULT</h3>
+<pre class="programlisting">#define TLM_CONFIG_GENERAL_PREPARE_DEFAULT  "PREPARE_DEFAULT"
+</pre>
+<p>Prepare default user before auto-login: TRUE/FALSE (FALSE if value not set).</p>
+<p>If set to TRUE, methods of <a class="link" href="TlmAccountPlugin.html" title="TlmAccountPlugin"><span class="type">TlmAccountPlugin</span></a> are used to set up the default
+user's account before auto-login.</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="TLM-CONFIG-GENERAL-PAM-SERVICE:CAPS"></a><h3>TLM_CONFIG_GENERAL_PAM_SERVICE</h3>
+<pre class="programlisting">#define TLM_CONFIG_GENERAL_PAM_SERVICE      "PAM_SERVICE"
+</pre>
+<p>PAM service file to use for authentication and session setup. Default value: "tlm-login".</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="TLM-CONFIG-GENERAL-DEFAULT-USER:CAPS"></a><h3>TLM_CONFIG_GENERAL_DEFAULT_USER</h3>
+<pre class="programlisting">#define TLM_CONFIG_GENERAL_DEFAULT_USER     "DEFAULT_USER"
+</pre>
+<p>Default username for autologin. Default value: "guest".</p>
+<p>The value can include: %S - seat number, %I - seat id string.</p>
 </div>
 <hr>
 <div class="refsect2">
 <a name="TLM-CONFIG-GENERAL-SETUP-TERMINAL:CAPS"></a><h3>TLM_CONFIG_GENERAL_SETUP_TERMINAL</h3>
 <pre class="programlisting">#define TLM_CONFIG_GENERAL_SETUP_TERMINAL   "SETUP_TERMINAL"
 </pre>
-<p>
-Setup terminal while creating session : TRUE/FALSE. (TRUE if not set).
-</p>
-<p>
-Whether to connect the standard input, output and error streams for a newly
-created session to the terminal device.
-</p>
+<p>Setup terminal while creating session : TRUE/FALSE. (TRUE if not set).</p>
+<p>Whether to connect the standard input, output and error streams for a newly
+created session to the terminal device.</p>
 </div>
 <hr>
 <div class="refsect2">
 <a name="TLM-CONFIG-GENERAL-TERMINATE-TIMEOUT:CAPS"></a><h3>TLM_CONFIG_GENERAL_TERMINATE_TIMEOUT</h3>
 <pre class="programlisting">#define TLM_CONFIG_GENERAL_TERMINATE_TIMEOUT "TERMINATE_TIMEOUT" 
 </pre>
-<p>
-Timeout for session termination in seconds. Default value: 10
-</p>
-<p>
-Specifies timeout between sending different termination signals in case
-the previous signal wasn't obeyed.
-</p>
+<p>Timeout for session termination in seconds. Default value: 10</p>
+<p>Specifies timeout between sending different termination signals in case
+the previous signal wasn't obeyed.</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="TLM-CONFIG-GENERAL-X11-SESSION:CAPS"></a><h3>TLM_CONFIG_GENERAL_X11_SESSION</h3>
+<pre class="programlisting">#define TLM_CONFIG_GENERAL_X11_SESSION      "X11_SESSION"
+</pre>
+<p>Use X11 style sessions. Default value: 0</p>
+<p>Switches session handling style to X11 sessions where display manager
+is terminated and Xserver restarted for each session.</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="TLM-CONFIG-GENERAL-PAUSE-SESSION:CAPS"></a><h3>TLM_CONFIG_GENERAL_PAUSE_SESSION</h3>
+<pre class="programlisting">#define TLM_CONFIG_GENERAL_PAUSE_SESSION    "PAUSE_SESSION"
+</pre>
+<p>Do not actually launch anything after creating session, let systemd
+handle it through PAM.</p>
 </div>
 </div>
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.18</div>
+          Generated by GTK-Doc V1.20</div>
 </body>
 </html>

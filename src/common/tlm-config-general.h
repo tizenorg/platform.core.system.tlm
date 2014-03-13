@@ -134,4 +134,22 @@
  */
 #define TLM_CONFIG_GENERAL_TERMINATE_TIMEOUT "TERMINATE_TIMEOUT" 
 
+/**
+ * TLM_CONFIG_GENERAL_X11_SESSION
+ *
+ * Use X11 style sessions. Default value: 0
+ *
+ * Switches session handling style to X11 sessions where display manager
+ * is terminated and Xserver restarted for each session.
+ */
+#define TLM_CONFIG_GENERAL_X11_SESSION      "X11_SESSION"
+
+/**
+ * TLM_CONFIG_GENERAL_PAUSE_SESSION
+ *
+ * Do not actually launch anything after creating session, let systemd
+ * handle it through PAM.
+ */
+#define TLM_CONFIG_GENERAL_PAUSE_SESSION    "PAUSE_SESSION"
+
 #endif /* __TLM_GENERAL_CONFIG_H_ */

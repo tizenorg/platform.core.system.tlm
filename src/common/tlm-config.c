@@ -102,65 +102,58 @@ struct _TlmConfigPrivate
 
 G_DEFINE_TYPE (TlmConfig, tlm_config, G_TYPE_OBJECT);
 
-static gboolean
-_load_config (
-        TlmConfig *self)
+static gchar *
+_check_config_file (const gchar *path)
 {
-    gchar *def_config;
+    gchar *fn = g_build_filename (path, "tlm.conf",   NULL);
+    DBG ("check config at %s", fn);
+    if (g_access (fn, R_OK) == 0)
+        return fn;
+    g_free (fn);
+    return NULL;
+}
+
+static gboolean
+_load_config (TlmConfig *self)
+{
+    TlmConfigPrivate *priv = self->priv;
     GError *err = NULL;
     gchar **groups = NULL;
     gsize n_groups = 0;
     int i,j;
     GKeyFile *settings = g_key_file_new ();
 
-#   ifdef ENABLE_DEBUG
     const gchar * const *sysconfdirs;
 
-    if (!self->priv->config_file_path) {
-        def_config = g_strdup (g_getenv ("TLM_CONF_FILE"));
-        if (!def_config)
-            def_config = g_build_filename (g_get_user_config_dir(),
-                                           "/tlm.conf",
-                                           NULL);
-        if (g_access (def_config, R_OK) == 0) {
-            self->priv->config_file_path = def_config;
-        } else {
-            g_free (def_config);
-            sysconfdirs = g_get_system_config_dirs ();
-            while (*sysconfdirs != NULL) {
-                def_config = g_build_filename (*sysconfdirs,
-                                               "/tlm.conf",
-                                               NULL);
-                if (g_access (def_config, R_OK) == 0) {
-                    self->priv->config_file_path = def_config;
-                    break;
-                }
-                g_free (def_config);
-                sysconfdirs++;
-            }
+    if (!priv->config_file_path) {
+        const gchar *cfg_env = g_getenv ("TLM_CONF_FILE");
+        if (cfg_env) {
+            if (g_access (cfg_env, R_OK) == 0)
+                priv->config_file_path = g_strdup (cfg_env);
         }
     }
-#   else  /* ENABLE_DEBUG */
-#   ifndef TLM_SYSCONF_DIR
-#   error "System configuration directory not defined!"
-#   endif
-    def_config = g_build_filename (TLM_SYSCONF_DIR,
-                                   "/tlm.conf",
-                                   NULL);
-    if (g_access (def_config, R_OK) == 0) {
-        self->priv->config_file_path = def_config;
-    } else {
-        g_free (def_config);
+    if (!priv->config_file_path) {
+        priv->config_file_path = _check_config_file (TLM_SYSCONF_DIR);
     }
-#   endif  /* ENABLE_DEBUG */
+    if (!priv->config_file_path) {
+        sysconfdirs = g_get_system_config_dirs ();
+        while (*sysconfdirs != NULL) {
+            gchar *sys_cfg = _check_config_file (*sysconfdirs);
+            if (sys_cfg) {
+                priv->config_file_path = sys_cfg;
+                break;
+            }
+            sysconfdirs++;
+        }
+    }
 
-    if (self->priv->config_file_path) {
-        DBG ("Loading TLM config from %s", self->priv->config_file_path);
+    if (priv->config_file_path) {
+        DBG ("loading TLM config from %s", priv->config_file_path);
         if (!g_key_file_load_from_file (settings,
-                                        self->priv->config_file_path,
+                                        priv->config_file_path,
                                         G_KEY_FILE_NONE, &err)) {
             WARN ("error reading config file at '%s': %s",
-                 self->priv->config_file_path, err->message);
+                 priv->config_file_path, err->message);
             g_error_free (err);
             g_key_file_free (settings);
             return FALSE;
@@ -188,7 +181,7 @@ _load_config (
         }
 
         group_table = (GHashTable *) g_hash_table_lookup (
-                                self->priv->config_table, groups[i]);
+                                priv->config_table, groups[i]);
         if (!group_table) 
             group_table = g_hash_table_new_full (
                                g_str_hash,
@@ -216,7 +209,7 @@ _load_config (
 
         }
 
-        g_hash_table_insert (self->priv->config_table,
+        g_hash_table_insert (priv->config_table,
                              g_strdup (groups[i]),
                              group_table);
 

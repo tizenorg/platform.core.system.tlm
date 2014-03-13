@@ -21,7 +21,7 @@
   </refsynopsisdiv>
 <refsect1 role="desc" id="gdbus-interface-org-tizen-Tlm-Login">
   <title role="desc.title">Description</title>
-  <para><para>    Login objects can be used to login, logout and switch users. Login object
+  <para>    Login objects can be used to login, logout and switch users. Login object
     with root access is exported at TLM_DBUS_ROOT_SOCKET_ADDRESS which can be
     used to login, logout and switch any user. TLM_DBUS_ROOT_SOCKET_ADDRESS can
     be fetched as a variable from package configuration file tlm.pc.
@@ -30,7 +30,7 @@
     that user. The dbus object can be accessed at
     TLM_DBUS_SOCKET_PATH/&lt;seat_id-uid&gt; by the user (uid) who is logged in
     at the seat (seat_id).
-</para></para>
+</para>
 </refsect1>
 <refsect1 role="details" id="gdbus-methods-org.tizen.Tlm.Login">
   <title role="details.title">Method Details</title>
@@ -43,9 +43,9 @@ loginUser (IN  s     seat_id,
            IN  s     password,
            IN  a{ss} environ);
 </programlisting>
-<para><para>        Login the user. loginUser() will fail if the user is already logged in,
+<para>        Login the user. loginUser() will fail if the user is already logged in,
         while switchUser() will not.
-</para></para>
+</para>
 <variablelist role="params">
 <varlistentry>
   <term><literal>IN s <parameter>seat_id</parameter></literal>:</term>
@@ -71,8 +71,8 @@ loginUser (IN  s     seat_id,
 <programlisting>
 logoutUser (IN  s seat_id);
 </programlisting>
-<para><para>        Logout the user.
-</para></para>
+<para>        Logout the user.
+</para>
 <variablelist role="params">
 <varlistentry>
   <term><literal>IN s <parameter>seat_id</parameter></literal>:</term>
@@ -89,10 +89,10 @@ switchUser (IN  s     seat_id,
             IN  s     password,
             IN  a{ss} environ);
 </programlisting>
-<para><para>        Logout the currently logged in user (if any), and login new user.
+<para>        Logout the currently logged in user (if any), and login new user.
         loginUser() will fail if the user is already logged in,
         while switchUser() will not.
-</para></para>
+</para>
 <variablelist role="params">
 <varlistentry>
   <term><literal>IN s <parameter>seat_id</parameter></literal>:</term>

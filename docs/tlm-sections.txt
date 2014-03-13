@@ -2,9 +2,10 @@
 <FILE>tlm-account-plugin</FILE>
 <TITLE>TlmAccountPlugin</TITLE>
 TlmAccountPluginInterface
-tlm_account_plugin_cleanup_guest_user
-tlm_account_plugin_is_valid_user
 tlm_account_plugin_setup_guest_user_account
+tlm_account_plugin_is_valid_user
+tlm_account_plugin_cleanup_guest_user
+TlmAccountPlugin
 <SUBSECTION Standard>
 TLM_ACCOUNT_PLUGIN
 TLM_ACCOUNT_PLUGIN_GET_IFACE
@@ -16,13 +17,14 @@ tlm_account_plugin_get_type
 <SECTION>
 <FILE>tlm-account-plugin-default</FILE>
 <TITLE>TlmAccountPluginDefault</TITLE>
-TlmAccountPluginDefaultClass
 <SUBSECTION Standard>
 TLM_ACCOUNT_PLUGIN_DEFAULT
 TLM_ACCOUNT_PLUGIN_DEFAULT_CLASS
 TLM_IS_ACCOUNT_PLUGIN_DEFAULT
 TLM_IS_ACCOUNT_PLUGIN_DEFAULT_CLASS
 TLM_TYPE_ACCOUNT_PLUGIN_DEFAULT
+TlmAccountPluginDefault
+TlmAccountPluginDefaultClass
 tlm_account_plugin_default_get_type
 </SECTION>
 
@@ -36,40 +38,40 @@ TLM_AUTH_PLUGIN
 TLM_AUTH_PLUGIN_GET_IFACE
 TLM_IS_AUTH_PLUGIN
 TLM_TYPE_AUTH_PLUGIN
+TlmAuthPlugin
 tlm_auth_plugin_get_type
 </SECTION>
 
 <SECTION>
 <FILE>tlm-auth-plugin-default</FILE>
 <TITLE>TlmAuthPluginDefault</TITLE>
-TlmAuthPluginDefaultClass
 <SUBSECTION Standard>
 TLM_AUTH_PLUGIN_DEFAULT
 TLM_AUTH_PLUGIN_DEFAULT_CLASS
 TLM_IS_AUTH_PLUGIN_DEFAULT
 TLM_IS_AUTH_PLUGIN_DEFAULT_CLASS
 TLM_TYPE_AUTH_PLUGIN_DEFAULT
+TlmAuthPluginDefault
+TlmAuthPluginDefaultClass
 tlm_auth_plugin_default_get_type
 </SECTION>
 
 <SECTION>
 <FILE>tlm-config</FILE>
 <TITLE>TlmConfig</TITLE>
-TlmConfig
-TlmConfigClass
-tlm_config_get_boolean
-tlm_config_get_group
+tlm_config_new
 tlm_config_get_int
-tlm_config_get_string
+tlm_config_set_int
 tlm_config_get_uint
+tlm_config_set_uint
+tlm_config_get_string
+tlm_config_set_string
+tlm_config_get_boolean
+tlm_config_set_boolean
 tlm_config_has_group
 tlm_config_has_key
-tlm_config_new
+tlm_config_get_group
 tlm_config_reload
-tlm_config_set_boolean
-tlm_config_set_int
-tlm_config_set_string
-tlm_config_set_uint
 <SUBSECTION Standard>
 TLM_CONFIG
 TLM_CONFIG_CLASS
@@ -77,6 +79,8 @@ TLM_CONFIG_GET_CLASS
 TLM_IS_CONFIG
 TLM_IS_CONFIG_CLASS
 TLM_TYPE_CONFIG
+TlmConfig
+TlmConfigClass
 TlmConfigPrivate
 tlm_config_get_type
 </SECTION>
@@ -85,48 +89,50 @@ tlm_config_get_type
 <FILE>tlm-config-general</FILE>
 TLM_CONFIG_GENERAL
 TLM_CONFIG_GENERAL_ACCOUNTS_PLUGIN
-TLM_CONFIG_GENERAL_AUTO_LOGIN
-TLM_CONFIG_GENERAL_DATA_DIRS
-TLM_CONFIG_GENERAL_DEFAULT_USER
-TLM_CONFIG_GENERAL_PAM_SERVICE
-TLM_CONFIG_GENERAL_PREPARE_DEFAULT
 TLM_CONFIG_GENERAL_SESSION_CMD
 TLM_CONFIG_GENERAL_SESSION_PATH
+TLM_CONFIG_GENERAL_DATA_DIRS
+TLM_CONFIG_GENERAL_AUTO_LOGIN
+TLM_CONFIG_GENERAL_PREPARE_DEFAULT
+TLM_CONFIG_GENERAL_PAM_SERVICE
+TLM_CONFIG_GENERAL_DEFAULT_USER
 TLM_CONFIG_GENERAL_SETUP_TERMINAL
 TLM_CONFIG_GENERAL_TERMINATE_TIMEOUT
+TLM_CONFIG_GENERAL_X11_SESSION
+TLM_CONFIG_GENERAL_PAUSE_SESSION
 </SECTION>
 
 <SECTION>
 <FILE>tlm-error</FILE>
 TLM_ERROR
-TLM_GET_ERROR_FOR_ID
 TlmError
+TLM_GET_ERROR_FOR_ID
 tlm_error_quark
 </SECTION>
 
 <SECTION>
 <FILE>tlm-log</FILE>
-CRITICAL
-DBG
-ERR
+tlm_log_init
+tlm_log_close
 EXPAND_LOG_MSG
 INFO
+DBG
 WARN
-tlm_log_close
-tlm_log_init
+CRITICAL
+ERR
 </SECTION>
 
 <SECTION>
 <FILE>tlm-plugin-gumd</FILE>
 <TITLE>TlmAccountPluginGumd</TITLE>
-TlmAccountPluginGumd
-TlmAccountPluginGumdClass
 <SUBSECTION Standard>
 TLM_ACCOUNT_PLUGIN_GUMD
 TLM_ACCOUNT_PLUGIN_GUMD_CLASS
 TLM_IS_ACCOUNT_PLUGIN_GUMD
 TLM_IS_ACCOUNT_PLUGIN_GUMD_CLASS
 TLM_TYPE_ACCOUNT_PLUGIN_GUMD
+TlmAccountPluginGumd
+TlmAccountPluginGumdClass
 tlm_account_plugin_gumd_get_type
 </SECTION>
 

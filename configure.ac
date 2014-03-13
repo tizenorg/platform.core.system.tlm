@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.68])
-AC_INIT([tlm], [0.0.1], [])
+AC_INIT([tlm], [0.0.2], [])
 AC_CONFIG_SRCDIR([src/daemon/tlm-main.c])
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_MACRO_DIR([m4])
@@ -48,7 +48,7 @@ AC_SUBST(TLM_LIBS)
 
 # Enable debug
 AC_ARG_ENABLE(debug, [ --enable-debug enable debug features],  
-                     [enable_debug=$enable_debug], [enable_debug="yes"])
+                     [enable_debug=$enable_debug], [enable_debug="no"])
 if test "x$enable_debug" = "xyes" ; then
     AC_DEFINE(ENABLE_DEBUG, [1], [Enable debug features])
     AC_ARG_ENABLE(tests, [ --enable-tests build unit tests],

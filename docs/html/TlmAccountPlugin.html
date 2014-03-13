@@ -1,0 +1,319 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Tizen Login Manager Reference Manual: TlmAccountPlugin</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+<link rel="home" href="index.html" title="Tizen Login Manager Reference Manual">
+<link rel="up" href="ch02.html" title="Tlm plugins reference">
+<link rel="prev" href="ch02.html" title="Tlm plugins reference">
+<link rel="next" href="TlmAccountPluginDefault.html" title="TlmAccountPluginDefault">
+<meta name="generator" content="GTK-Doc V1.20 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="10"><tr valign="middle">
+<td width="100%" align="left" class="shortcuts">
+<a href="#" class="shortcut">Top</a><span id="nav_description"> <span class="dim">|</span> 
+                  <a href="#TlmAccountPlugin.description" class="shortcut">Description</a></span><span id="nav_hierarchy"> <span class="dim">|</span> 
+                  <a href="#TlmAccountPlugin.object-hierarchy" class="shortcut">Object Hierarchy</a></span><span id="nav_properties"> <span class="dim">|</span> 
+                  <a href="#TlmAccountPlugin.properties" class="shortcut">Properties</a></span>
+</td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="16" height="16" border="0" alt="Home"></a></td>
+<td><a accesskey="u" href="ch02.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
+<td><a accesskey="p" href="ch02.html"><img src="left.png" width="16" height="16" border="0" alt="Prev"></a></td>
+<td><a accesskey="n" href="TlmAccountPluginDefault.html"><img src="right.png" width="16" height="16" border="0" alt="Next"></a></td>
+</tr></table>
+<div class="refentry">
+<a name="TlmAccountPlugin"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="TlmAccountPlugin.top_of_page"></a>TlmAccountPlugin</span></h2>
+<p>TlmAccountPlugin — an interface for implementing tlm account plugins</p>
+</td>
+<td class="gallery_image" valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsect1">
+<a name="TlmAccountPlugin.functions"></a><h2>Functions</h2>
+<div class="informaltable"><table width="100%" border="0">
+<colgroup>
+<col width="150px" class="functions_return">
+<col class="functions_name">
+</colgroup>
+<tbody>
+<tr>
+<td class="function_type">
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>
+</td>
+<td class="function_name">
+<a class="link" href="TlmAccountPlugin.html#tlm-account-plugin-setup-guest-user-account" title="tlm_account_plugin_setup_guest_user_account ()">tlm_account_plugin_setup_guest_user_account</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>
+</td>
+<td class="function_name">
+<a class="link" href="TlmAccountPlugin.html#tlm-account-plugin-is-valid-user" title="tlm_account_plugin_is_valid_user ()">tlm_account_plugin_is_valid_user</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>
+</td>
+<td class="function_name">
+<a class="link" href="TlmAccountPlugin.html#tlm-account-plugin-cleanup-guest-user" title="tlm_account_plugin_cleanup_guest_user ()">tlm_account_plugin_cleanup_guest_user</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="refsect1">
+<a name="TlmAccountPlugin.properties"></a><h2>Properties</h2>
+<div class="informaltable"><table border="0">
+<colgroup>
+<col width="150px" class="properties_type">
+<col width="300px" class="properties_name">
+<col width="200px" class="properties_flags">
+</colgroup>
+<tbody><tr>
+<td class="property_type">
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Hash-Tables.html#GHashTable"><span class="type">GHashTable</span></a> *</td>
+<td class="property_name"><a class="link" href="TlmAccountPlugin.html#TlmAccountPlugin--config" title="The “config” property">config</a></td>
+<td class="property_flags">Read / Write / Construct Only</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="refsect1">
+<a name="TlmAccountPlugin.other"></a><h2>Types and Values</h2>
+<div class="informaltable"><table width="100%" border="0">
+<colgroup>
+<col width="150px" class="name">
+<col class="description">
+</colgroup>
+<tbody>
+<tr>
+<td class="datatype_keyword">struct</td>
+<td class="function_name"><a class="link" href="TlmAccountPlugin.html#TlmAccountPluginInterface" title="struct TlmAccountPluginInterface">TlmAccountPluginInterface</a></td>
+</tr>
+<tr>
+<td class="datatype_keyword"> </td>
+<td class="function_name"><a class="link" href="TlmAccountPlugin.html#TlmAccountPlugin-struct" title="TlmAccountPlugin">TlmAccountPlugin</a></td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="refsect1">
+<a name="TlmAccountPlugin.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="screen">    GInterface
+    <span class="lineart">╰──</span> TlmAccountPlugin
+</pre>
+</div>
+<div class="refsect1">
+<a name="TlmAccountPlugin.includes"></a><h2>Includes</h2>
+<pre class="synopsis">#include &lt;tlm-account-plugin.h&gt;
+</pre>
+</div>
+<div class="refsect1">
+<a name="TlmAccountPlugin.description"></a><h2>Description</h2>
+<p><a class="link" href="TlmAccountPlugin.html" title="TlmAccountPlugin"><span class="type">TlmAccountPlugin</span></a> is an interface for implementing tlm account plugins.</p>
+<div class="refsect1">
+<a name="id-1.3.2.8.3"></a><h2>The plugin API</h2>
+</div>
+<p>Tlm account plugins provide an API for system-specific account operations:
+setting up and cleaning up guest user account, and checking username validity.
+They should implement the plugin interface specified here.</p>
+<div class="refsect1">
+<a name="id-1.3.2.8.5"></a><h2>Example plugins</h2>
+</div>
+<p>See example plugin implementation here:</p>
+<a class="ulink" href="https://github.com/01org/tlm/tree/master/src/plugins/default" target="_top">
+https://github.com/01org/tlm/tree/master/src/plugins/default</a> and here:
+<a class="ulink" href="https://github.com/01org/tlm/tree/master/src/plugins/gumd" target="_top">
+https://github.com/01org/tlm/tree/master/src/plugins/gumd</a>.
+
+</div>
+<div class="refsect1">
+<a name="TlmAccountPlugin.functions_details"></a><h2>Functions</h2>
+<div class="refsect2">
+<a name="tlm-account-plugin-setup-guest-user-account"></a><h3>tlm_account_plugin_setup_guest_user_account ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>
+tlm_account_plugin_setup_guest_user_account
+                               (<em class="parameter"><code><a class="link" href="TlmAccountPlugin.html" title="TlmAccountPlugin"><span class="type">TlmAccountPlugin</span></a> *self</code></em>,
+                                <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *user_name</code></em>);</pre>
+<p>This method creates and sets up a guest user account with a provided
+<em class="parameter"><code>user_name</code></em>
+.</p>
+<div class="refsect3">
+<a name="id-1.3.2.9.2.5"></a><h4>Parameters</h4>
+<div class="informaltable"><table width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>self</p></td>
+<td class="parameter_description"><p>plugin instance</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>user_name</p></td>
+<td class="parameter_description"><p>the user name</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="refsect3">
+<a name="id-1.3.2.9.2.6"></a><h4>Returns</h4>
+<p> whether the operation succeeded.</p>
+<p></p>
+</div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="tlm-account-plugin-is-valid-user"></a><h3>tlm_account_plugin_is_valid_user ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>
+tlm_account_plugin_is_valid_user (<em class="parameter"><code><a class="link" href="TlmAccountPlugin.html" title="TlmAccountPlugin"><span class="type">TlmAccountPlugin</span></a> *self</code></em>,
+                                  <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *user_name</code></em>);</pre>
+<p>Checks if the user with a given <em class="parameter"><code>user_name</code></em>
+ exists.</p>
+<div class="refsect3">
+<a name="id-1.3.2.9.3.5"></a><h4>Parameters</h4>
+<div class="informaltable"><table width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>self</p></td>
+<td class="parameter_description"><p>plugin instance</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>user_name</p></td>
+<td class="parameter_description"><p>user name to check</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="tlm-account-plugin-cleanup-guest-user"></a><h3>tlm_account_plugin_cleanup_guest_user ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>
+tlm_account_plugin_cleanup_guest_user (<em class="parameter"><code><a class="link" href="TlmAccountPlugin.html" title="TlmAccountPlugin"><span class="type">TlmAccountPlugin</span></a> *self</code></em>,
+                                       <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *user_name</code></em>,
+                                       <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> delete_account</code></em>);</pre>
+<p>When a guest user logs out, this method is called. It should clean up the
+home directory of the user, and, if delete_user is set, delete the user
+account.</p>
+<div class="refsect3">
+<a name="id-1.3.2.9.4.5"></a><h4>Parameters</h4>
+<div class="informaltable"><table width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>self</p></td>
+<td class="parameter_description"><p>plugin instance</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>user_name</p></td>
+<td class="parameter_description"><p>user name to clean up</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>delete_account</p></td>
+<td class="parameter_description"><p>whether the user account should be deleted</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="refsect1">
+<a name="TlmAccountPlugin.other_details"></a><h2>Types and Values</h2>
+<div class="refsect2">
+<a name="TlmAccountPluginInterface"></a><h3>struct TlmAccountPluginInterface</h3>
+<pre class="programlisting">struct TlmAccountPluginInterface {
+   GTypeInterface parent;
+
+    gboolean (*setup_guest_user_account) (TlmAccountPlugin *self,
+                                          const gchar *user_name);
+    gboolean (*is_valid_user) (TlmAccountPlugin *self,
+                               const gchar *user_name);
+
+   gboolean  (*cleanup_guest_user) (TlmAccountPlugin *self,
+                                    const gchar *guest_user,
+                                    gboolean delete_account);
+};
+</pre>
+<p><a class="link" href="TlmAccountPlugin.html#TlmAccountPluginInterface" title="struct TlmAccountPluginInterface"><span class="type">TlmAccountPluginInterface</span></a> interface containing pointers to methods that all
+plugin implementations should provide.</p>
+<div class="refsect3">
+<a name="id-1.3.2.10.2.5"></a><h4>Members</h4>
+<div class="informaltable"><table width="100%" border="0">
+<colgroup>
+<col width="300px" class="struct_members_name">
+<col class="struct_members_description">
+<col width="200px" class="struct_members_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="struct_member_name"><p><a href="http://library.gnome.org/devel/gobject/unstable/gobject-Type-Information.html#GTypeInterface"><span class="type">GTypeInterface</span></a> <em class="structfield"><code><a name="TlmAccountPluginInterface.parent"></a>parent</code></em>;</p></td>
+<td class="struct_member_description"><p>parent interface type.</p></td>
+<td class="struct_member_annotations"> </td>
+</tr>
+<tr>
+<td class="struct_member_name"><p><em class="structfield"><code><a name="TlmAccountPluginInterface.setup-guest-user-account"></a>setup_guest_user_account</code></em> ()</p></td>
+<td class="struct_member_description"><p>implementation of <a class="link" href="TlmAccountPlugin.html#tlm-account-plugin-setup-guest-user-account" title="tlm_account_plugin_setup_guest_user_account ()"><code class="function">tlm_account_plugin_setup_guest_user_account()</code></a></p></td>
+<td class="struct_member_annotations"> </td>
+</tr>
+<tr>
+<td class="struct_member_name"><p><em class="structfield"><code><a name="TlmAccountPluginInterface.is-valid-user"></a>is_valid_user</code></em> ()</p></td>
+<td class="struct_member_description"><p>implementation of <a class="link" href="TlmAccountPlugin.html#tlm-account-plugin-is-valid-user" title="tlm_account_plugin_is_valid_user ()"><code class="function">tlm_account_plugin_is_valid_user()</code></a></p></td>
+<td class="struct_member_annotations"> </td>
+</tr>
+<tr>
+<td class="struct_member_name"><p><em class="structfield"><code><a name="TlmAccountPluginInterface.cleanup-guest-user"></a>cleanup_guest_user</code></em> ()</p></td>
+<td class="struct_member_description"><p>implementation of <a class="link" href="TlmAccountPlugin.html#tlm-account-plugin-cleanup-guest-user" title="tlm_account_plugin_cleanup_guest_user ()"><code class="function">tlm_account_plugin_cleanup_guest_user()</code></a></p></td>
+<td class="struct_member_annotations"> </td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="TlmAccountPlugin-struct"></a><h3>TlmAccountPlugin</h3>
+<pre class="programlisting">typedef struct _TlmAccountPlugin TlmAccountPlugin;</pre>
+<p>Opaque <a class="link" href="TlmAccountPlugin.html" title="TlmAccountPlugin"><span class="type">TlmAccountPlugin</span></a> data structure.</p>
+</div>
+</div>
+<div class="refsect1">
+<a name="TlmAccountPlugin.property-details"></a><h2>Property Details</h2>
+<div class="refsect2">
+<a name="TlmAccountPlugin--config"></a><h3>The <code class="literal">“config”</code> property</h3>
+<pre class="programlisting">  “config”                   <a href="http://library.gnome.org/devel/glib/unstable/glib-Hash-Tables.html#GHashTable"><span class="type">GHashTable</span></a> *</pre>
+<p>This property holds a list of key-value pairs of plugin configuration
+taken from tlm.conf configuration file.</p>
+<p>Flags: Read / Write / Construct Only</p>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.20</div>
+</body>
+</html>
