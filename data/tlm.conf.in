@@ -16,7 +16,7 @@ AUTO_LOGIN=1
 #
 # Prepare default/guest users before auto-login
 # Default: off
-PREPARE_DEFAULT=1
+#PREPARE_DEFAULT=1
 #
 # PAM service file to use
 PAM_SERVICE=tlm-login
@@ -46,7 +46,7 @@ PAM_SERVICE=tlm-login
 #
 # Do not launch anything, let systemd handle it through PAM
 # Default: off
-#PAUSE_SESSION=1
+PAUSE_SESSION=1
 #
 #
 # Seat specific settings where the group name is seat id
