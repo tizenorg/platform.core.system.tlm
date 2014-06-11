@@ -1,3 +1,6 @@
+* Wed Jun 11 2014 Jussi Laako <jussi.laako@linux.intel.com>
+- Depend on gumd on Tizen
+
 * Mon May 5 2014 Jussi Laako <jussi.laako@linux.intel.com>
 - Add PAM configuration file
 - Fix omitted password PAM chatter

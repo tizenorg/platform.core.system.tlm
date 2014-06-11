@@ -5,7 +5,7 @@
 Name: tlm
 Summary: Login manager for Tizen
 Version: 0.0.2
-Release: 4
+Release: 5
 Group: System/Service
 License: LGPL-2.1+
 Source: %{name}-%{version}.tar.gz
@@ -13,6 +13,7 @@ URL: https://github.com/01org/tlm
 Source1001:     %{name}.manifest
 Requires(post): /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
+Requires: gumd
 BuildRequires: pkgconfig(glib-2.0) >= 2.30
 BuildRequires: pkgconfig(gobject-2.0)
 BuildRequires: pkgconfig(gio-2.0)
