@@ -101,8 +101,7 @@ am__objects_1 =
 am_libtlm_dbus_la_OBJECTS =  \
 	libtlm_dbus_la-tlm-dbus-server-interface.lo \
 	libtlm_dbus_la-tlm-dbus-server-p2p.lo \
-	libtlm_dbus_la-tlm-dbus-login-adapter.lo \
-	libtlm_dbus_la-tlm-dbus-utils.lo $(am__objects_1)
+	libtlm_dbus_la-tlm-dbus-login-adapter.lo $(am__objects_1)
 libtlm_dbus_la_OBJECTS = $(am_libtlm_dbus_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
@@ -315,6 +314,7 @@ NULL =
 noinst_LTLIBRARIES = libtlm-dbus.la
 libtlm_dbus_la_CPPFLAGS = \
     -I$(top_srcdir)/src \
+    -I$(top_builddir)/src \
     $(TLM_CFLAGS) \
     -DG_LOG_DOMAIN=\"TLM\" \
     $(NULL)
@@ -331,8 +331,6 @@ libtlm_dbus_la_SOURCES = \
    tlm-dbus-server-p2p.h \
    tlm-dbus-login-adapter.c \
    tlm-dbus-login-adapter.h \
-   tlm-dbus-utils.c \
-   tlm-dbus-utils.h \
    $(NULL)
 
 all: all-am
@@ -393,7 +391,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libtlm_dbus_la-tlm-dbus-login-adapter.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libtlm_dbus_la-tlm-dbus-server-interface.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libtlm_dbus_la-tlm-dbus-server-p2p.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libtlm_dbus_la-tlm-dbus-utils.Plo@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	$(AM_V_CC)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.o$$||'`;\
@@ -439,13 +436,6 @@ libtlm_dbus_la-tlm-dbus-login-adapter.lo: tlm-dbus-login-adapter.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='tlm-dbus-login-adapter.c' object='libtlm_dbus_la-tlm-dbus-login-adapter.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libtlm_dbus_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libtlm_dbus_la-tlm-dbus-login-adapter.lo `test -f 'tlm-dbus-login-adapter.c' || echo '$(srcdir)/'`tlm-dbus-login-adapter.c
-
-libtlm_dbus_la-tlm-dbus-utils.lo: tlm-dbus-utils.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libtlm_dbus_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libtlm_dbus_la-tlm-dbus-utils.lo -MD -MP -MF $(DEPDIR)/libtlm_dbus_la-tlm-dbus-utils.Tpo -c -o libtlm_dbus_la-tlm-dbus-utils.lo `test -f 'tlm-dbus-utils.c' || echo '$(srcdir)/'`tlm-dbus-utils.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libtlm_dbus_la-tlm-dbus-utils.Tpo $(DEPDIR)/libtlm_dbus_la-tlm-dbus-utils.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='tlm-dbus-utils.c' object='libtlm_dbus_la-tlm-dbus-utils.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libtlm_dbus_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libtlm_dbus_la-tlm-dbus-utils.lo `test -f 'tlm-dbus-utils.c' || echo '$(srcdir)/'`tlm-dbus-utils.c
 
 mostlyclean-libtool:
 	-rm -f *.lo

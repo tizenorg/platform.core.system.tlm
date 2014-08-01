@@ -123,7 +123,7 @@ am__installdirs = "$(DESTDIR)$(pluginsdir)"
 LTLIBRARIES = $(plugins_LTLIBRARIES)
 am__DEPENDENCIES_1 =
 libtlm_plugin_gumd_la_DEPENDENCIES =  \
-	$(abs_top_builddir)/src/common/libtlm-plugin.la \
+	$(abs_top_builddir)/src/common/libtlm-common.la \
 	$(am__DEPENDENCIES_1)
 am_libtlm_plugin_gumd_la_OBJECTS =  \
 	libtlm_plugin_gumd_la-tlm-plugin-gumd.lo
@@ -352,8 +352,8 @@ libtlm_plugin_gumd_la_CFLAGS = \
 
 libtlm_plugin_gumd_la_LDFLAGS = -avoid-version
 libtlm_plugin_gumd_la_LIBADD = \
-	$(abs_top_builddir)/src/common/libtlm-plugin.la \
-    $(LIBGUM_LIBS)
+	$(abs_top_builddir)/src/common/libtlm-common.la \
+	$(LIBGUM_LIBS)
 
 all: all-am
 

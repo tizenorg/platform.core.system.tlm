@@ -77,6 +77,8 @@
     <keyword type="macro" name="TLM_ERROR" link="tlm-Errors.html#TLM-ERROR:CAPS"/>
     <keyword type="macro" name="TLM_GET_ERROR_FOR_ID()" link="tlm-Errors.html#TLM-GET-ERROR-FOR-ID:CAPS"/>
     <keyword type="function" name="tlm_error_quark ()" link="tlm-Errors.html#tlm-error-quark"/>
+    <keyword type="function" name="tlm_error_new_from_variant ()" link="tlm-Errors.html#tlm-error-new-from-variant"/>
+    <keyword type="function" name="tlm_error_to_variant ()" link="tlm-Errors.html#tlm-error-to-variant"/>
     <keyword type="enum" name="enum TlmError" link="tlm-Errors.html#TlmError"/>
   </functions>
 </book>

@@ -58,6 +58,22 @@
 <a class="link" href="tlm-Errors.html#tlm-error-quark" title="tlm_error_quark ()">tlm_error_quark</a> <span class="c_punctuation">()</span>
 </td>
 </tr>
+<tr>
+<td class="function_type">
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="returnvalue">GError</span></a> *
+</td>
+<td class="function_name">
+<a class="link" href="tlm-Errors.html#tlm-error-new-from-variant" title="tlm_error_new_from_variant ()">tlm_error_new_from_variant</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#GVariant"><span class="returnvalue">GVariant</span></a> *
+</td>
+<td class="function_name">
+<a class="link" href="tlm-Errors.html#tlm-error-to-variant" title="tlm_error_to_variant ()">tlm_error_to_variant</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
 </tbody>
 </table></div>
 </div>
@@ -84,19 +100,10 @@
 <p>This file provides Tlm error definitions and utilities.
 When creating an error, use <a class="link" href="tlm-Errors.html#TLM-ERROR:CAPS" title="TLM_ERROR"><span class="type">TLM_ERROR</span></a> for the error domain and errors
 from <a class="link" href="tlm-Errors.html#TlmError" title="enum TlmError"><span class="type">TlmError</span></a> for the error code.</p>
-<div class="informalexample">
-  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
-    <tbody>
-      <tr>
-        <td class="listing_lines" align="right"><pre>1
-2</pre></td>
-        <td class="listing_code"><pre class="programlisting">GError<span class="gtkdoc opt">*</span> err <span class="gtkdoc opt">=</span> <span class="function"><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#g-error-new">g_error_new</a></span><span class="gtkdoc opt">(</span>TLM_ERROR<span class="gtkdoc opt">,</span> TLM_ERROR_INVALID_INPUT<span class="gtkdoc opt">,</span>
-<span class="string">&quot;Invalid input&quot;</span><span class="gtkdoc opt">);</span></pre></td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
+<div class="informalexample"><pre class="programlisting">
+    GError* err = g_error_new(TLM_ERROR, TLM_ERROR_INVALID_INPUT,
+    "Invalid input");
+</pre></div>
 <p></p>
 </div>
 <div class="refsect1">
@@ -150,6 +157,60 @@ tlm_error_quark (<em class="parameter"><code><span class="type">void</span></cod
 <div class="refsect3">
 <a name="id-1.4.3.7.4.5"></a><h4>Returns</h4>
 <p> <a href="http://library.gnome.org/devel/glib/unstable/glib-Quarks.html#GQuark"><span class="type">GQuark</span></a> for Tlm errors</p>
+<p></p>
+</div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="tlm-error-new-from-variant"></a><h3>tlm_error_new_from_variant ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="returnvalue">GError</span></a> *
+tlm_error_new_from_variant (<em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#GVariant"><span class="type">GVariant</span></a> *var</code></em>);</pre>
+<p>Converts the GVariant to GError.</p>
+<div class="refsect3">
+<a name="id-1.4.3.7.5.5"></a><h4>Parameters</h4>
+<div class="informaltable"><table width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody><tr>
+<td class="parameter_name"><p>var</p></td>
+<td class="parameter_description"><p> instance of <a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#GVariant"><span class="type">GVariant</span></a>. </p></td>
+<td class="parameter_annotations"><span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span></td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="refsect3">
+<a name="id-1.4.3.7.5.6"></a><h4>Returns</h4>
+<p> <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> object if successful, NULL otherwise. </p>
+<p><span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span></p>
+</div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="tlm-error-to-variant"></a><h3>tlm_error_to_variant ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#GVariant"><span class="returnvalue">GVariant</span></a> *
+tlm_error_to_variant (<em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> *error</code></em>);</pre>
+<p>Converts the GError to GVariant.</p>
+<div class="refsect3">
+<a name="id-1.4.3.7.6.5"></a><h4>Parameters</h4>
+<div class="informaltable"><table width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody><tr>
+<td class="parameter_name"><p>error</p></td>
+<td class="parameter_description"><p> instance of <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a>. </p></td>
+<td class="parameter_annotations"><span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span></td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="refsect3">
+<a name="id-1.4.3.7.6.6"></a><h4>Returns</h4>
+<p> (transfer full) <a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#GVariant"><span class="type">GVariant</span></a> object if successful, NULL otherwise.</p>
 <p></p>
 </div>
 </div>
@@ -233,9 +294,23 @@ code</p>
 <td class="enum_member_annotations"> </td>
 </tr>
 <tr>
+<td class="enum_member_name"><p><a name="TLM-ERROR-SESSION-TERMINATION-FAILURE:CAPS"></a>TLM_ERROR_SESSION_TERMINATION_FAILURE</p></td>
+<td class="enum_member_description">
+<p>Session termination failed</p>
+</td>
+<td class="enum_member_annotations"> </td>
+</tr>
+<tr>
 <td class="enum_member_name"><p><a name="TLM-ERROR-DBUS-SERVER-START-FAILURE:CAPS"></a>TLM_ERROR_DBUS_SERVER_START_FAILURE</p></td>
 <td class="enum_member_description">
 <p>dbus-server startup failed</p>
+</td>
+<td class="enum_member_annotations"> </td>
+</tr>
+<tr>
+<td class="enum_member_name"><p><a name="TLM-ERROR-PAM-AUTH-FAILURE:CAPS"></a>TLM_ERROR_PAM_AUTH_FAILURE</p></td>
+<td class="enum_member_description">
+<p>PAM authentication failed</p>
 </td>
 <td class="enum_member_annotations"> </td>
 </tr>

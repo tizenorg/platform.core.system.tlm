@@ -123,7 +123,7 @@ am__installdirs = "$(DESTDIR)$(pluginsdir)"
 LTLIBRARIES = $(plugins_LTLIBRARIES)
 am__DEPENDENCIES_1 =
 libtlm_plugin_nfc_la_DEPENDENCIES =  \
-	$(abs_top_builddir)/src/common/libtlm-plugin.la \
+	$(abs_top_builddir)/src/common/libtlm-common.la \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
 am_libtlm_plugin_nfc_la_OBJECTS =  \
 	libtlm_plugin_nfc_la-tlm-auth-plugin-nfc.lo
@@ -353,7 +353,7 @@ libtlm_plugin_nfc_la_CFLAGS = \
 
 libtlm_plugin_nfc_la_LDFLAGS = -avoid-version
 libtlm_plugin_nfc_la_LIBADD = \
-	$(abs_top_builddir)/src/common/libtlm-plugin.la \
+	$(abs_top_builddir)/src/common/libtlm-common.la \
 	$(LIBTLM_NFC_LIBS) \
 	$(GLIB_LIBS)
 

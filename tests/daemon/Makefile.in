@@ -99,9 +99,8 @@ am_daemontest_OBJECTS = daemontest-daemon-test.$(OBJEXT)
 daemontest_OBJECTS = $(am_daemontest_OBJECTS)
 am__DEPENDENCIES_1 =
 daemontest_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
-	$(abs_top_builddir)/src/daemon/tlm-tlm-utils.o \
-	$(abs_top_builddir)/src/daemon/dbus/libtlm-dbus.la \
-	$(abs_top_builddir)/src/common/dbus/libtlm-dbus-glue.la
+	$(abs_top_builddir)/src/common/libtlm-common.la \
+	$(abs_top_builddir)/src/daemon/dbus/libtlm-dbus.la
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
@@ -534,9 +533,8 @@ daemontest_CFLAGS = \
 daemontest_LDADD = \
     $(TLM_LIBS) \
     $(CHECK_LIBS) \
-    $(abs_top_builddir)/src/daemon/tlm-tlm-utils.o \
-    $(abs_top_builddir)/src/daemon/dbus/libtlm-dbus.la \
-    $(abs_top_builddir)/src/common/dbus/libtlm-dbus-glue.la
+    $(abs_top_builddir)/src/common/libtlm-common.la \
+    $(abs_top_builddir)/src/daemon/dbus/libtlm-dbus.la
 
 CLEANFILES = *.gcno *.gcda
 all: all-am

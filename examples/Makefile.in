@@ -100,7 +100,7 @@ tlm_ui_OBJECTS = $(am_tlm_ui_OBJECTS)
 am__DEPENDENCIES_1 =
 tlm_ui_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
-	$(top_builddir)/src/daemon/tlm-tlm-utils.o \
+	$(top_builddir)/src/common/.libs/libtlm_common_la-tlm-utils.o \
 	$(top_builddir)/src/daemon/dbus/libtlm-dbus.la \
 	$(top_builddir)/src/common/dbus/libtlm-dbus-glue.la
 AM_V_lt = $(am__v_lt_@AM_V@)
@@ -325,7 +325,7 @@ tlm_ui_LDADD = \
     $(GMODULE_LIBS) \
     $(ELEMENTARY_LIBS) \
     $(DEPS_LIBS) \
-    $(top_builddir)/src/daemon/tlm-tlm-utils.o \
+    $(top_builddir)/src/common/.libs/libtlm_common_la-tlm-utils.o \
     $(top_builddir)/src/daemon/dbus/libtlm-dbus.la \
     $(top_builddir)/src/common/dbus/libtlm-dbus-glue.la
 

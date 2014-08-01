@@ -81,7 +81,7 @@ build_triplet = @build@
 host_triplet = @host@
 DIST_COMMON = $(top_srcdir)/common.mk $(srcdir)/Makefile.in \
 	$(srcdir)/Makefile.am $(top_srcdir)/depcomp \
-	$(libtlm_plugin_la_include_HEADERS)
+	$(libtlm_common_la_include_HEADERS)
 subdir = src/common
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/gtk-doc.m4 \
@@ -122,24 +122,26 @@ am__uninstall_files_from_dir = { \
          $(am__cd) "$$dir" && rm -f $$files; }; \
   }
 am__installdirs = "$(DESTDIR)$(libdir)" \
-	"$(DESTDIR)$(libtlm_plugin_la_includedir)"
+	"$(DESTDIR)$(libtlm_common_la_includedir)"
 LTLIBRARIES = $(lib_LTLIBRARIES)
 am__DEPENDENCIES_1 =
-libtlm_plugin_la_DEPENDENCIES = $(am__DEPENDENCIES_1)
+libtlm_common_la_DEPENDENCIES = $(am__DEPENDENCIES_1)
 am__objects_1 =
-am_libtlm_plugin_la_OBJECTS = $(am__objects_1) \
-	libtlm_plugin_la-tlm-account-plugin.lo \
-	libtlm_plugin_la-tlm-auth-plugin.lo \
-	libtlm_plugin_la-tlm-log.lo libtlm_plugin_la-tlm-error.lo \
-	libtlm_plugin_la-tlm-config.lo
-libtlm_plugin_la_OBJECTS = $(am_libtlm_plugin_la_OBJECTS)
+am_libtlm_common_la_OBJECTS = $(am__objects_1) \
+	libtlm_common_la-tlm-account-plugin.lo \
+	libtlm_common_la-tlm-auth-plugin.lo \
+	libtlm_common_la-tlm-log.lo libtlm_common_la-tlm-error.lo \
+	libtlm_common_la-tlm-config.lo \
+	libtlm_common_la-tlm-pipe-stream.lo \
+	libtlm_common_la-tlm-utils.lo
+libtlm_common_la_OBJECTS = $(am_libtlm_common_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
 am__v_lt_1 = 
-libtlm_plugin_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC \
+libtlm_common_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC \
 	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CCLD) \
-	$(libtlm_plugin_la_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) \
+	$(libtlm_common_la_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) \
 	-o $@
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
@@ -175,8 +177,8 @@ AM_V_CCLD = $(am__v_CCLD_@AM_V@)
 am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
-SOURCES = $(libtlm_plugin_la_SOURCES)
-DIST_SOURCES = $(libtlm_plugin_la_SOURCES)
+SOURCES = $(libtlm_common_la_SOURCES)
+DIST_SOURCES = $(libtlm_common_la_SOURCES)
 RECURSIVE_TARGETS = all-recursive check-recursive cscopelist-recursive \
 	ctags-recursive dvi-recursive html-recursive info-recursive \
 	install-data-recursive install-dvi-recursive \
@@ -190,7 +192,7 @@ am__can_run_installinfo = \
     n|no|NO) false;; \
     *) (install-info --version) >/dev/null 2>&1;; \
   esac
-HEADERS = $(libtlm_plugin_la_include_HEADERS)
+HEADERS = $(libtlm_common_la_include_HEADERS)
 RECURSIVE_CLEAN_TARGETS = mostlyclean-recursive clean-recursive	\
   distclean-recursive maintainer-clean-recursive
 am__recursive_targets = \
@@ -389,15 +391,15 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 pluginsdir = $(pkglibdir)/plugins
 SUBDIRS = dbus
-lib_LTLIBRARIES = libtlm-plugin.la
+lib_LTLIBRARIES = libtlm-common.la
 BUILT_SOURCES = 
-libtlm_plugin_la_includedir = $(includedir)/tlm
-libtlm_plugin_la_include_HEADERS = \
+libtlm_common_la_includedir = $(includedir)/tlm
+libtlm_common_la_include_HEADERS = \
 	tlm-account-plugin.h \
 	tlm-auth-plugin.h \
 	$(NULL)
 
-libtlm_plugin_la_SOURCES = \
+libtlm_common_la_SOURCES = \
 	$(BUILT_SOURCES) \
 	tlm-account-plugin.c \
 	tlm-auth-plugin.c \
@@ -408,17 +410,21 @@ libtlm_plugin_la_SOURCES = \
 	tlm-config.h \
 	tlm-config.c \
 	tlm-config-general.h \
+	tlm-pipe-stream.c \
+	tlm-pipe-stream.h \
+	tlm-utils.h \
+	tlm-utils.c \
 	$(NULL)
 
-libtlm_plugin_la_CFLAGS = \
+libtlm_common_la_CFLAGS = \
 	-I$(abs_top_srcdir)/src \
-	-DG_LOG_DOMAIN=\"TLM_PLUGIN\" \
+	-DG_LOG_DOMAIN=\"TLM_COMMON\" \
 	-DTLM_PLUGINS_DIR='"$(pluginsdir)"' \
 	-DTLM_SYSCONF_DIR='"$(sysconfdir)"' \
 	$(TLM_CFLAGS) \
 	$(NULL)
 
-libtlm_plugin_la_LIBADD = \
+libtlm_common_la_LIBADD = \
 	$(TLM_LIBS) \
 	$(NULL)
 
@@ -494,8 +500,8 @@ clean-libLTLIBRARIES:
 	  rm -f $${locs}; \
 	}
 
-libtlm-plugin.la: $(libtlm_plugin_la_OBJECTS) $(libtlm_plugin_la_DEPENDENCIES) $(EXTRA_libtlm_plugin_la_DEPENDENCIES) 
-	$(AM_V_CCLD)$(libtlm_plugin_la_LINK) -rpath $(libdir) $(libtlm_plugin_la_OBJECTS) $(libtlm_plugin_la_LIBADD) $(LIBS)
+libtlm-common.la: $(libtlm_common_la_OBJECTS) $(libtlm_common_la_DEPENDENCIES) $(EXTRA_libtlm_common_la_DEPENDENCIES) 
+	$(AM_V_CCLD)$(libtlm_common_la_LINK) -rpath $(libdir) $(libtlm_common_la_OBJECTS) $(libtlm_common_la_LIBADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -503,11 +509,13 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libtlm_plugin_la-tlm-account-plugin.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libtlm_plugin_la-tlm-auth-plugin.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libtlm_plugin_la-tlm-config.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libtlm_plugin_la-tlm-error.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libtlm_plugin_la-tlm-log.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libtlm_common_la-tlm-account-plugin.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libtlm_common_la-tlm-auth-plugin.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libtlm_common_la-tlm-config.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libtlm_common_la-tlm-error.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libtlm_common_la-tlm-log.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libtlm_common_la-tlm-pipe-stream.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libtlm_common_la-tlm-utils.Plo@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	$(AM_V_CC)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.o$$||'`;\
@@ -533,67 +541,81 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LTCOMPILE) -c -o $@ $<
 
-libtlm_plugin_la-tlm-account-plugin.lo: tlm-account-plugin.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libtlm_plugin_la_CFLAGS) $(CFLAGS) -MT libtlm_plugin_la-tlm-account-plugin.lo -MD -MP -MF $(DEPDIR)/libtlm_plugin_la-tlm-account-plugin.Tpo -c -o libtlm_plugin_la-tlm-account-plugin.lo `test -f 'tlm-account-plugin.c' || echo '$(srcdir)/'`tlm-account-plugin.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libtlm_plugin_la-tlm-account-plugin.Tpo $(DEPDIR)/libtlm_plugin_la-tlm-account-plugin.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='tlm-account-plugin.c' object='libtlm_plugin_la-tlm-account-plugin.lo' libtool=yes @AMDEPBACKSLASH@
+libtlm_common_la-tlm-account-plugin.lo: tlm-account-plugin.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libtlm_common_la_CFLAGS) $(CFLAGS) -MT libtlm_common_la-tlm-account-plugin.lo -MD -MP -MF $(DEPDIR)/libtlm_common_la-tlm-account-plugin.Tpo -c -o libtlm_common_la-tlm-account-plugin.lo `test -f 'tlm-account-plugin.c' || echo '$(srcdir)/'`tlm-account-plugin.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libtlm_common_la-tlm-account-plugin.Tpo $(DEPDIR)/libtlm_common_la-tlm-account-plugin.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='tlm-account-plugin.c' object='libtlm_common_la-tlm-account-plugin.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libtlm_plugin_la_CFLAGS) $(CFLAGS) -c -o libtlm_plugin_la-tlm-account-plugin.lo `test -f 'tlm-account-plugin.c' || echo '$(srcdir)/'`tlm-account-plugin.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libtlm_common_la_CFLAGS) $(CFLAGS) -c -o libtlm_common_la-tlm-account-plugin.lo `test -f 'tlm-account-plugin.c' || echo '$(srcdir)/'`tlm-account-plugin.c
 
-libtlm_plugin_la-tlm-auth-plugin.lo: tlm-auth-plugin.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libtlm_plugin_la_CFLAGS) $(CFLAGS) -MT libtlm_plugin_la-tlm-auth-plugin.lo -MD -MP -MF $(DEPDIR)/libtlm_plugin_la-tlm-auth-plugin.Tpo -c -o libtlm_plugin_la-tlm-auth-plugin.lo `test -f 'tlm-auth-plugin.c' || echo '$(srcdir)/'`tlm-auth-plugin.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libtlm_plugin_la-tlm-auth-plugin.Tpo $(DEPDIR)/libtlm_plugin_la-tlm-auth-plugin.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='tlm-auth-plugin.c' object='libtlm_plugin_la-tlm-auth-plugin.lo' libtool=yes @AMDEPBACKSLASH@
+libtlm_common_la-tlm-auth-plugin.lo: tlm-auth-plugin.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libtlm_common_la_CFLAGS) $(CFLAGS) -MT libtlm_common_la-tlm-auth-plugin.lo -MD -MP -MF $(DEPDIR)/libtlm_common_la-tlm-auth-plugin.Tpo -c -o libtlm_common_la-tlm-auth-plugin.lo `test -f 'tlm-auth-plugin.c' || echo '$(srcdir)/'`tlm-auth-plugin.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libtlm_common_la-tlm-auth-plugin.Tpo $(DEPDIR)/libtlm_common_la-tlm-auth-plugin.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='tlm-auth-plugin.c' object='libtlm_common_la-tlm-auth-plugin.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libtlm_plugin_la_CFLAGS) $(CFLAGS) -c -o libtlm_plugin_la-tlm-auth-plugin.lo `test -f 'tlm-auth-plugin.c' || echo '$(srcdir)/'`tlm-auth-plugin.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libtlm_common_la_CFLAGS) $(CFLAGS) -c -o libtlm_common_la-tlm-auth-plugin.lo `test -f 'tlm-auth-plugin.c' || echo '$(srcdir)/'`tlm-auth-plugin.c
 
-libtlm_plugin_la-tlm-log.lo: tlm-log.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libtlm_plugin_la_CFLAGS) $(CFLAGS) -MT libtlm_plugin_la-tlm-log.lo -MD -MP -MF $(DEPDIR)/libtlm_plugin_la-tlm-log.Tpo -c -o libtlm_plugin_la-tlm-log.lo `test -f 'tlm-log.c' || echo '$(srcdir)/'`tlm-log.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libtlm_plugin_la-tlm-log.Tpo $(DEPDIR)/libtlm_plugin_la-tlm-log.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='tlm-log.c' object='libtlm_plugin_la-tlm-log.lo' libtool=yes @AMDEPBACKSLASH@
+libtlm_common_la-tlm-log.lo: tlm-log.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libtlm_common_la_CFLAGS) $(CFLAGS) -MT libtlm_common_la-tlm-log.lo -MD -MP -MF $(DEPDIR)/libtlm_common_la-tlm-log.Tpo -c -o libtlm_common_la-tlm-log.lo `test -f 'tlm-log.c' || echo '$(srcdir)/'`tlm-log.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libtlm_common_la-tlm-log.Tpo $(DEPDIR)/libtlm_common_la-tlm-log.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='tlm-log.c' object='libtlm_common_la-tlm-log.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libtlm_plugin_la_CFLAGS) $(CFLAGS) -c -o libtlm_plugin_la-tlm-log.lo `test -f 'tlm-log.c' || echo '$(srcdir)/'`tlm-log.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libtlm_common_la_CFLAGS) $(CFLAGS) -c -o libtlm_common_la-tlm-log.lo `test -f 'tlm-log.c' || echo '$(srcdir)/'`tlm-log.c
 
-libtlm_plugin_la-tlm-error.lo: tlm-error.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libtlm_plugin_la_CFLAGS) $(CFLAGS) -MT libtlm_plugin_la-tlm-error.lo -MD -MP -MF $(DEPDIR)/libtlm_plugin_la-tlm-error.Tpo -c -o libtlm_plugin_la-tlm-error.lo `test -f 'tlm-error.c' || echo '$(srcdir)/'`tlm-error.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libtlm_plugin_la-tlm-error.Tpo $(DEPDIR)/libtlm_plugin_la-tlm-error.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='tlm-error.c' object='libtlm_plugin_la-tlm-error.lo' libtool=yes @AMDEPBACKSLASH@
+libtlm_common_la-tlm-error.lo: tlm-error.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libtlm_common_la_CFLAGS) $(CFLAGS) -MT libtlm_common_la-tlm-error.lo -MD -MP -MF $(DEPDIR)/libtlm_common_la-tlm-error.Tpo -c -o libtlm_common_la-tlm-error.lo `test -f 'tlm-error.c' || echo '$(srcdir)/'`tlm-error.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libtlm_common_la-tlm-error.Tpo $(DEPDIR)/libtlm_common_la-tlm-error.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='tlm-error.c' object='libtlm_common_la-tlm-error.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libtlm_plugin_la_CFLAGS) $(CFLAGS) -c -o libtlm_plugin_la-tlm-error.lo `test -f 'tlm-error.c' || echo '$(srcdir)/'`tlm-error.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libtlm_common_la_CFLAGS) $(CFLAGS) -c -o libtlm_common_la-tlm-error.lo `test -f 'tlm-error.c' || echo '$(srcdir)/'`tlm-error.c
 
-libtlm_plugin_la-tlm-config.lo: tlm-config.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libtlm_plugin_la_CFLAGS) $(CFLAGS) -MT libtlm_plugin_la-tlm-config.lo -MD -MP -MF $(DEPDIR)/libtlm_plugin_la-tlm-config.Tpo -c -o libtlm_plugin_la-tlm-config.lo `test -f 'tlm-config.c' || echo '$(srcdir)/'`tlm-config.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libtlm_plugin_la-tlm-config.Tpo $(DEPDIR)/libtlm_plugin_la-tlm-config.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='tlm-config.c' object='libtlm_plugin_la-tlm-config.lo' libtool=yes @AMDEPBACKSLASH@
+libtlm_common_la-tlm-config.lo: tlm-config.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libtlm_common_la_CFLAGS) $(CFLAGS) -MT libtlm_common_la-tlm-config.lo -MD -MP -MF $(DEPDIR)/libtlm_common_la-tlm-config.Tpo -c -o libtlm_common_la-tlm-config.lo `test -f 'tlm-config.c' || echo '$(srcdir)/'`tlm-config.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libtlm_common_la-tlm-config.Tpo $(DEPDIR)/libtlm_common_la-tlm-config.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='tlm-config.c' object='libtlm_common_la-tlm-config.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libtlm_plugin_la_CFLAGS) $(CFLAGS) -c -o libtlm_plugin_la-tlm-config.lo `test -f 'tlm-config.c' || echo '$(srcdir)/'`tlm-config.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libtlm_common_la_CFLAGS) $(CFLAGS) -c -o libtlm_common_la-tlm-config.lo `test -f 'tlm-config.c' || echo '$(srcdir)/'`tlm-config.c
+
+libtlm_common_la-tlm-pipe-stream.lo: tlm-pipe-stream.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libtlm_common_la_CFLAGS) $(CFLAGS) -MT libtlm_common_la-tlm-pipe-stream.lo -MD -MP -MF $(DEPDIR)/libtlm_common_la-tlm-pipe-stream.Tpo -c -o libtlm_common_la-tlm-pipe-stream.lo `test -f 'tlm-pipe-stream.c' || echo '$(srcdir)/'`tlm-pipe-stream.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libtlm_common_la-tlm-pipe-stream.Tpo $(DEPDIR)/libtlm_common_la-tlm-pipe-stream.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='tlm-pipe-stream.c' object='libtlm_common_la-tlm-pipe-stream.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libtlm_common_la_CFLAGS) $(CFLAGS) -c -o libtlm_common_la-tlm-pipe-stream.lo `test -f 'tlm-pipe-stream.c' || echo '$(srcdir)/'`tlm-pipe-stream.c
+
+libtlm_common_la-tlm-utils.lo: tlm-utils.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libtlm_common_la_CFLAGS) $(CFLAGS) -MT libtlm_common_la-tlm-utils.lo -MD -MP -MF $(DEPDIR)/libtlm_common_la-tlm-utils.Tpo -c -o libtlm_common_la-tlm-utils.lo `test -f 'tlm-utils.c' || echo '$(srcdir)/'`tlm-utils.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libtlm_common_la-tlm-utils.Tpo $(DEPDIR)/libtlm_common_la-tlm-utils.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='tlm-utils.c' object='libtlm_common_la-tlm-utils.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libtlm_common_la_CFLAGS) $(CFLAGS) -c -o libtlm_common_la-tlm-utils.lo `test -f 'tlm-utils.c' || echo '$(srcdir)/'`tlm-utils.c
 
 mostlyclean-libtool:
 	-rm -f *.lo
 
 clean-libtool:
 	-rm -rf .libs _libs
-install-libtlm_plugin_la_includeHEADERS: $(libtlm_plugin_la_include_HEADERS)
+install-libtlm_common_la_includeHEADERS: $(libtlm_common_la_include_HEADERS)
 	@$(NORMAL_INSTALL)
-	@list='$(libtlm_plugin_la_include_HEADERS)'; test -n "$(libtlm_plugin_la_includedir)" || list=; \
+	@list='$(libtlm_common_la_include_HEADERS)'; test -n "$(libtlm_common_la_includedir)" || list=; \
 	if test -n "$$list"; then \
-	  echo " $(MKDIR_P) '$(DESTDIR)$(libtlm_plugin_la_includedir)'"; \
-	  $(MKDIR_P) "$(DESTDIR)$(libtlm_plugin_la_includedir)" || exit 1; \
+	  echo " $(MKDIR_P) '$(DESTDIR)$(libtlm_common_la_includedir)'"; \
+	  $(MKDIR_P) "$(DESTDIR)$(libtlm_common_la_includedir)" || exit 1; \
 	fi; \
 	for p in $$list; do \
 	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
 	  echo "$$d$$p"; \
 	done | $(am__base_list) | \
 	while read files; do \
-	  echo " $(INSTALL_HEADER) $$files '$(DESTDIR)$(libtlm_plugin_la_includedir)'"; \
-	  $(INSTALL_HEADER) $$files "$(DESTDIR)$(libtlm_plugin_la_includedir)" || exit $$?; \
+	  echo " $(INSTALL_HEADER) $$files '$(DESTDIR)$(libtlm_common_la_includedir)'"; \
+	  $(INSTALL_HEADER) $$files "$(DESTDIR)$(libtlm_common_la_includedir)" || exit $$?; \
 	done
 
-uninstall-libtlm_plugin_la_includeHEADERS:
+uninstall-libtlm_common_la_includeHEADERS:
 	@$(NORMAL_UNINSTALL)
-	@list='$(libtlm_plugin_la_include_HEADERS)'; test -n "$(libtlm_plugin_la_includedir)" || list=; \
+	@list='$(libtlm_common_la_include_HEADERS)'; test -n "$(libtlm_common_la_includedir)" || list=; \
 	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
-	dir='$(DESTDIR)$(libtlm_plugin_la_includedir)'; $(am__uninstall_files_from_dir)
+	dir='$(DESTDIR)$(libtlm_common_la_includedir)'; $(am__uninstall_files_from_dir)
 
 # This directory's subdirectories are mostly independent; you can cd
 # into them and run 'make' without going through this Makefile.
@@ -755,7 +777,7 @@ check: $(BUILT_SOURCES)
 all-am: Makefile $(LTLIBRARIES) $(HEADERS)
 installdirs: installdirs-recursive
 installdirs-am:
-	for dir in "$(DESTDIR)$(libdir)" "$(DESTDIR)$(libtlm_plugin_la_includedir)"; do \
+	for dir in "$(DESTDIR)$(libdir)" "$(DESTDIR)$(libtlm_common_la_includedir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
 install: $(BUILT_SOURCES)
@@ -813,7 +835,7 @@ info: info-recursive
 
 info-am:
 
-install-data-am: install-libtlm_plugin_la_includeHEADERS
+install-data-am: install-libtlm_common_la_includeHEADERS
 
 install-dvi: install-dvi-recursive
 
@@ -860,7 +882,7 @@ ps: ps-recursive
 ps-am:
 
 uninstall-am: uninstall-libLTLIBRARIES \
-	uninstall-libtlm_plugin_la_includeHEADERS
+	uninstall-libtlm_common_la_includeHEADERS
 
 .MAKE: $(am__recursive_targets) all check install install-am \
 	install-strip
@@ -873,14 +895,14 @@ uninstall-am: uninstall-libLTLIBRARIES \
 	install install-am install-data install-data-am install-dvi \
 	install-dvi-am install-exec install-exec-am install-html \
 	install-html-am install-info install-info-am \
-	install-libLTLIBRARIES install-libtlm_plugin_la_includeHEADERS \
+	install-libLTLIBRARIES install-libtlm_common_la_includeHEADERS \
 	install-man install-pdf install-pdf-am install-ps \
 	install-ps-am install-strip installcheck installcheck-am \
 	installdirs installdirs-am maintainer-clean \
 	maintainer-clean-generic mostlyclean mostlyclean-compile \
 	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
 	tags tags-am uninstall uninstall-am uninstall-libLTLIBRARIES \
-	uninstall-libtlm_plugin_la_includeHEADERS
+	uninstall-libtlm_common_la_includeHEADERS
 
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.

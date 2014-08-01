@@ -25,7 +25,7 @@ PAM_SERVICE=tlm-login
 #  %S - seat number
 #  %I - seat id string
 # Default: "guest"
-#DEFAULT_USER=guest
+DEFAULT_USER=app
 #
 # Session command : The command run after successfull login
 # Default: $SHELL

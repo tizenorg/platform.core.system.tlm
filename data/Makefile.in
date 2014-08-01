@@ -286,7 +286,10 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 pluginsdir = $(pkglibdir)/plugins
 EXTRA_DIST = \
-      tlm.conf.in
+      tlm.conf.in \
+      tlm.service \
+      tlm-login \
+      tlm-login.debian
 
 sysconf_DATA = tlm.conf
 all: all-am

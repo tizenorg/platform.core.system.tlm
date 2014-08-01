@@ -108,6 +108,8 @@ TLM_ERROR
 TlmError
 TLM_GET_ERROR_FOR_ID
 tlm_error_quark
+tlm_error_new_from_variant
+tlm_error_to_variant
 </SECTION>
 
 <SECTION>

@@ -97,14 +97,13 @@ CONFIG_CLEAN_FILES = tlm.pc
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)" "$(DESTDIR)$(pkgconfigdir)"
 PROGRAMS = $(bin_PROGRAMS)
-am_tlm_OBJECTS = tlm-tlm-utils.$(OBJEXT) \
-	tlm-tlm-auth-session.$(OBJEXT) tlm-tlm-session.$(OBJEXT) \
+am_tlm_OBJECTS = tlm-tlm-session-remote.$(OBJEXT) \
 	tlm-tlm-seat.$(OBJEXT) tlm-tlm-dbus-observer.$(OBJEXT) \
 	tlm-tlm-manager.$(OBJEXT) tlm-tlm-main.$(OBJEXT)
 tlm_OBJECTS = $(am_tlm_OBJECTS)
 am__DEPENDENCIES_1 =
 tlm_DEPENDENCIES = $(am__DEPENDENCIES_1) \
-	$(abs_top_builddir)/src/common/libtlm-plugin.la \
+	$(abs_top_builddir)/src/common/libtlm-common.la \
 	$(abs_top_builddir)/src/daemon/dbus/libtlm-dbus.la
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
@@ -391,12 +390,8 @@ SUBDIRS = dbus
 BUILT_SOURCES = 
 tlm_SOURCES = \
 	tlm-types.h \
-	tlm-utils.h \
-	tlm-utils.c \
-	tlm-auth-session.h \
-	tlm-auth-session.c \
-	tlm-session.h \
-	tlm-session.c \
+	tlm-session-remote.h \
+	tlm-session-remote.c \
 	tlm-seat.h \
 	tlm-seat.c \
 	tlm-dbus-observer.h \
@@ -408,18 +403,19 @@ tlm_SOURCES = \
 
 tlm_CFLAGS = \
 	-I$(abs_top_builddir) \
+	-I$(abs_top_builddir)/src \
 	-I$(abs_top_srcdir)/src \
 	-I$(abs_top_srcdir)/src/common \
 	-DG_LOG_DOMAIN=\"TLM\" \
+	-DTLM_BIN_DIR='"$(bindir)"' \
 	-DTLM_PLUGINS_DIR='"$(pluginsdir)"' \
 	$(TLM_CFLAGS) \
 	$(NULL)
 
 tlm_LDADD = \
 	$(TLM_LIBS) \
-	$(abs_top_builddir)/src/common/libtlm-plugin.la \
-    $(abs_top_builddir)/src/daemon/dbus/libtlm-dbus.la \
-	-lpam \
+	$(abs_top_builddir)/src/common/libtlm-common.la \
+  $(abs_top_builddir)/src/daemon/dbus/libtlm-dbus.la \
 	$(NULL)
 
 EXTRA_DIST = \
@@ -526,13 +522,11 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tlm-tlm-auth-session.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tlm-tlm-dbus-observer.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tlm-tlm-main.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tlm-tlm-manager.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tlm-tlm-seat.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tlm-tlm-session.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tlm-tlm-utils.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tlm-tlm-session-remote.Po@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	$(AM_V_CC)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.o$$||'`;\
@@ -558,47 +552,19 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LTCOMPILE) -c -o $@ $<
 
-tlm-tlm-utils.o: tlm-utils.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(tlm_CFLAGS) $(CFLAGS) -MT tlm-tlm-utils.o -MD -MP -MF $(DEPDIR)/tlm-tlm-utils.Tpo -c -o tlm-tlm-utils.o `test -f 'tlm-utils.c' || echo '$(srcdir)/'`tlm-utils.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/tlm-tlm-utils.Tpo $(DEPDIR)/tlm-tlm-utils.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='tlm-utils.c' object='tlm-tlm-utils.o' libtool=no @AMDEPBACKSLASH@
+tlm-tlm-session-remote.o: tlm-session-remote.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(tlm_CFLAGS) $(CFLAGS) -MT tlm-tlm-session-remote.o -MD -MP -MF $(DEPDIR)/tlm-tlm-session-remote.Tpo -c -o tlm-tlm-session-remote.o `test -f 'tlm-session-remote.c' || echo '$(srcdir)/'`tlm-session-remote.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/tlm-tlm-session-remote.Tpo $(DEPDIR)/tlm-tlm-session-remote.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='tlm-session-remote.c' object='tlm-tlm-session-remote.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(tlm_CFLAGS) $(CFLAGS) -c -o tlm-tlm-utils.o `test -f 'tlm-utils.c' || echo '$(srcdir)/'`tlm-utils.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(tlm_CFLAGS) $(CFLAGS) -c -o tlm-tlm-session-remote.o `test -f 'tlm-session-remote.c' || echo '$(srcdir)/'`tlm-session-remote.c
 
-tlm-tlm-utils.obj: tlm-utils.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(tlm_CFLAGS) $(CFLAGS) -MT tlm-tlm-utils.obj -MD -MP -MF $(DEPDIR)/tlm-tlm-utils.Tpo -c -o tlm-tlm-utils.obj `if test -f 'tlm-utils.c'; then $(CYGPATH_W) 'tlm-utils.c'; else $(CYGPATH_W) '$(srcdir)/tlm-utils.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/tlm-tlm-utils.Tpo $(DEPDIR)/tlm-tlm-utils.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='tlm-utils.c' object='tlm-tlm-utils.obj' libtool=no @AMDEPBACKSLASH@
+tlm-tlm-session-remote.obj: tlm-session-remote.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(tlm_CFLAGS) $(CFLAGS) -MT tlm-tlm-session-remote.obj -MD -MP -MF $(DEPDIR)/tlm-tlm-session-remote.Tpo -c -o tlm-tlm-session-remote.obj `if test -f 'tlm-session-remote.c'; then $(CYGPATH_W) 'tlm-session-remote.c'; else $(CYGPATH_W) '$(srcdir)/tlm-session-remote.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/tlm-tlm-session-remote.Tpo $(DEPDIR)/tlm-tlm-session-remote.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='tlm-session-remote.c' object='tlm-tlm-session-remote.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(tlm_CFLAGS) $(CFLAGS) -c -o tlm-tlm-utils.obj `if test -f 'tlm-utils.c'; then $(CYGPATH_W) 'tlm-utils.c'; else $(CYGPATH_W) '$(srcdir)/tlm-utils.c'; fi`
-
-tlm-tlm-auth-session.o: tlm-auth-session.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(tlm_CFLAGS) $(CFLAGS) -MT tlm-tlm-auth-session.o -MD -MP -MF $(DEPDIR)/tlm-tlm-auth-session.Tpo -c -o tlm-tlm-auth-session.o `test -f 'tlm-auth-session.c' || echo '$(srcdir)/'`tlm-auth-session.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/tlm-tlm-auth-session.Tpo $(DEPDIR)/tlm-tlm-auth-session.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='tlm-auth-session.c' object='tlm-tlm-auth-session.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(tlm_CFLAGS) $(CFLAGS) -c -o tlm-tlm-auth-session.o `test -f 'tlm-auth-session.c' || echo '$(srcdir)/'`tlm-auth-session.c
-
-tlm-tlm-auth-session.obj: tlm-auth-session.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(tlm_CFLAGS) $(CFLAGS) -MT tlm-tlm-auth-session.obj -MD -MP -MF $(DEPDIR)/tlm-tlm-auth-session.Tpo -c -o tlm-tlm-auth-session.obj `if test -f 'tlm-auth-session.c'; then $(CYGPATH_W) 'tlm-auth-session.c'; else $(CYGPATH_W) '$(srcdir)/tlm-auth-session.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/tlm-tlm-auth-session.Tpo $(DEPDIR)/tlm-tlm-auth-session.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='tlm-auth-session.c' object='tlm-tlm-auth-session.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(tlm_CFLAGS) $(CFLAGS) -c -o tlm-tlm-auth-session.obj `if test -f 'tlm-auth-session.c'; then $(CYGPATH_W) 'tlm-auth-session.c'; else $(CYGPATH_W) '$(srcdir)/tlm-auth-session.c'; fi`
-
-tlm-tlm-session.o: tlm-session.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(tlm_CFLAGS) $(CFLAGS) -MT tlm-tlm-session.o -MD -MP -MF $(DEPDIR)/tlm-tlm-session.Tpo -c -o tlm-tlm-session.o `test -f 'tlm-session.c' || echo '$(srcdir)/'`tlm-session.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/tlm-tlm-session.Tpo $(DEPDIR)/tlm-tlm-session.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='tlm-session.c' object='tlm-tlm-session.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(tlm_CFLAGS) $(CFLAGS) -c -o tlm-tlm-session.o `test -f 'tlm-session.c' || echo '$(srcdir)/'`tlm-session.c
-
-tlm-tlm-session.obj: tlm-session.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(tlm_CFLAGS) $(CFLAGS) -MT tlm-tlm-session.obj -MD -MP -MF $(DEPDIR)/tlm-tlm-session.Tpo -c -o tlm-tlm-session.obj `if test -f 'tlm-session.c'; then $(CYGPATH_W) 'tlm-session.c'; else $(CYGPATH_W) '$(srcdir)/tlm-session.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/tlm-tlm-session.Tpo $(DEPDIR)/tlm-tlm-session.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='tlm-session.c' object='tlm-tlm-session.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(tlm_CFLAGS) $(CFLAGS) -c -o tlm-tlm-session.obj `if test -f 'tlm-session.c'; then $(CYGPATH_W) 'tlm-session.c'; else $(CYGPATH_W) '$(srcdir)/tlm-session.c'; fi`
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(tlm_CFLAGS) $(CFLAGS) -c -o tlm-tlm-session-remote.obj `if test -f 'tlm-session-remote.c'; then $(CYGPATH_W) 'tlm-session-remote.c'; else $(CYGPATH_W) '$(srcdir)/tlm-session-remote.c'; fi`
 
 tlm-tlm-seat.o: tlm-seat.c
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(tlm_CFLAGS) $(CFLAGS) -MT tlm-tlm-seat.o -MD -MP -MF $(DEPDIR)/tlm-tlm-seat.Tpo -c -o tlm-tlm-seat.o `test -f 'tlm-seat.c' || echo '$(srcdir)/'`tlm-seat.c

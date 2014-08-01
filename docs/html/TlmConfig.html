@@ -170,23 +170,14 @@ for where the file is searched for.</p>
 <a name="id-1.2.3.6.6"></a><h2>Usage</h2>
 </div>
 <p>Following code snippet demonstrates how to create and use config object:</p>
-<div class="informalexample">
-  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
-    <tbody>
-      <tr>
-        <td class="listing_lines" align="right"><pre>1
-2
-3
-4</pre></td>
-        <td class="listing_code"><pre class="programlisting">TlmConfig<span class="gtkdoc opt">*</span> config <span class="gtkdoc opt">=</span> <span class="function"><a href="TlmConfig.html#tlm-config-new">tlm_config_new</a></span> <span class="gtkdoc opt">();</span>
-<span class="gtkdoc kwb">const</span> gchar <span class="gtkdoc opt">*</span>str <span class="gtkdoc opt">=</span> <span class="function"><a href="TlmConfig.html#tlm-config-get-string">tlm_config_get_string</a></span> <span class="gtkdoc opt">(</span>config<span class="gtkdoc opt">,</span>
- TLM_CONFIG_GENERAL<span class="gtkdoc opt">,</span> TLM_CONFIG_GENERAL_PAM_SERVICE<span class="gtkdoc opt">,</span> <span class="number">0</span><span class="gtkdoc opt">);</span>
-<span class="function"><a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span><span class="gtkdoc opt">(</span>config<span class="gtkdoc opt">);</span></pre></td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+<div class="informalexample"><pre class="programlisting">
 
+TlmConfig* config = tlm_config_new ();
+const gchar *str = tlm_config_get_string (config,
+ TLM_CONFIG_GENERAL, TLM_CONFIG_GENERAL_PAM_SERVICE, 0);
+g_object_unref(config);
+
+</pre></div>
 <p></p>
 <div class="refsect1">
 <a name="id-1.2.3.6.10"></a><h2>Where the configuration file is searched for</h2>

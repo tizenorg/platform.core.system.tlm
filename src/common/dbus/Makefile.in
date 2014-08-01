@@ -97,9 +97,10 @@ am__DEPENDENCIES_1 =
 libtlm_dbus_glue_la_DEPENDENCIES = $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1)
 am__objects_1 =
-am_libtlm_dbus_glue_la_OBJECTS = $(am__objects_1)
+am_libtlm_dbus_glue_la_OBJECTS =  \
+	libtlm_dbus_glue_la-tlm-dbus-utils.lo $(am__objects_1)
 am__objects_2 = libtlm_dbus_glue_la-tlm-dbus-login-gen.lo \
-	$(am__objects_1)
+	libtlm_dbus_glue_la-tlm-dbus-session-gen.lo $(am__objects_1)
 nodist_libtlm_dbus_glue_la_OBJECTS = $(am__objects_2) $(am__objects_1)
 libtlm_dbus_glue_la_OBJECTS = $(am_libtlm_dbus_glue_la_OBJECTS) \
 	$(nodist_libtlm_dbus_glue_la_OBJECTS)
@@ -316,10 +317,13 @@ INTERFACES_DIR = $(top_builddir)/src/common/dbus/interfaces
 DBUS_BUILT_SOURCES = \
     tlm-dbus-login-gen.c \
     tlm-dbus-login-gen.h \
+    tlm-dbus-session-gen.c \
+    tlm-dbus-session-gen.h \
     $(NULL)
 
 DBUS_BUILT_DOCS = \
     tlm-dbus-login-doc-gen-org.tizen.Tlm.Login.xml \
+    tlm-dbus-session-doc-gen-org.tizen.Tlm.Session.xml \
     $(NULL)
 
 DBUS_INTERFACE_PREFIX = "org.tizen.Tlm."
@@ -338,9 +342,13 @@ nodist_libtlm_dbus_glue_la_SOURCES = \
 
 libtlm_dbus_glue_la_SOURCES = \
    tlm-dbus.h \
+   tlm-dbus-utils.c \
+   tlm-dbus-utils.h \
    $(NULL)
 
-EXTRA_DIST = interfaces tlm-dbus-login-doc-gen-org.tizen.Tlm.Login.xml
+EXTRA_DIST = interfaces tlm-dbus-login-doc-gen-org.tizen.Tlm.Login.xml \
+  tlm-dbus-session-doc-gen-org.tizen.Tlm.Session.xml
+
 all: all-am
 
 .SUFFIXES:
@@ -397,6 +405,8 @@ distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libtlm_dbus_glue_la-tlm-dbus-login-gen.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libtlm_dbus_glue_la-tlm-dbus-session-gen.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libtlm_dbus_glue_la-tlm-dbus-utils.Plo@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	$(AM_V_CC)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.o$$||'`;\
@@ -422,12 +432,26 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LTCOMPILE) -c -o $@ $<
 
+libtlm_dbus_glue_la-tlm-dbus-utils.lo: tlm-dbus-utils.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libtlm_dbus_glue_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libtlm_dbus_glue_la-tlm-dbus-utils.lo -MD -MP -MF $(DEPDIR)/libtlm_dbus_glue_la-tlm-dbus-utils.Tpo -c -o libtlm_dbus_glue_la-tlm-dbus-utils.lo `test -f 'tlm-dbus-utils.c' || echo '$(srcdir)/'`tlm-dbus-utils.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libtlm_dbus_glue_la-tlm-dbus-utils.Tpo $(DEPDIR)/libtlm_dbus_glue_la-tlm-dbus-utils.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='tlm-dbus-utils.c' object='libtlm_dbus_glue_la-tlm-dbus-utils.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libtlm_dbus_glue_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libtlm_dbus_glue_la-tlm-dbus-utils.lo `test -f 'tlm-dbus-utils.c' || echo '$(srcdir)/'`tlm-dbus-utils.c
+
 libtlm_dbus_glue_la-tlm-dbus-login-gen.lo: tlm-dbus-login-gen.c
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libtlm_dbus_glue_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libtlm_dbus_glue_la-tlm-dbus-login-gen.lo -MD -MP -MF $(DEPDIR)/libtlm_dbus_glue_la-tlm-dbus-login-gen.Tpo -c -o libtlm_dbus_glue_la-tlm-dbus-login-gen.lo `test -f 'tlm-dbus-login-gen.c' || echo '$(srcdir)/'`tlm-dbus-login-gen.c
 @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libtlm_dbus_glue_la-tlm-dbus-login-gen.Tpo $(DEPDIR)/libtlm_dbus_glue_la-tlm-dbus-login-gen.Plo
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='tlm-dbus-login-gen.c' object='libtlm_dbus_glue_la-tlm-dbus-login-gen.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libtlm_dbus_glue_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libtlm_dbus_glue_la-tlm-dbus-login-gen.lo `test -f 'tlm-dbus-login-gen.c' || echo '$(srcdir)/'`tlm-dbus-login-gen.c
+
+libtlm_dbus_glue_la-tlm-dbus-session-gen.lo: tlm-dbus-session-gen.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libtlm_dbus_glue_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libtlm_dbus_glue_la-tlm-dbus-session-gen.lo -MD -MP -MF $(DEPDIR)/libtlm_dbus_glue_la-tlm-dbus-session-gen.Tpo -c -o libtlm_dbus_glue_la-tlm-dbus-session-gen.lo `test -f 'tlm-dbus-session-gen.c' || echo '$(srcdir)/'`tlm-dbus-session-gen.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libtlm_dbus_glue_la-tlm-dbus-session-gen.Tpo $(DEPDIR)/libtlm_dbus_glue_la-tlm-dbus-session-gen.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='tlm-dbus-session-gen.c' object='libtlm_dbus_glue_la-tlm-dbus-session-gen.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libtlm_dbus_glue_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libtlm_dbus_glue_la-tlm-dbus-session-gen.lo `test -f 'tlm-dbus-session-gen.c' || echo '$(srcdir)/'`tlm-dbus-session-gen.c
 
 mostlyclean-libtool:
 	-rm -f *.lo
@@ -647,14 +671,25 @@ tlm-dbus-login-gen.c tlm-dbus-login-gen.h : $(INTERFACES_DIR)/org.tizen.Tlm.Logi
        --generate-docbook tlm-dbus-login-doc-gen \
        $<
 
-all-local: login_xml_doc
+tlm-dbus-session-gen.c tlm-dbus-session-gen.h : $(INTERFACES_DIR)/org.tizen.Tlm.Session.xml
+	gdbus-codegen                                       \
+       --interface-prefix $(DBUS_INTERFACE_PREFIX)      \
+       --c-namespace TlmDbus                       \
+       --generate-c-code  tlm-dbus-session-gen     \
+       --generate-docbook tlm-dbus-session-doc-gen \
+       $<
+
+all-local: copy_xml_doc
 
 mostlyclean-local:
 	rm -rf $(abs_top_builddir)/docs/tlm-dbus-login-doc-gen-org.tizen.Tlm.Login.xml
+	rm -rf $(abs_top_builddir)/docs/tlm-dbus-session-doc-gen-org.tizen.Tlm.Session.xml
 
-login_xml_doc: tlm-dbus-login-gen.c
+copy_xml_doc: tlm-dbus-login-gen.c tlm-dbus-session-gen.c
 	cp -f $(abs_top_srcdir)/src/common/dbus/tlm-dbus-login-doc-gen-org.tizen.Tlm.Login.xml $(abs_top_builddir)/docs/tlm-dbus-login-doc-gen-org.tizen.Tlm.Login.xml
 	chmod +w $(abs_top_builddir)/docs/tlm-dbus-login-doc-gen-org.tizen.Tlm.Login.xml
+	cp -f $(abs_top_srcdir)/src/common/dbus/tlm-dbus-session-doc-gen-org.tizen.Tlm.Session.xml $(abs_top_builddir)/docs/tlm-dbus-session-doc-gen-org.tizen.Tlm.Session.xml
+	chmod +w $(abs_top_builddir)/docs/tlm-dbus-session-doc-gen-org.tizen.Tlm.Session.xml
 
 clean-local:
 	rm -f *~ $(DBUS_BUILT_SOURCES) $(DBUS_BUILT_DOCS)
