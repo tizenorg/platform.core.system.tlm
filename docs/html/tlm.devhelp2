@@ -48,6 +48,7 @@
     <keyword type="macro" name="TLM_CONFIG_GENERAL_AUTO_LOGIN" link="tlm-General-configuration.html#TLM-CONFIG-GENERAL-AUTO-LOGIN:CAPS"/>
     <keyword type="macro" name="TLM_CONFIG_GENERAL_PREPARE_DEFAULT" link="tlm-General-configuration.html#TLM-CONFIG-GENERAL-PREPARE-DEFAULT:CAPS"/>
     <keyword type="macro" name="TLM_CONFIG_GENERAL_PAM_SERVICE" link="tlm-General-configuration.html#TLM-CONFIG-GENERAL-PAM-SERVICE:CAPS"/>
+    <keyword type="macro" name="TLM_CONFIG_GENERAL_DEFAULT_PAM_SERVICE" link="tlm-General-configuration.html#TLM-CONFIG-GENERAL-DEFAULT-PAM-SERVICE:CAPS"/>
     <keyword type="macro" name="TLM_CONFIG_GENERAL_DEFAULT_USER" link="tlm-General-configuration.html#TLM-CONFIG-GENERAL-DEFAULT-USER:CAPS"/>
     <keyword type="macro" name="TLM_CONFIG_GENERAL_SETUP_TERMINAL" link="tlm-General-configuration.html#TLM-CONFIG-GENERAL-SETUP-TERMINAL:CAPS"/>
     <keyword type="macro" name="TLM_CONFIG_GENERAL_TERMINATE_TIMEOUT" link="tlm-General-configuration.html#TLM-CONFIG-GENERAL-TERMINATE-TIMEOUT:CAPS"/>
