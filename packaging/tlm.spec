@@ -12,19 +12,18 @@
 %endif
 
 
-Name: tlm
-Summary: Login manager for Tizen
-Version: 1.0.0
-Release: 0
-Group: System/Service
-License: LGPL-2.1+
-Source: %{name}-%{version}.tar.gz
-URL: https://github.com/01org/tlm
+Name:       tlm
+Summary:    Login manager for Tizen
+Version:    1.0.0
+Release:    0
+Group:      System/Service
+License:    LGPL-2.1+
+Source:     %{name}-%{version}.tar.gz
+URL:        https://github.com/01org/tlm
 Source1001: %{name}.manifest
-Requires(post): /sbin/ldconfig, systemd
+Requires(post):   /sbin/ldconfig, systemd
 Requires(postun): /sbin/ldconfig, systemd
-Requires: gumd
-Requires: libsystemd
+Requires:         gumd
 BuildRequires: pkgconfig(glib-2.0) >= 2.30
 BuildRequires: pkgconfig(gobject-2.0)
 BuildRequires: pkgconfig(gio-2.0)
@@ -39,29 +38,27 @@ BuildRequires: gtk-doc
 BuildRequires: pkgconfig(elementary)
 %endif
 
-
 %description
-%{summary} files
-
+TLM is a daemon that handles user logins in a multi-user, multi-seat system by
+authenticating the users through PAM, and setting up, launching, and tracking user
+sessions.
 
 %package devel
-Summary:    Development files for %{name}
+Summary:    Dev files for %{name}
 Group:      Development/Libraries
 Requires:   %{name} = %{version}-%{release}
 
-
 %description devel
-%{summary} files
+Development files for %{name}.
 
 
 %package doc
-Summary:    Documentation files for %{name}
+Summary:    Doc files for %{name}
 Group:      Development/Libraries
 Requires:   %{name} = %{version}-%{release}
 
-
 %description doc
-%{summary} files
+Documentation files for %{name}.
 
 
 %prep
@@ -100,21 +97,21 @@ install -m 755 data/tizen-common/etc/session.d/* %{buildroot}%{_sysconfdir}/sess
 
 %post
 /sbin/ldconfig
-/usr/bin/systemctl enable tlm
-/usr/bin/systemctl daemon-reload
+systemctl enable tlm
+systemctl daemon-reload
 
 
 %postun
 /sbin/ldconfig
-/usr/bin/systemctl disable tlm
-/usr/bin/systemctl daemon-reload
+systemctl disable tlm
+systemctl daemon-reload
 
 
 %files
 %defattr(-,root,root,-)
 %manifest %{name}.manifest
 %license COPYING
-%doc AUTHORS NEWS README
+%doc AUTHORS
 %{_bindir}/%{name}
 %{_bindir}/%{name}-sessiond
 %{_bindir}/%{name}-client
@@ -127,7 +124,6 @@ install -m 755 data/tizen-common/etc/session.d/* %{buildroot}%{_sysconfdir}/sess
 %config %{_sysconfdir}/pam.d/tlm-system-login
 %config(noreplace) %{_sysconfdir}/session.d/*
 
-
 %files devel
 %defattr(-,root,root,-)
 %{_includedir}/%{name}/*.h
@@ -137,7 +133,7 @@ install -m 755 data/tizen-common/etc/session.d/* %{buildroot}%{_sysconfdir}/sess
 %{_bindir}/tlm-ui
 %endif
 
-
 %files doc
 %defattr(-,root,root,-)
 %{_datadir}/gtk-doc/html/tlm/*
+
