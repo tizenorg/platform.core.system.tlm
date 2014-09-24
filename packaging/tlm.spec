@@ -2,19 +2,18 @@
 # WARNING! do not use for production builds as it will break security
 %define debug_build 0
 
-Name: tlm
-Summary: Login manager for Tizen
-Version: 0.0.5
-Release: 1
-Group: System/Service
-License: LGPL-2.1+
-Source: %{name}-%{version}.tar.gz
-URL: https://github.com/01org/tlm
+Name:       tlm
+Summary:    Login manager for Tizen
+Version:    0.0.5
+Release:    0
+Group:      System/Service
+License:    LGPL-2.1+
+Source:     %{name}-%{version}.tar.gz
+URL:        https://github.com/01org/tlm
 Source1001: %{name}.manifest
-Requires(post): /sbin/ldconfig, systemd
+Requires(post):   /sbin/ldconfig, systemd
 Requires(postun): /sbin/ldconfig, systemd
-Requires: gumd
-Requires: libsystemd
+Requires:         gumd
 BuildRequires: pkgconfig(glib-2.0) >= 2.30
 BuildRequires: pkgconfig(gobject-2.0)
 BuildRequires: pkgconfig(gio-2.0)
@@ -27,29 +26,27 @@ BuildRequires: pam-devel
 BuildRequires: gtk-doc
 %endif
 
-
 %description
-%{summary}.
-
+TLM is a daemon that handles user logins in a multi-user, multi-seat system by
+authenticating the users through PAM, and setting up, launching, and tracking user
+sessions.
 
 %package devel
-Summary:    Development files for %{name}
+Summary:    Dev files for %{name}
 Group:      Development/Libraries
 Requires:   %{name} = %{version}-%{release}
 
-
 %description devel
-%{summary}.
+Development files for %{name}.
 
 
 %package doc
-Summary:    Documentation files for %{name}
+Summary:    Doc files for %{name}
 Group:      Development/Libraries
 Requires:   %{name} = %{version}-%{release}
 
-
 %description doc
-%{summary}.
+Documentation files for %{name}.
 
 
 %prep
@@ -59,12 +56,11 @@ cp %{SOURCE1001} .
 
 %build
 %if %{debug_build} == 1
-./autogen.sh
-%configure --enable-gum --enable-gtk-doc --enable-examples --enable-debug
+%reconfigure --enable-gum --enable-gtk-doc --enable-examples --enable-debug
 %else
-%configure --enable-gum --enable-examples
+%reconfigure --enable-gum --enable-examples
 %endif
-make %{?_smp_mflags}
+%__make %{?_smp_mflags}
 
 
 %install
@@ -79,20 +75,20 @@ install -m 644 data/tlm-default-login %{buildroot}%{_sysconfdir}/pam.d/
 
 %post
 /sbin/ldconfig
-/usr/bin/systemctl enable tlm
-/usr/bin/systemctl daemon-reload
+systemctl enable tlm
+systemctl daemon-reload
 
 
 %postun
 /sbin/ldconfig
-/usr/bin/systemctl disable tlm
-/usr/bin/systemctl daemon-reload
+systemctl disable tlm
+systemctl daemon-reload
 
 
 %files
 %defattr(-,root,root,-)
 %manifest %{name}.manifest
-%doc AUTHORS COPYING INSTALL NEWS README
+%doc AUTHORS
 %{_bindir}/%{name}
 %{_bindir}/%{name}-sessiond
 %{_bindir}/%{name}-client
@@ -102,7 +98,7 @@ install -m 644 data/tlm-default-login %{buildroot}%{_sysconfdir}/pam.d/
 %config(noreplace) %{_sysconfdir}/tlm.conf
 %config %{_sysconfdir}/pam.d/tlm-login
 %config %{_sysconfdir}/pam.d/tlm-default-login
-
+%license COPYING
 
 %files devel
 %defattr(-,root,root,-)
@@ -110,7 +106,6 @@ install -m 644 data/tlm-default-login %{buildroot}%{_sysconfdir}/pam.d/
 %{_libdir}/lib%{name}*.so
 %{_libdir}/pkgconfig/%{name}.pc
 %{_bindir}/tlm-ui
-
 
 %files doc
 %defattr(-,root,root,-)
