@@ -14,6 +14,7 @@
       <sub name="TlmAccountPluginGumd" link="TlmAccountPluginGumd.html"/>
       <sub name="TlmAuthPlugin" link="TlmAuthPlugin.html"/>
       <sub name="TlmAuthPluginDefault" link="TlmAuthPluginDefault.html"/>
+      <sub name="Seat configuration" link="tlm-Seat-configuration.html"/>
     </sub>
     <sub name="Tlm miscellaneous" link="ch03.html">
       <sub name="tlm-log" link="tlm-tlm-log.html"/>
@@ -67,6 +68,7 @@
     <keyword type="struct" name="struct TlmAuthPluginInterface" link="TlmAuthPlugin.html#TlmAuthPluginInterface"/>
     <keyword type="property" name="The “config” property" link="TlmAuthPlugin.html#TlmAuthPlugin--config"/>
     <keyword type="signal" name="The “authenticate” signal" link="TlmAuthPlugin.html#TlmAuthPlugin-authenticate"/>
+    <keyword type="macro" name="TLM_CONFIG_SEAT_ACTIVE" link="tlm-Seat-configuration.html#TLM-CONFIG-SEAT-ACTIVE:CAPS"/>
     <keyword type="function" name="tlm_log_init ()" link="tlm-tlm-log.html#tlm-log-init"/>
     <keyword type="function" name="tlm_log_close ()" link="tlm-tlm-log.html#tlm-log-close"/>
     <keyword type="macro" name="EXPAND_LOG_MSG()" link="tlm-tlm-log.html#EXPAND-LOG-MSG:CAPS"/>
