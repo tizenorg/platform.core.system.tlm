@@ -39,10 +39,24 @@
 <col width="150px" class="name">
 <col class="description">
 </colgroup>
-<tbody><tr>
+<tbody>
+<tr>
 <td class="define_keyword">#define</td>
 <td class="function_name"><a class="link" href="tlm-Seat-configuration.html#TLM-CONFIG-SEAT-ACTIVE:CAPS" title="TLM_CONFIG_SEAT_ACTIVE">TLM_CONFIG_SEAT_ACTIVE</a></td>
-</tr></tbody>
+</tr>
+<tr>
+<td class="define_keyword">#define</td>
+<td class="function_name"><a class="link" href="tlm-Seat-configuration.html#TLM-CONFIG-SEAT-NWATCH:CAPS" title="TLM_CONFIG_SEAT_NWATCH">TLM_CONFIG_SEAT_NWATCH</a></td>
+</tr>
+<tr>
+<td class="define_keyword">#define</td>
+<td class="function_name"><a class="link" href="tlm-Seat-configuration.html#TLM-CONFIG-SEAT-WATCHX:CAPS" title="TLM_CONFIG_SEAT_WATCHX">TLM_CONFIG_SEAT_WATCHX</a></td>
+</tr>
+<tr>
+<td class="define_keyword">#define</td>
+<td class="function_name"><a class="link" href="tlm-Seat-configuration.html#TLM-CONFIG-SEAT-VTNR:CAPS" title="TLM_CONFIG_SEAT_VTNR">TLM_CONFIG_SEAT_VTNR</a></td>
+</tr>
+</tbody>
 </table></div>
 </div>
 <div class="refsect1">
@@ -66,6 +80,30 @@ may be either global or per-seat are defined in <span class="type">tlm-config-ge
 </pre>
 <p>Value specifying whether a seat is to be used or not.
 Default value: 1</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="TLM-CONFIG-SEAT-NWATCH:CAPS"></a><h3>TLM_CONFIG_SEAT_NWATCH</h3>
+<pre class="programlisting">#define TLM_CONFIG_SEAT_NWATCH          "NWATCH"
+</pre>
+<p>Number of seat-ready watch items.
+Default value: 0</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="TLM-CONFIG-SEAT-WATCHX:CAPS"></a><h3>TLM_CONFIG_SEAT_WATCHX</h3>
+<pre class="programlisting">#define TLM_CONFIG_SEAT_WATCHX          "WATCH"
+</pre>
+<p>Base key for seat-ready watch item.</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="TLM-CONFIG-SEAT-VTNR:CAPS"></a><h3>TLM_CONFIG_SEAT_VTNR</h3>
+<pre class="programlisting">#define TLM_CONFIG_SEAT_VTNR            "VTNR"
+</pre>
+<p>Specifies virtual terminal number to be used for the seat, note that
+this has effect only when SETUP_TERMINAL is enabled.
+Default value: 0</p>
 </div>
 </div>
 </div>

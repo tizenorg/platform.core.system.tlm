@@ -50,6 +50,10 @@
 </tr>
 <tr>
 <td class="define_keyword">#define</td>
+<td class="function_name"><a class="link" href="tlm-General-configuration.html#TLM-CONFIG-GENERAL-NSEATS:CAPS" title="TLM_CONFIG_GENERAL_NSEATS">TLM_CONFIG_GENERAL_NSEATS</a></td>
+</tr>
+<tr>
+<td class="define_keyword">#define</td>
 <td class="function_name"><a class="link" href="tlm-General-configuration.html#TLM-CONFIG-GENERAL-SESSION-CMD:CAPS" title="TLM_CONFIG_GENERAL_SESSION_CMD">TLM_CONFIG_GENERAL_SESSION_CMD</a></td>
 </tr>
 <tr>
@@ -86,6 +90,14 @@
 </tr>
 <tr>
 <td class="define_keyword">#define</td>
+<td class="function_name"><a class="link" href="tlm-General-configuration.html#TLM-CONFIG-GENERAL-SETUP-RUNTIME-DIR:CAPS" title="TLM_CONFIG_GENERAL_SETUP_RUNTIME_DIR">TLM_CONFIG_GENERAL_SETUP_RUNTIME_DIR</a></td>
+</tr>
+<tr>
+<td class="define_keyword">#define</td>
+<td class="function_name"><a class="link" href="tlm-General-configuration.html#TLM-CONFIG-GENERAL-RUNTIME-MODE:CAPS" title="TLM_CONFIG_GENERAL_RUNTIME_MODE">TLM_CONFIG_GENERAL_RUNTIME_MODE</a></td>
+</tr>
+<tr>
+<td class="define_keyword">#define</td>
 <td class="function_name"><a class="link" href="tlm-General-configuration.html#TLM-CONFIG-GENERAL-TERMINATE-TIMEOUT:CAPS" title="TLM_CONFIG_GENERAL_TERMINATE_TIMEOUT">TLM_CONFIG_GENERAL_TERMINATE_TIMEOUT</a></td>
 </tr>
 <tr>
@@ -95,6 +107,10 @@
 <tr>
 <td class="define_keyword">#define</td>
 <td class="function_name"><a class="link" href="tlm-General-configuration.html#TLM-CONFIG-GENERAL-PAUSE-SESSION:CAPS" title="TLM_CONFIG_GENERAL_PAUSE_SESSION">TLM_CONFIG_GENERAL_PAUSE_SESSION</a></td>
+</tr>
+<tr>
+<td class="define_keyword">#define</td>
+<td class="function_name"><a class="link" href="tlm-General-configuration.html#TLM-CONFIG-GENERAL-SESSION-TYPE:CAPS" title="TLM_CONFIG_GENERAL_SESSION_TYPE">TLM_CONFIG_GENERAL_SESSION_TYPE</a></td>
 </tr>
 </tbody>
 </table></div>
@@ -128,6 +144,13 @@ them.</p>
 <p>Accounts plugin (implementation of <a class="link" href="TlmAccountPlugin.html" title="TlmAccountPlugin"><span class="type">TlmAccountPlugin</span></a>) to use.
 Default value: "default". If Tlm has been configured with --enable-debug, the
 value can be overriden with TLM_ACCOUNT_PLUGIN environment variable.</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="TLM-CONFIG-GENERAL-NSEATS:CAPS"></a><h3>TLM_CONFIG_GENERAL_NSEATS</h3>
+<pre class="programlisting">#define TLM_CONFIG_GENERAL_NSEATS           "NSEATS"
+</pre>
+<p>Number of seats, instead seat information from systemd.</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -205,6 +228,20 @@ created session to the terminal device.</p>
 </div>
 <hr>
 <div class="refsect2">
+<a name="TLM-CONFIG-GENERAL-SETUP-RUNTIME-DIR:CAPS"></a><h3>TLM_CONFIG_GENERAL_SETUP_RUNTIME_DIR</h3>
+<pre class="programlisting">#define TLM_CONFIG_GENERAL_SETUP_RUNTIME_DIR "SETUP_RUNTIME_DIR"
+</pre>
+<p>Setup XDG_RUNTIME_DIR for the user.</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="TLM-CONFIG-GENERAL-RUNTIME-MODE:CAPS"></a><h3>TLM_CONFIG_GENERAL_RUNTIME_MODE</h3>
+<pre class="programlisting">#define TLM_CONFIG_GENERAL_RUNTIME_MODE     "RUNTIME_MODE"
+</pre>
+<p>Access mode for the XDG_RUNTIME_DIR.</p>
+</div>
+<hr>
+<div class="refsect2">
 <a name="TLM-CONFIG-GENERAL-TERMINATE-TIMEOUT:CAPS"></a><h3>TLM_CONFIG_GENERAL_TERMINATE_TIMEOUT</h3>
 <pre class="programlisting">#define TLM_CONFIG_GENERAL_TERMINATE_TIMEOUT "TERMINATE_TIMEOUT" 
 </pre>
@@ -228,6 +265,14 @@ is terminated and Xserver restarted for each session.</p>
 </pre>
 <p>Do not actually launch anything after creating session, let systemd
 handle it through PAM.</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="TLM-CONFIG-GENERAL-SESSION-TYPE:CAPS"></a><h3>TLM_CONFIG_GENERAL_SESSION_TYPE</h3>
+<pre class="programlisting">#define TLM_CONFIG_GENERAL_SESSION_TYPE     "SESSION_TYPE"
+</pre>
+<p>Specify session type, one of "unspecified", "tty", "x11", "wayland" or
+"mir".</p>
 </div>
 </div>
 </div>

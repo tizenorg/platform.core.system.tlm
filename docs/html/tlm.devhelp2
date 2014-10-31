@@ -34,6 +34,7 @@
     <keyword type="function" name="tlm_config_get_uint ()" link="TlmConfig.html#tlm-config-get-uint"/>
     <keyword type="function" name="tlm_config_set_uint ()" link="TlmConfig.html#tlm-config-set-uint"/>
     <keyword type="function" name="tlm_config_get_string ()" link="TlmConfig.html#tlm-config-get-string"/>
+    <keyword type="function" name="tlm_config_get_string_default ()" link="TlmConfig.html#tlm-config-get-string-default"/>
     <keyword type="function" name="tlm_config_set_string ()" link="TlmConfig.html#tlm-config-set-string"/>
     <keyword type="function" name="tlm_config_get_boolean ()" link="TlmConfig.html#tlm-config-get-boolean"/>
     <keyword type="function" name="tlm_config_set_boolean ()" link="TlmConfig.html#tlm-config-set-boolean"/>
@@ -43,6 +44,7 @@
     <keyword type="function" name="tlm_config_reload ()" link="TlmConfig.html#tlm-config-reload"/>
     <keyword type="macro" name="TLM_CONFIG_GENERAL" link="tlm-General-configuration.html#TLM-CONFIG-GENERAL:CAPS"/>
     <keyword type="macro" name="TLM_CONFIG_GENERAL_ACCOUNTS_PLUGIN" link="tlm-General-configuration.html#TLM-CONFIG-GENERAL-ACCOUNTS-PLUGIN:CAPS"/>
+    <keyword type="macro" name="TLM_CONFIG_GENERAL_NSEATS" link="tlm-General-configuration.html#TLM-CONFIG-GENERAL-NSEATS:CAPS"/>
     <keyword type="macro" name="TLM_CONFIG_GENERAL_SESSION_CMD" link="tlm-General-configuration.html#TLM-CONFIG-GENERAL-SESSION-CMD:CAPS"/>
     <keyword type="macro" name="TLM_CONFIG_GENERAL_SESSION_PATH" link="tlm-General-configuration.html#TLM-CONFIG-GENERAL-SESSION-PATH:CAPS"/>
     <keyword type="macro" name="TLM_CONFIG_GENERAL_DATA_DIRS" link="tlm-General-configuration.html#TLM-CONFIG-GENERAL-DATA-DIRS:CAPS"/>
@@ -52,9 +54,12 @@
     <keyword type="macro" name="TLM_CONFIG_GENERAL_DEFAULT_PAM_SERVICE" link="tlm-General-configuration.html#TLM-CONFIG-GENERAL-DEFAULT-PAM-SERVICE:CAPS"/>
     <keyword type="macro" name="TLM_CONFIG_GENERAL_DEFAULT_USER" link="tlm-General-configuration.html#TLM-CONFIG-GENERAL-DEFAULT-USER:CAPS"/>
     <keyword type="macro" name="TLM_CONFIG_GENERAL_SETUP_TERMINAL" link="tlm-General-configuration.html#TLM-CONFIG-GENERAL-SETUP-TERMINAL:CAPS"/>
+    <keyword type="macro" name="TLM_CONFIG_GENERAL_SETUP_RUNTIME_DIR" link="tlm-General-configuration.html#TLM-CONFIG-GENERAL-SETUP-RUNTIME-DIR:CAPS"/>
+    <keyword type="macro" name="TLM_CONFIG_GENERAL_RUNTIME_MODE" link="tlm-General-configuration.html#TLM-CONFIG-GENERAL-RUNTIME-MODE:CAPS"/>
     <keyword type="macro" name="TLM_CONFIG_GENERAL_TERMINATE_TIMEOUT" link="tlm-General-configuration.html#TLM-CONFIG-GENERAL-TERMINATE-TIMEOUT:CAPS"/>
     <keyword type="macro" name="TLM_CONFIG_GENERAL_X11_SESSION" link="tlm-General-configuration.html#TLM-CONFIG-GENERAL-X11-SESSION:CAPS"/>
     <keyword type="macro" name="TLM_CONFIG_GENERAL_PAUSE_SESSION" link="tlm-General-configuration.html#TLM-CONFIG-GENERAL-PAUSE-SESSION:CAPS"/>
+    <keyword type="macro" name="TLM_CONFIG_GENERAL_SESSION_TYPE" link="tlm-General-configuration.html#TLM-CONFIG-GENERAL-SESSION-TYPE:CAPS"/>
     <keyword type="method" name="The loginUser() method" link="gdbus-org.tizen.Tlm.Login.html#gdbus-method-org-tizen-Tlm-Login.loginUser"/>
     <keyword type="method" name="The logoutUser() method" link="gdbus-org.tizen.Tlm.Login.html#gdbus-method-org-tizen-Tlm-Login.logoutUser"/>
     <keyword type="method" name="The switchUser() method" link="gdbus-org.tizen.Tlm.Login.html#gdbus-method-org-tizen-Tlm-Login.switchUser"/>
@@ -69,6 +74,9 @@
     <keyword type="property" name="The “config” property" link="TlmAuthPlugin.html#TlmAuthPlugin--config"/>
     <keyword type="signal" name="The “authenticate” signal" link="TlmAuthPlugin.html#TlmAuthPlugin-authenticate"/>
     <keyword type="macro" name="TLM_CONFIG_SEAT_ACTIVE" link="tlm-Seat-configuration.html#TLM-CONFIG-SEAT-ACTIVE:CAPS"/>
+    <keyword type="macro" name="TLM_CONFIG_SEAT_NWATCH" link="tlm-Seat-configuration.html#TLM-CONFIG-SEAT-NWATCH:CAPS"/>
+    <keyword type="macro" name="TLM_CONFIG_SEAT_WATCHX" link="tlm-Seat-configuration.html#TLM-CONFIG-SEAT-WATCHX:CAPS"/>
+    <keyword type="macro" name="TLM_CONFIG_SEAT_VTNR" link="tlm-Seat-configuration.html#TLM-CONFIG-SEAT-VTNR:CAPS"/>
     <keyword type="function" name="tlm_log_init ()" link="tlm-tlm-log.html#tlm-log-init"/>
     <keyword type="function" name="tlm_log_close ()" link="tlm-tlm-log.html#tlm-log-close"/>
     <keyword type="macro" name="EXPAND_LOG_MSG()" link="tlm-tlm-log.html#EXPAND-LOG-MSG:CAPS"/>

@@ -12,6 +12,7 @@
 <ANCHOR id="tlm-config-get-uint" href="tlm/TlmConfig.html#tlm-config-get-uint">
 <ANCHOR id="tlm-config-set-uint" href="tlm/TlmConfig.html#tlm-config-set-uint">
 <ANCHOR id="tlm-config-get-string" href="tlm/TlmConfig.html#tlm-config-get-string">
+<ANCHOR id="tlm-config-get-string-default" href="tlm/TlmConfig.html#tlm-config-get-string-default">
 <ANCHOR id="tlm-config-set-string" href="tlm/TlmConfig.html#tlm-config-set-string">
 <ANCHOR id="tlm-config-get-boolean" href="tlm/TlmConfig.html#tlm-config-get-boolean">
 <ANCHOR id="tlm-config-set-boolean" href="tlm/TlmConfig.html#tlm-config-set-boolean">
@@ -28,6 +29,7 @@
 <ANCHOR id="tlm-General-configuration.other_details" href="tlm/tlm-General-configuration.html#tlm-General-configuration.other_details">
 <ANCHOR id="TLM-CONFIG-GENERAL:CAPS" href="tlm/tlm-General-configuration.html#TLM-CONFIG-GENERAL:CAPS">
 <ANCHOR id="TLM-CONFIG-GENERAL-ACCOUNTS-PLUGIN:CAPS" href="tlm/tlm-General-configuration.html#TLM-CONFIG-GENERAL-ACCOUNTS-PLUGIN:CAPS">
+<ANCHOR id="TLM-CONFIG-GENERAL-NSEATS:CAPS" href="tlm/tlm-General-configuration.html#TLM-CONFIG-GENERAL-NSEATS:CAPS">
 <ANCHOR id="TLM-CONFIG-GENERAL-SESSION-CMD:CAPS" href="tlm/tlm-General-configuration.html#TLM-CONFIG-GENERAL-SESSION-CMD:CAPS">
 <ANCHOR id="TLM-CONFIG-GENERAL-SESSION-PATH:CAPS" href="tlm/tlm-General-configuration.html#TLM-CONFIG-GENERAL-SESSION-PATH:CAPS">
 <ANCHOR id="TLM-CONFIG-GENERAL-DATA-DIRS:CAPS" href="tlm/tlm-General-configuration.html#TLM-CONFIG-GENERAL-DATA-DIRS:CAPS">
@@ -37,9 +39,12 @@
 <ANCHOR id="TLM-CONFIG-GENERAL-DEFAULT-PAM-SERVICE:CAPS" href="tlm/tlm-General-configuration.html#TLM-CONFIG-GENERAL-DEFAULT-PAM-SERVICE:CAPS">
 <ANCHOR id="TLM-CONFIG-GENERAL-DEFAULT-USER:CAPS" href="tlm/tlm-General-configuration.html#TLM-CONFIG-GENERAL-DEFAULT-USER:CAPS">
 <ANCHOR id="TLM-CONFIG-GENERAL-SETUP-TERMINAL:CAPS" href="tlm/tlm-General-configuration.html#TLM-CONFIG-GENERAL-SETUP-TERMINAL:CAPS">
+<ANCHOR id="TLM-CONFIG-GENERAL-SETUP-RUNTIME-DIR:CAPS" href="tlm/tlm-General-configuration.html#TLM-CONFIG-GENERAL-SETUP-RUNTIME-DIR:CAPS">
+<ANCHOR id="TLM-CONFIG-GENERAL-RUNTIME-MODE:CAPS" href="tlm/tlm-General-configuration.html#TLM-CONFIG-GENERAL-RUNTIME-MODE:CAPS">
 <ANCHOR id="TLM-CONFIG-GENERAL-TERMINATE-TIMEOUT:CAPS" href="tlm/tlm-General-configuration.html#TLM-CONFIG-GENERAL-TERMINATE-TIMEOUT:CAPS">
 <ANCHOR id="TLM-CONFIG-GENERAL-X11-SESSION:CAPS" href="tlm/tlm-General-configuration.html#TLM-CONFIG-GENERAL-X11-SESSION:CAPS">
 <ANCHOR id="TLM-CONFIG-GENERAL-PAUSE-SESSION:CAPS" href="tlm/tlm-General-configuration.html#TLM-CONFIG-GENERAL-PAUSE-SESSION:CAPS">
+<ANCHOR id="TLM-CONFIG-GENERAL-SESSION-TYPE:CAPS" href="tlm/tlm-General-configuration.html#TLM-CONFIG-GENERAL-SESSION-TYPE:CAPS">
 <ANCHOR id="gdbus-org.tizen.Tlm.Login" href="tlm/gdbus-org.tizen.Tlm.Login.html">
 <ANCHOR id="gdbus-interface-org-tizen-Tlm-Login" href="tlm/gdbus-org.tizen.Tlm.Login.html#gdbus-interface-org-tizen-Tlm-Login">
 <ANCHOR id="gdbus-methods-org.tizen.Tlm.Login" href="tlm/gdbus-org.tizen.Tlm.Login.html#gdbus-methods-org.tizen.Tlm.Login">
@@ -100,6 +105,9 @@
 <ANCHOR id="tlm-Seat-configuration.functions_details" href="tlm/tlm-Seat-configuration.html#tlm-Seat-configuration.functions_details">
 <ANCHOR id="tlm-Seat-configuration.other_details" href="tlm/tlm-Seat-configuration.html#tlm-Seat-configuration.other_details">
 <ANCHOR id="TLM-CONFIG-SEAT-ACTIVE:CAPS" href="tlm/tlm-Seat-configuration.html#TLM-CONFIG-SEAT-ACTIVE:CAPS">
+<ANCHOR id="TLM-CONFIG-SEAT-NWATCH:CAPS" href="tlm/tlm-Seat-configuration.html#TLM-CONFIG-SEAT-NWATCH:CAPS">
+<ANCHOR id="TLM-CONFIG-SEAT-WATCHX:CAPS" href="tlm/tlm-Seat-configuration.html#TLM-CONFIG-SEAT-WATCHX:CAPS">
+<ANCHOR id="TLM-CONFIG-SEAT-VTNR:CAPS" href="tlm/tlm-Seat-configuration.html#TLM-CONFIG-SEAT-VTNR:CAPS">
 <ANCHOR id="tlm-tlm-log" href="tlm/tlm-tlm-log.html">
 <ANCHOR id="tlm-tlm-log.functions" href="tlm/tlm-tlm-log.html#tlm-tlm-log.functions">
 <ANCHOR id="tlm-tlm-log.object-hierarchy" href="tlm/tlm-tlm-log.html#tlm-tlm-log.object-hierarchy">
