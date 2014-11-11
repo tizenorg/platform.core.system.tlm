@@ -11,6 +11,7 @@ License: LGPL-2.1+
 Source: %{name}-%{version}.tar.gz
 URL: https://github.com/01org/tlm
 Source1001: %{name}.manifest
+Source1002: %{name}.conf
 Requires(post): /sbin/ldconfig, systemd
 Requires(postun): /sbin/ldconfig, systemd
 Requires: gumd
@@ -55,11 +56,11 @@ Requires:   %{name} = %{version}-%{release}
 %prep
 %setup -q -n %{name}-%{version}
 cp %{SOURCE1001} .
+cp %{SOURCE1002} .
 
 
 %build
 %if %{debug_build} == 1
-./autogen.sh
 %configure --enable-gum --enable-gtk-doc --enable-examples --enable-debug
 %else
 %configure --enable-gum --enable-examples
@@ -76,6 +77,7 @@ install -m 755 -d %{buildroot}%{_sysconfdir}/pam.d
 install -m 644 data/tlm-login %{buildroot}%{_sysconfdir}/pam.d/
 install -m 644 data/tlm-default-login %{buildroot}%{_sysconfdir}/pam.d/
 install -m 644 data/tlm-system-login %{buildroot}%{_sysconfdir}/pam.d/
+install -m 644 %{name}.conf %{buildroot}%{_sysconfdir}/
 
 
 %post
