@@ -4,14 +4,13 @@
 
 Name: tlm
 Summary: Login manager for Tizen
-Version: 0.0.7
+Version: 1.0.0
 Release: 0
 Group: System/Service
 License: LGPL-2.1+
 Source: %{name}-%{version}.tar.gz
 URL: https://github.com/01org/tlm
 Source1001: %{name}.manifest
-Source1002: %{name}.conf
 Requires(post): /sbin/ldconfig, systemd
 Requires(postun): /sbin/ldconfig, systemd
 Requires: gumd
@@ -56,11 +55,11 @@ Requires:   %{name} = %{version}-%{release}
 %prep
 %setup -q -n %{name}-%{version}
 cp %{SOURCE1001} .
-cp %{SOURCE1002} .
 
 
 %build
 %if %{debug_build} == 1
+./autogen.sh
 %configure --enable-gum --enable-gtk-doc --enable-examples --enable-debug
 %else
 %configure --enable-gum --enable-examples
@@ -77,7 +76,9 @@ install -m 755 -d %{buildroot}%{_sysconfdir}/pam.d
 install -m 644 data/tlm-login %{buildroot}%{_sysconfdir}/pam.d/
 install -m 644 data/tlm-default-login %{buildroot}%{_sysconfdir}/pam.d/
 install -m 644 data/tlm-system-login %{buildroot}%{_sysconfdir}/pam.d/
-install -m 644 %{name}.conf %{buildroot}%{_sysconfdir}/
+install -m 644 data/multi-seat/etc/tlm.conf %{buildroot}%{_sysconfdir}
+install -m 755 -d %{buildroot}%{_sysconfdir}/session.d
+install -m 755 data/multi-seat/etc/session.d/* %{buildroot}%{_sysconfdir}/session.d/
 
 
 %post
@@ -102,11 +103,12 @@ install -m 644 %{name}.conf %{buildroot}%{_sysconfdir}/
 %{_bindir}/%{name}-client
 %{_libdir}/lib%{name}*.so.*
 %{_libdir}/%{name}/plugins/*.so*
-%config %{_unitdir}/tlm.service
+%{_unitdir}/tlm.service
 %config(noreplace) %{_sysconfdir}/tlm.conf
 %config %{_sysconfdir}/pam.d/tlm-login
 %config %{_sysconfdir}/pam.d/tlm-default-login
 %config %{_sysconfdir}/pam.d/tlm-system-login
+%config(noreplace) %{_sysconfdir}/session.d/*
 
 
 %files devel
