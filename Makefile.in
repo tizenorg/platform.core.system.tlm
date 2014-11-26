@@ -348,7 +348,7 @@ ACLOCAL_AMFLAGS = -I m4
 AM_DISTCHECK_CONFIGURE_FLAGS = --enable-distcheck --enable-debug \
 	$(am__append_1) $(am__append_2) $(am__append_4)
 SUBDIRS = src data docs $(am__append_3) $(am__append_5)
-EXTRA_DIST = dists tools
+EXTRA_DIST = dists tools autogen.sh
 all: config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-recursive
 
