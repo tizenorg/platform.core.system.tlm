@@ -157,10 +157,13 @@ install -m 755 data/tizen-common/etc/session.d/* %{buildroot}%{_sysconfdir}/sess
 /usr/bin/systemctl daemon-reload
 
 
-%postun
-/sbin/ldconfig
-/usr/bin/systemctl disable tlm
-/usr/bin/systemctl daemon-reload
+%preun
+if [ $1 == 0 ]; then
+	/usr/bin/systemctl disable tlm
+	/usr/bin/systemctl daemon-reload
+fi
+
+%postun -p /sbin/ldconfig
 
 
 %if "%{profile}" == "ivi"
@@ -208,6 +211,7 @@ fi
 %{_bindir}/%{name}
 %{_bindir}/%{name}-sessiond
 %{_bindir}/%{name}-client
+%{_bindir}/%{name}-weston-launch
 %{_libdir}/lib%{name}*.so.*
 %{_libdir}/%{name}/plugins/*.so*
 %{_unitdir}/tlm.service

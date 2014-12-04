@@ -78,7 +78,7 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-bin_PROGRAMS = tlm-client$(EXEEXT)
+bin_PROGRAMS = tlm-client$(EXEEXT) tlm-weston-launch$(EXEEXT)
 subdir = src/utils
 DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/Makefile.am \
 	$(top_srcdir)/depcomp
@@ -108,6 +108,14 @@ am__v_lt_1 =
 tlm_client_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(tlm_client_CFLAGS) \
 	$(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
+am_tlm_weston_launch_OBJECTS =  \
+	tlm_weston_launch-tlm-weston-launch.$(OBJEXT)
+tlm_weston_launch_OBJECTS = $(am_tlm_weston_launch_OBJECTS)
+tlm_weston_launch_LDADD = $(LDADD)
+tlm_weston_launch_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC \
+	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CCLD) \
+	$(tlm_weston_launch_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) \
+	-o $@
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -142,8 +150,8 @@ AM_V_CCLD = $(am__v_CCLD_@AM_V@)
 am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
-SOURCES = $(tlm_client_SOURCES)
-DIST_SOURCES = $(tlm_client_SOURCES)
+SOURCES = $(tlm_client_SOURCES) $(tlm_weston_launch_SOURCES)
+DIST_SOURCES = $(tlm_client_SOURCES) $(tlm_weston_launch_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -326,6 +334,12 @@ tlm_client_LDADD = \
   $(top_builddir)/src/common/dbus/libtlm-dbus-glue.la \
 	$(TLM_LIBS)
 
+tlm_weston_launch_SOURCES = tlm-weston-launch.c
+tlm_weston_launch_CFLAGS = \
+  -I$(top_builddir)/src \
+  -DBINDIR='"$(bindir)"' \
+  $(DEPS_CFLAGS)
+
 CLEANFILES = *.gcno *.gcda
 all: all-am
 
@@ -415,6 +429,10 @@ tlm-client$(EXEEXT): $(tlm_client_OBJECTS) $(tlm_client_DEPENDENCIES) $(EXTRA_tl
 	@rm -f tlm-client$(EXEEXT)
 	$(AM_V_CCLD)$(tlm_client_LINK) $(tlm_client_OBJECTS) $(tlm_client_LDADD) $(LIBS)
 
+tlm-weston-launch$(EXEEXT): $(tlm_weston_launch_OBJECTS) $(tlm_weston_launch_DEPENDENCIES) $(EXTRA_tlm_weston_launch_DEPENDENCIES) 
+	@rm -f tlm-weston-launch$(EXEEXT)
+	$(AM_V_CCLD)$(tlm_weston_launch_LINK) $(tlm_weston_launch_OBJECTS) $(tlm_weston_launch_LDADD) $(LIBS)
+
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
 
@@ -422,6 +440,7 @@ distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tlm_client-tlm-client.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tlm_weston_launch-tlm-weston-launch.Po@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	$(AM_V_CC)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.o$$||'`;\
@@ -460,6 +479,20 @@ tlm_client-tlm-client.obj: tlm-client.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='tlm-client.c' object='tlm_client-tlm-client.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(tlm_client_CFLAGS) $(CFLAGS) -c -o tlm_client-tlm-client.obj `if test -f 'tlm-client.c'; then $(CYGPATH_W) 'tlm-client.c'; else $(CYGPATH_W) '$(srcdir)/tlm-client.c'; fi`
+
+tlm_weston_launch-tlm-weston-launch.o: tlm-weston-launch.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(tlm_weston_launch_CFLAGS) $(CFLAGS) -MT tlm_weston_launch-tlm-weston-launch.o -MD -MP -MF $(DEPDIR)/tlm_weston_launch-tlm-weston-launch.Tpo -c -o tlm_weston_launch-tlm-weston-launch.o `test -f 'tlm-weston-launch.c' || echo '$(srcdir)/'`tlm-weston-launch.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/tlm_weston_launch-tlm-weston-launch.Tpo $(DEPDIR)/tlm_weston_launch-tlm-weston-launch.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='tlm-weston-launch.c' object='tlm_weston_launch-tlm-weston-launch.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(tlm_weston_launch_CFLAGS) $(CFLAGS) -c -o tlm_weston_launch-tlm-weston-launch.o `test -f 'tlm-weston-launch.c' || echo '$(srcdir)/'`tlm-weston-launch.c
+
+tlm_weston_launch-tlm-weston-launch.obj: tlm-weston-launch.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(tlm_weston_launch_CFLAGS) $(CFLAGS) -MT tlm_weston_launch-tlm-weston-launch.obj -MD -MP -MF $(DEPDIR)/tlm_weston_launch-tlm-weston-launch.Tpo -c -o tlm_weston_launch-tlm-weston-launch.obj `if test -f 'tlm-weston-launch.c'; then $(CYGPATH_W) 'tlm-weston-launch.c'; else $(CYGPATH_W) '$(srcdir)/tlm-weston-launch.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/tlm_weston_launch-tlm-weston-launch.Tpo $(DEPDIR)/tlm_weston_launch-tlm-weston-launch.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='tlm-weston-launch.c' object='tlm_weston_launch-tlm-weston-launch.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(tlm_weston_launch_CFLAGS) $(CFLAGS) -c -o tlm_weston_launch-tlm-weston-launch.obj `if test -f 'tlm-weston-launch.c'; then $(CYGPATH_W) 'tlm-weston-launch.c'; else $(CYGPATH_W) '$(srcdir)/tlm-weston-launch.c'; fi`
 
 mostlyclean-libtool:
 	-rm -f *.lo
