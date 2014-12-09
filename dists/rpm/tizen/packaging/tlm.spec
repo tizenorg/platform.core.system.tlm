@@ -157,7 +157,24 @@ install -m 755 data/tizen-common/etc/session.d/* %{buildroot}%{_sysconfdir}/sess
 %postun -p /sbin/ldconfig
 
 
-%if "%{profile}" == "ivi"
+%if "%{profile}" != "ivi"
+
+%post config-common
+/usr/bin/systemctl enable tlm
+/usr/bin/systemctl daemon-reload
+
+%preun config-common
+if [ $1 == 0 ]; then
+  /usr/bin/systemctl disable tlm
+  /usr/bin/systemctl daemon-reload
+fi
+
+%postun config-common
+if [ -h /etc/tlm.conf ]; then
+rm -f /etc/tlm.conf
+fi
+
+%else
 
 %post config-ivi-singleseat
 if [ ! -e /etc/tlm.conf ] || [ -h /etc/tlm.conf ]; then
