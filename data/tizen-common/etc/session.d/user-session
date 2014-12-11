@@ -1,5 +1,5 @@
 #!/bin/sh -l
 #
-for entries in $(/etc/sysconfig/weston-user); do export $entries; done;
+for entries in $(cat /etc/sysconfig/weston-user); do export $entries; done;
 ln -sf /run/display/wayland-0 /run/user/$UID/
 exec /usr/bin/tz-launcher -c /usr/share/applications/tizen/launcher.conf $HOME/.applications/desktop
