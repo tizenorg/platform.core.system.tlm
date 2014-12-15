@@ -14,7 +14,7 @@
 
 Name:    tlm
 Summary: Login manager for Tizen
-Version: 1.0.1
+Version: 1.0.2
 Release: 0
 Group:   System/Service
 License: LGPL-2.1+
@@ -42,25 +42,26 @@ BuildRequires: pkgconfig(elementary)
 %endif
 
 %description
-Login manager daemon for Tizen.
-
+TLM is a daemon that handles user logins in a multi-user, multi-seat system by
+authenticating the users through PAM, and setting up, launching, and tracking
+user sessions.
 
 %package devel
-Summary:    Development files for %{name}
+Summary:    Dev files for %{name}
 Group:      Development/Libraries
 Requires:   %{name} = %{version}-%{release}
 
 %description devel
-%{summary} package.
+Development files for %{name}.
 
 
 %package doc
-Summary:    Documentation files for %{name}
+Summary:    Doc files for %{name}
 Group:      Development/Libraries
 Requires:   %{name} = %{version}-%{release}
 
 %description doc
-%{summary} package.
+Documentation files for %{name}.
 
 
 %if "%{profile}" != "ivi"
