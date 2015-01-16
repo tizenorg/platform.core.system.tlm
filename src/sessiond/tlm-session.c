@@ -33,7 +33,6 @@
 #include <grp.h>
 #include <stdio.h>
 #include <signal.h>
-#include <errno.h>
 #include <termios.h>
 #include <libintl.h>
 #include <sys/types.h>
