@@ -1,6 +1,5 @@
 tlm_account_plugin_default_get_type
 tlm_account_plugin_get_type
-tlm_account_plugin_gumd_get_type
 tlm_auth_plugin_default_get_type
 tlm_auth_plugin_get_type
 tlm_config_get_type

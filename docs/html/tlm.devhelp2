@@ -11,7 +11,6 @@
     <sub name="Tlm plugins reference" link="ch02.html">
       <sub name="TlmAccountPlugin" link="TlmAccountPlugin.html"/>
       <sub name="TlmAccountPluginDefault" link="TlmAccountPluginDefault.html"/>
-      <sub name="TlmAccountPluginGumd" link="TlmAccountPluginGumd.html"/>
       <sub name="TlmAuthPlugin" link="TlmAuthPlugin.html"/>
       <sub name="TlmAuthPluginDefault" link="TlmAuthPluginDefault.html"/>
       <sub name="Seat configuration" link="tlm-Seat-configuration.html"/>
