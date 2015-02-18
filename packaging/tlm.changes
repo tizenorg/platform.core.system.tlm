@@ -1,3 +1,7 @@
+* Tue Feb 18 2015 Imran Zaman <imran.zaman@intel.com>
+- Move the tlm dbus interface under org.01
+- tlm-launcher is used to launch session scripts
+
 * Tue Dec 23 2014 Imran Zaman <imran.zaman@intel.com>
 - Added config package for modello
 

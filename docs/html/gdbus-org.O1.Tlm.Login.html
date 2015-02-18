@@ -2,11 +2,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Tizen Login Manager Reference Manual: org.tizen.Tlm.Login</title>
+<title>Tiny Login Manager Reference Manual: org.O1.Tlm.Login</title>
 <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
-<link rel="home" href="index.html" title="Tizen Login Manager Reference Manual">
+<link rel="home" href="index.html" title="Tiny Login Manager Reference Manual">
 <link rel="up" href="ch01.html" title="Introduction">
-<link rel="prev" href="tlm-General-configuration.html" title="General configuration">
+<link rel="prev" href="tlm-Seat-configuration.html" title="Seat configuration">
 <link rel="next" href="ch02.html" title="Tlm plugins reference">
 <meta name="generator" content="GTK-Doc V1.20 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
@@ -15,38 +15,38 @@
 <table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="10"><tr valign="middle">
 <td width="100%" align="left" class="shortcuts">
 <a href="#" class="shortcut">Top</a><span id="nav_description"> <span class="dim">|</span> 
-                  <a href="#gdbus-org.tizen.Tlm.Login.description" class="shortcut">Description</a></span>
+                  <a href="#gdbus-org.O1.Tlm.Login.description" class="shortcut">Description</a></span>
 </td>
 <td><a accesskey="h" href="index.html"><img src="home.png" width="16" height="16" border="0" alt="Home"></a></td>
 <td><a accesskey="u" href="ch01.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
-<td><a accesskey="p" href="tlm-General-configuration.html"><img src="left.png" width="16" height="16" border="0" alt="Prev"></a></td>
+<td><a accesskey="p" href="tlm-Seat-configuration.html"><img src="left.png" width="16" height="16" border="0" alt="Prev"></a></td>
 <td><a accesskey="n" href="ch02.html"><img src="right.png" width="16" height="16" border="0" alt="Next"></a></td>
 </tr></table>
 <div class="refentry">
-<a name="gdbus-org.tizen.Tlm.Login"></a><div class="titlepage"></div>
+<a name="gdbus-org.O1.Tlm.Login"></a><div class="titlepage"></div>
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
-<h2><span class="refentrytitle"><a name="gdbus-interface-org-tizen-Tlm-Login.top_of_page"></a>org.tizen.Tlm.Login</span></h2>
-<p>org.tizen.Tlm.Login — a D-Bus interface to TLM</p>
+<h2><span class="refentrytitle"><a name="gdbus-interface-org-O1-Tlm-Login.top_of_page"></a>org.O1.Tlm.Login</span></h2>
+<p>org.O1.Tlm.Login — a D-Bus interface to TLM</p>
 </td>
 <td class="gallery_image" valign="top" align="right"></td>
 </tr></table></div>
 <div class="refsynopsisdiv">
 <h2>Methods</h2>
 <pre class="synopsis">
-<a class="link" href="gdbus-org.tizen.Tlm.Login.html#gdbus-method-org-tizen-Tlm-Login.loginUser" title="The loginUser() method">loginUser</a>  (IN  s     seat_id,
+<a class="link" href="gdbus-org.O1.Tlm.Login.html#gdbus-method-org-O1-Tlm-Login.loginUser" title="The loginUser() method">loginUser</a>  (IN  s     seat_id,
             IN  s     username,
             IN  s     password,
             IN  a{ss} environ);
-<a class="link" href="gdbus-org.tizen.Tlm.Login.html#gdbus-method-org-tizen-Tlm-Login.logoutUser" title="The logoutUser() method">logoutUser</a> (IN  s     seat_id);
-<a class="link" href="gdbus-org.tizen.Tlm.Login.html#gdbus-method-org-tizen-Tlm-Login.switchUser" title="The switchUser() method">switchUser</a> (IN  s     seat_id,
+<a class="link" href="gdbus-org.O1.Tlm.Login.html#gdbus-method-org-O1-Tlm-Login.logoutUser" title="The logoutUser() method">logoutUser</a> (IN  s     seat_id);
+<a class="link" href="gdbus-org.O1.Tlm.Login.html#gdbus-method-org-O1-Tlm-Login.switchUser" title="The switchUser() method">switchUser</a> (IN  s     seat_id,
             IN  s     username,
             IN  s     password,
             IN  a{ss} environ);
 </pre>
 </div>
 <div class="refsect1">
-<a name="gdbus-interface-org-tizen-Tlm-Login"></a><h2>Description</h2>
+<a name="gdbus-interface-org-O1-Tlm-Login"></a><h2>Description</h2>
 <p>    Login objects can be used to login, logout and switch users. Login object
     with root access is exported at TLM_DBUS_ROOT_SOCKET_ADDRESS which can be
     used to login, logout and switch any user. TLM_DBUS_ROOT_SOCKET_ADDRESS can
@@ -59,9 +59,9 @@
 </p>
 </div>
 <div class="refsect1">
-<a name="gdbus-methods-org.tizen.Tlm.Login"></a><h2>Method Details</h2>
+<a name="gdbus-methods-org.O1.Tlm.Login"></a><h2>Method Details</h2>
 <div class="refsect2">
-<a name="gdbus-method-org-tizen-Tlm-Login.loginUser"></a><h3>The loginUser() method</h3>
+<a name="gdbus-method-org-O1-Tlm-Login.loginUser"></a><h3>The loginUser() method</h3>
 <pre class="programlisting">
 loginUser (IN  s     seat_id,
            IN  s     username,
@@ -98,7 +98,7 @@ loginUser (IN  s     seat_id,
 </div>
 <hr>
 <div class="refsect2">
-<a name="gdbus-method-org-tizen-Tlm-Login.logoutUser"></a><h3>The logoutUser() method</h3>
+<a name="gdbus-method-org-O1-Tlm-Login.logoutUser"></a><h3>The logoutUser() method</h3>
 <pre class="programlisting">
 logoutUser (IN  s seat_id);
 </pre>
@@ -117,7 +117,7 @@ logoutUser (IN  s seat_id);
 </div>
 <hr>
 <div class="refsect2">
-<a name="gdbus-method-org-tizen-Tlm-Login.switchUser"></a><h3>The switchUser() method</h3>
+<a name="gdbus-method-org-O1-Tlm-Login.switchUser"></a><h3>The switchUser() method</h3>
 <pre class="programlisting">
 switchUser (IN  s     seat_id,
             IN  s     username,

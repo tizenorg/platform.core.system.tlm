@@ -2,24 +2,24 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
                "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
 ]>
-<refentry id="gdbus-org.tizen.Tlm.Login">
-  <refmeta>    <refentrytitle role="top_of_page" id="gdbus-interface-org-tizen-Tlm-Login.top_of_page">org.tizen.Tlm.Login</refentrytitle>
-  <indexterm zone="gdbus-interface-org-tizen-Tlm-Login.top_of_page"><primary sortas="Login">org.tizen.Tlm.Login</primary></indexterm>
-  </refmeta>  <refnamediv>    <refname>org.tizen.Tlm.Login</refname>    <refpurpose>a D-Bus interface to TLM</refpurpose>  </refnamediv>  <refsynopsisdiv role="synopsis">
+<refentry id="gdbus-org.O1.Tlm.Login">
+  <refmeta>    <refentrytitle role="top_of_page" id="gdbus-interface-org-O1-Tlm-Login.top_of_page">org.O1.Tlm.Login</refentrytitle>
+  <indexterm zone="gdbus-interface-org-O1-Tlm-Login.top_of_page"><primary sortas="Login">org.O1.Tlm.Login</primary></indexterm>
+  </refmeta>  <refnamediv>    <refname>org.O1.Tlm.Login</refname>    <refpurpose>a D-Bus interface to TLM</refpurpose>  </refnamediv>  <refsynopsisdiv role="synopsis">
     <title role="synopsis.title">Methods</title>
     <synopsis>
-<link linkend="gdbus-method-org-tizen-Tlm-Login.loginUser">loginUser</link>  (IN  s     seat_id,
+<link linkend="gdbus-method-org-O1-Tlm-Login.loginUser">loginUser</link>  (IN  s     seat_id,
             IN  s     username,
             IN  s     password,
             IN  a{ss} environ);
-<link linkend="gdbus-method-org-tizen-Tlm-Login.logoutUser">logoutUser</link> (IN  s     seat_id);
-<link linkend="gdbus-method-org-tizen-Tlm-Login.switchUser">switchUser</link> (IN  s     seat_id,
+<link linkend="gdbus-method-org-O1-Tlm-Login.logoutUser">logoutUser</link> (IN  s     seat_id);
+<link linkend="gdbus-method-org-O1-Tlm-Login.switchUser">switchUser</link> (IN  s     seat_id,
             IN  s     username,
             IN  s     password,
             IN  a{ss} environ);
 </synopsis>
   </refsynopsisdiv>
-<refsect1 role="desc" id="gdbus-interface-org-tizen-Tlm-Login">
+<refsect1 role="desc" id="gdbus-interface-org-O1-Tlm-Login">
   <title role="desc.title">Description</title>
   <para>    Login objects can be used to login, logout and switch users. Login object
     with root access is exported at TLM_DBUS_ROOT_SOCKET_ADDRESS which can be
@@ -32,11 +32,11 @@
     at the seat (seat_id).
 </para>
 </refsect1>
-<refsect1 role="details" id="gdbus-methods-org.tizen.Tlm.Login">
+<refsect1 role="details" id="gdbus-methods-org.O1.Tlm.Login">
   <title role="details.title">Method Details</title>
-<refsect2 role="method" id="gdbus-method-org-tizen-Tlm-Login.loginUser">
+<refsect2 role="method" id="gdbus-method-org-O1-Tlm-Login.loginUser">
   <title>The loginUser() method</title>
-  <indexterm zone="gdbus-method-org-tizen-Tlm-Login.loginUser"><primary sortas="Login.loginUser">org.tizen.Tlm.Login.loginUser()</primary></indexterm>
+  <indexterm zone="gdbus-method-org-O1-Tlm-Login.loginUser"><primary sortas="Login.loginUser">org.O1.Tlm.Login.loginUser()</primary></indexterm>
 <programlisting>
 loginUser (IN  s     seat_id,
            IN  s     username,
@@ -65,9 +65,9 @@ loginUser (IN  s     seat_id,
 </varlistentry>
 </variablelist>
 </refsect2>
-<refsect2 role="method" id="gdbus-method-org-tizen-Tlm-Login.logoutUser">
+<refsect2 role="method" id="gdbus-method-org-O1-Tlm-Login.logoutUser">
   <title>The logoutUser() method</title>
-  <indexterm zone="gdbus-method-org-tizen-Tlm-Login.logoutUser"><primary sortas="Login.logoutUser">org.tizen.Tlm.Login.logoutUser()</primary></indexterm>
+  <indexterm zone="gdbus-method-org-O1-Tlm-Login.logoutUser"><primary sortas="Login.logoutUser">org.O1.Tlm.Login.logoutUser()</primary></indexterm>
 <programlisting>
 logoutUser (IN  s seat_id);
 </programlisting>
@@ -80,9 +80,9 @@ logoutUser (IN  s seat_id);
 </varlistentry>
 </variablelist>
 </refsect2>
-<refsect2 role="method" id="gdbus-method-org-tizen-Tlm-Login.switchUser">
+<refsect2 role="method" id="gdbus-method-org-O1-Tlm-Login.switchUser">
   <title>The switchUser() method</title>
-  <indexterm zone="gdbus-method-org-tizen-Tlm-Login.switchUser"><primary sortas="Login.switchUser">org.tizen.Tlm.Login.switchUser()</primary></indexterm>
+  <indexterm zone="gdbus-method-org-O1-Tlm-Login.switchUser"><primary sortas="Login.switchUser">org.O1.Tlm.Login.switchUser()</primary></indexterm>
 <programlisting>
 switchUser (IN  s     seat_id,
             IN  s     username,

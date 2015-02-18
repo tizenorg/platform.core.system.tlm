@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!DOCTYPE book PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "">
-<book xmlns="http://www.devhelp.net/book" title="Tizen Login Manager Reference Manual" link="index.html" author="" name="tlm" version="2" language="c">
+<book xmlns="http://www.devhelp.net/book" title="Tiny Login Manager Reference Manual" link="index.html" author="" name="tlm" version="2" language="c">
   <chapters>
     <sub name="Introduction" link="ch01.html">
       <sub name="Introduction" link="tlm-intro.html"/>
       <sub name="TlmConfig" link="TlmConfig.html"/>
       <sub name="General configuration" link="tlm-General-configuration.html"/>
-      <sub name="org.tizen.Tlm.Login" link="gdbus-org.tizen.Tlm.Login.html"/>
+      <sub name="Seat configuration" link="tlm-Seat-configuration.html"/>
+      <sub name="org.O1.Tlm.Login" link="gdbus-org.O1.Tlm.Login.html"/>
     </sub>
     <sub name="Tlm plugins reference" link="ch02.html">
       <sub name="TlmAccountPlugin" link="TlmAccountPlugin.html"/>
@@ -14,7 +15,6 @@
       <sub name="TlmAccountPluginGumd" link="TlmAccountPluginGumd.html"/>
       <sub name="TlmAuthPlugin" link="TlmAuthPlugin.html"/>
       <sub name="TlmAuthPluginDefault" link="TlmAuthPluginDefault.html"/>
-      <sub name="Seat configuration" link="tlm-Seat-configuration.html"/>
     </sub>
     <sub name="Tlm miscellaneous" link="ch03.html">
       <sub name="tlm-log" link="tlm-tlm-log.html"/>
@@ -60,9 +60,13 @@
     <keyword type="macro" name="TLM_CONFIG_GENERAL_X11_SESSION" link="tlm-General-configuration.html#TLM-CONFIG-GENERAL-X11-SESSION:CAPS"/>
     <keyword type="macro" name="TLM_CONFIG_GENERAL_PAUSE_SESSION" link="tlm-General-configuration.html#TLM-CONFIG-GENERAL-PAUSE-SESSION:CAPS"/>
     <keyword type="macro" name="TLM_CONFIG_GENERAL_SESSION_TYPE" link="tlm-General-configuration.html#TLM-CONFIG-GENERAL-SESSION-TYPE:CAPS"/>
-    <keyword type="method" name="The loginUser() method" link="gdbus-org.tizen.Tlm.Login.html#gdbus-method-org-tizen-Tlm-Login.loginUser"/>
-    <keyword type="method" name="The logoutUser() method" link="gdbus-org.tizen.Tlm.Login.html#gdbus-method-org-tizen-Tlm-Login.logoutUser"/>
-    <keyword type="method" name="The switchUser() method" link="gdbus-org.tizen.Tlm.Login.html#gdbus-method-org-tizen-Tlm-Login.switchUser"/>
+    <keyword type="macro" name="TLM_CONFIG_SEAT_ACTIVE" link="tlm-Seat-configuration.html#TLM-CONFIG-SEAT-ACTIVE:CAPS"/>
+    <keyword type="macro" name="TLM_CONFIG_SEAT_NWATCH" link="tlm-Seat-configuration.html#TLM-CONFIG-SEAT-NWATCH:CAPS"/>
+    <keyword type="macro" name="TLM_CONFIG_SEAT_WATCHX" link="tlm-Seat-configuration.html#TLM-CONFIG-SEAT-WATCHX:CAPS"/>
+    <keyword type="macro" name="TLM_CONFIG_SEAT_VTNR" link="tlm-Seat-configuration.html#TLM-CONFIG-SEAT-VTNR:CAPS"/>
+    <keyword type="method" name="The loginUser() method" link="gdbus-org.O1.Tlm.Login.html#gdbus-method-org-O1-Tlm-Login.loginUser"/>
+    <keyword type="method" name="The logoutUser() method" link="gdbus-org.O1.Tlm.Login.html#gdbus-method-org-O1-Tlm-Login.logoutUser"/>
+    <keyword type="method" name="The switchUser() method" link="gdbus-org.O1.Tlm.Login.html#gdbus-method-org-O1-Tlm-Login.switchUser"/>
     <keyword type="function" name="tlm_account_plugin_setup_guest_user_account ()" link="TlmAccountPlugin.html#tlm-account-plugin-setup-guest-user-account"/>
     <keyword type="function" name="tlm_account_plugin_is_valid_user ()" link="TlmAccountPlugin.html#tlm-account-plugin-is-valid-user"/>
     <keyword type="function" name="tlm_account_plugin_cleanup_guest_user ()" link="TlmAccountPlugin.html#tlm-account-plugin-cleanup-guest-user"/>
@@ -73,10 +77,6 @@
     <keyword type="struct" name="struct TlmAuthPluginInterface" link="TlmAuthPlugin.html#TlmAuthPluginInterface"/>
     <keyword type="property" name="The “config” property" link="TlmAuthPlugin.html#TlmAuthPlugin--config"/>
     <keyword type="signal" name="The “authenticate” signal" link="TlmAuthPlugin.html#TlmAuthPlugin-authenticate"/>
-    <keyword type="macro" name="TLM_CONFIG_SEAT_ACTIVE" link="tlm-Seat-configuration.html#TLM-CONFIG-SEAT-ACTIVE:CAPS"/>
-    <keyword type="macro" name="TLM_CONFIG_SEAT_NWATCH" link="tlm-Seat-configuration.html#TLM-CONFIG-SEAT-NWATCH:CAPS"/>
-    <keyword type="macro" name="TLM_CONFIG_SEAT_WATCHX" link="tlm-Seat-configuration.html#TLM-CONFIG-SEAT-WATCHX:CAPS"/>
-    <keyword type="macro" name="TLM_CONFIG_SEAT_VTNR" link="tlm-Seat-configuration.html#TLM-CONFIG-SEAT-VTNR:CAPS"/>
     <keyword type="function" name="tlm_log_init ()" link="tlm-tlm-log.html#tlm-log-init"/>
     <keyword type="function" name="tlm_log_close ()" link="tlm-tlm-log.html#tlm-log-close"/>
     <keyword type="macro" name="EXPAND_LOG_MSG()" link="tlm-tlm-log.html#EXPAND-LOG-MSG:CAPS"/>
