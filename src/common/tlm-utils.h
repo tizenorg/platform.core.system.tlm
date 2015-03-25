@@ -67,6 +67,9 @@ typedef void (*WatchCb) (const gchar *found_item, gboolean is_final, GError *err
 guint
 tlm_utils_watch_for_files (const gchar **watch_list, WatchCb cb, gpointer userdata);
 
+gboolean
+tlm_authenticate_user (const gchar *username, const gchar *password);
+
 G_END_DECLS
 
 #endif /* _TLM_UTILS_H */

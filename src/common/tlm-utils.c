@@ -39,12 +39,14 @@
 #include <unistd.h>
 #include <glib/gstdio.h>
 #include <glib-unix.h>
+#include <security/pam_appl.h>
 #include <errno.h>
 
 #include "tlm-utils.h"
 #include "tlm-log.h"
 
 #define HOST_NAME_SIZE 256
+#define AUTH_SERVICE "system-auth"
 
 void
 g_clear_string (gchar **str)
@@ -678,3 +680,53 @@ tlm_utils_watch_for_files (
       _inotify_watcher_cb, w_info, (GDestroyNotify)_watch_info_free);
 }
 
+static int func_conv(
+    int num_msg,
+    const struct pam_message **msgs,
+    struct pam_response **resps,
+    void *pdata)
+{
+    int i;
+    if (num_msg <= 0)
+        return PAM_CONV_ERR;
+
+    *resps = g_malloc0 (num_msg * sizeof(struct pam_response));
+    for (i=0; i<num_msg; ++i) {
+        struct pam_response *resp = *resps + i;
+        const char *password = (const char *)pdata;
+
+        if (resp) {
+            resp->resp = strndup (password, PAM_MAX_RESP_SIZE - 1);
+            resp->resp_retcode = PAM_SUCCESS;
+        }
+    }
+    return PAM_SUCCESS;
+}
+
+gboolean
+tlm_authenticate_user (
+    const gchar *username,
+    const gchar *password)
+{
+    pam_handle_t *pam_h = NULL;
+    gboolean ret_auth = FALSE;
+    int ret;
+    const struct pam_conv conv = {func_conv, (gchar*)password};
+
+    ret = pam_start (AUTH_SERVICE, username, &conv, &pam_h);
+    if (ret != PAM_SUCCESS) {
+        WARN("Failed to pam_start: %d", ret);
+        return FALSE;
+    }
+
+    ret = pam_authenticate (pam_h, PAM_SILENT);
+    if (ret == PAM_SUCCESS)
+        ret_auth = TRUE;
+    else if (ret == PAM_AUTH_ERR)
+        WARN("Failed to get authentication! username: %s", username);
+    else
+        WARN("Failed to pam_authenticate: %d", ret);
+
+    pam_end(pam_h, ret);
+    return ret_auth;
+}
