@@ -75,6 +75,16 @@ Provides:   %{name}-config
 %description config-common
 Tiny Login Manager configuration files for common-profile.
 
+%package config-common-singleseat
+Summary:    Configuration files for common-profile with single seat
+Group:      System/Service
+Requires:   %{name} = %{version}-%{release}
+Provides:   %{name}-config
+
+%description config-common-singleseat
+Tiny Login Manager configuration files for common-profile with
+signle seat.
+
 %else
 
 %package config-ivi-singleseat
@@ -189,7 +199,7 @@ install -m 644 data/tizen-ivi/10-multiseat-vtc1010.rules %{buildroot}%{_sysconfd
 install -m 755 -d %{buildroot}%{_sysconfdir}/profile.d
 install -m 644 data/tizen-ivi/etc/profile.d/* %{buildroot}%{_sysconfdir}/profile.d/
 %else
-install -m 644 data/tizen-common/etc/tlm.conf %{buildroot}%{_sysconfdir}
+install -m 644 data/tizen-common/etc/tlm*.conf %{buildroot}%{_sysconfdir}
 install -m 755 data/tizen-common/etc/session.d/* %{buildroot}%{_sysconfdir}/session.d/
 %endif
 
@@ -204,6 +214,9 @@ install -m 755 data/tizen-common/etc/session.d/* %{buildroot}%{_sysconfdir}/sess
 %if "%{profile}" != "ivi"
 
 %post config-common
+if [ ! -e /etc/tlm.conf ] || [ -h /etc/tlm.conf ]; then
+	ln -s -f /etc/tlm-default.conf /etc/tlm.conf
+fi
 systemctl enable tlm
 systemctl daemon-reload
 
@@ -214,6 +227,25 @@ if [ $1 == 0 ]; then
 fi
 
 %postun config-common
+if [ -h /etc/tlm.conf ] && [ $1 == 0 ]; then
+	rm -f /etc/tlm.conf
+fi
+
+
+%post config-common-singleseat
+if [ ! -e /etc/tlm.conf ] || [ -h /etc/tlm.conf ]; then
+	ln -s -f /etc/tlm-singleseat.conf /etc/tlm.conf
+fi
+systemctl enable tlm
+systemctl daemon-reload
+
+%preun config-common-singleseat
+if [ $1 == 0 ]; then
+	systemctl disable tlm
+	systemctl daemon-reload
+fi
+
+%postun config-common-singleseat
 if [ -h /etc/tlm.conf ] && [ $1 == 0 ]; then
 	rm -f /etc/tlm.conf
 fi
@@ -354,8 +386,13 @@ fi
 %files config-common
 %defattr(-,root,root,-)
 %manifest %{name}.manifest
-%config(noreplace) %{_sysconfdir}/tlm.conf
+%config(noreplace) %{_sysconfdir}/tlm-default.conf
 %config(noreplace) %{_sysconfdir}/session.d/*
+
+%files config-common-singleseat
+%defattr(-,root,root,-)
+%manifest %{name}.manifest
+%config(noreplace) %{_sysconfdir}/tlm-singleseat.conf
 
 %else
 
