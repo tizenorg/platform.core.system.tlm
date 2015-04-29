@@ -84,6 +84,11 @@ _setup_daemon ()
 
     const gchar *bin_path = TLM_BIN_DIR;
 
+    if (geteuid() != 0) {
+        WARN("ROOT privilege users can launch tlm daemon");
+        return FALSE;
+    }
+
 #ifdef ENABLE_DEBUG
     const gchar *env_val = g_getenv("TLM_BIN_DIR");
     if (env_val)
@@ -392,14 +397,10 @@ int main (int argc, char *argv[])
         return EXIT_FAILURE;
     }
 
-    if (geteuid() != 0) {
-        WARN("test-client can only be run with ROOT privileges");
+    if (run_tlm_daemon && !_setup_daemon()) {
         _free_tlm_user (user);
         return EXIT_FAILURE;
     }
-
-    if (run_tlm_daemon)
-        _setup_daemon ();
 
     if (is_user_login_op) {
         _handle_user_login (user);
