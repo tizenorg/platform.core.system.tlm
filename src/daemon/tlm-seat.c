@@ -127,8 +127,10 @@ _close_active_session (TlmSeat *self)
 {
     TlmSeatPrivate *priv = TLM_SEAT_PRIV (self);
     _disconnect_session_signals (self);
-    if (priv->session)
+    if (priv->session) {
+        DBG("Clear session_remote object");
         g_clear_object (&priv->session);
+    }
 }
 
 static void
@@ -143,8 +145,11 @@ _handle_session_terminated (
     gboolean stop = FALSE;
 
     DBG ("seat %p session %p", self, priv->session);
+
     _close_active_session (seat);
 
+    // NOTE: This "session-terminated" signal to seat object is caught by
+    // _session_terminated_cb() which is conencted in tlm_manager_stop().
     g_signal_emit (seat,
             signals[SIG_SESSION_TERMINATED],
             0,
@@ -154,8 +159,10 @@ _handle_session_terminated (
         DBG ("no relogin or switch user");
         return;
     }
+
     g_clear_object (&priv->dbus_observer);
 
+    // If X11 session is used, kill self
     if (tlm_config_get_boolean (priv->config,
                                 TLM_CONFIG_GENERAL,
                                 TLM_CONFIG_GENERAL_X11_SESSION,
@@ -166,12 +173,14 @@ _handle_session_terminated (
         return;
     }
 
+    // Auto re-login, if the auto-login option is set
     if (tlm_config_get_boolean (priv->config,
                                 TLM_CONFIG_GENERAL,
                                 TLM_CONFIG_GENERAL_AUTO_LOGIN,
                                 TRUE) ||
                                 seat->priv->next_user) {
         DBG ("auto re-login with '%s'", seat->priv->next_user);
+
         tlm_seat_create_session (seat,
                 seat->priv->next_service,
                 seat->priv->next_user,
@@ -305,7 +314,7 @@ _seat_set_property (GObject *obj,
         case PROP_CONFIG:
             priv->config = g_value_dup_object (value);
             break;
-        case PROP_ID: 
+        case PROP_ID:
             priv->id = g_value_dup_string (value);
             break;
         case PROP_PATH:
@@ -329,7 +338,7 @@ _seat_get_property (GObject *obj,
         case PROP_CONFIG:
             g_value_set_object (value, priv->config);
             break;
-        case PROP_ID: 
+        case PROP_ID:
             g_value_set_string (value, priv->id);
             break;
         case PROP_PATH:
@@ -431,7 +440,7 @@ static void
 tlm_seat_init (TlmSeat *seat)
 {
     TlmSeatPrivate *priv = TLM_SEAT_PRIV (seat);
-    
+
     priv->id = priv->path = priv->default_user = NULL;
     priv->dbus_observer = priv->prev_dbus_observer = NULL;
     priv->default_active = FALSE;
@@ -446,6 +455,19 @@ tlm_seat_get_id (TlmSeat *seat)
     return (const gchar*) seat->priv->id;
 }
 
+gchar *
+tlm_seat_get_occupying_username (TlmSeat *seat) {
+    TlmSeatPrivate *priv = TLM_SEAT_PRIV (seat);
+    if (!priv->session) return NULL;
+
+    TlmSessionRemote *sr = priv->session;
+    gchar *username = NULL;
+
+    g_object_get(G_OBJECT(sr), "username", &username, NULL);
+
+    return username;
+}
+
 gboolean
 tlm_seat_switch_user (TlmSeat *seat,
                       const gchar *service,
@@ -453,6 +475,7 @@ tlm_seat_switch_user (TlmSeat *seat,
                       const gchar *password,
                       GHashTable *environment)
 {
+    DBG("run tlm_seat_switch_user()");
     g_return_val_if_fail (seat && TLM_IS_SEAT(seat), FALSE);
 
     TlmSeatPrivate *priv = TLM_SEAT_PRIV (seat);
@@ -465,10 +488,12 @@ tlm_seat_switch_user (TlmSeat *seat,
     }
 
     if (!priv->session) {
+        DBG("No live session, so just create session.");
         return tlm_seat_create_session (seat, service, username, password,
                 environment);
     }
 
+    DBG("Store service/user/password/env as seat->priv->next_*, and terminate current session");
     _reset_next (priv);
     priv->next_service = g_strdup (service);
     priv->next_user = g_strdup (username);
@@ -551,12 +576,16 @@ tlm_seat_create_session (TlmSeat *seat,
     g_return_val_if_fail (seat && TLM_IS_SEAT(seat), FALSE);
     TlmSeatPrivate *priv = TLM_SEAT_PRIV (seat);
 
+    // Ignore creating session if there is an existing session already
     if (priv->session != NULL) {
+        WARN("Session already exists on the seat: %s", priv->id);
         g_signal_emit (seat, signals[SIG_SESSION_ERROR],  0,
                 TLM_ERROR_SESSION_ALREADY_EXISTS);
         return FALSE;
     }
 
+    // Prevent short-delay relogin.
+    // If the login delay is too fast (<1s), run _delayed_session()
     if (g_get_monotonic_time () - priv->prev_time < 1000000) {
         DBG ("short time relogin");
         priv->prev_time = g_get_monotonic_time ();
@@ -578,6 +607,8 @@ tlm_seat_create_session (TlmSeat *seat,
         priv->prev_count = 1;
     }
 
+    // Check for function arguments
+    // service: if NULL, get default service
     if (!service) {
         DBG ("PAM service not defined, looking up configuration");
         service = tlm_config_get_string (priv->config,
@@ -592,6 +623,7 @@ tlm_seat_create_session (TlmSeat *seat,
     }
     DBG ("using PAM service %s for seat %s", service, priv->id);
 
+    // username: if NULL, get default user
     if (!username) {
         if (!priv->default_user) {
             const gchar *name_tmpl =
@@ -616,11 +648,13 @@ tlm_seat_create_session (TlmSeat *seat,
         }
     }
 
+    // Create a session_remote object (It creates actual remote session process)
     priv->session = tlm_session_remote_new (priv->config,
             priv->id,
             service,
             priv->default_active ? priv->default_user : username);
     if (!priv->session) {
+
         g_signal_emit (seat, signals[SIG_SESSION_ERROR], 0,
                 TLM_ERROR_SESSION_CREATION_FAILURE);
         return FALSE;
@@ -628,11 +662,15 @@ tlm_seat_create_session (TlmSeat *seat,
 
     /*It is needed to handle switch user case which completes after new session
      *is created */
+    // TODO: process this prev_dbus_observer somewhere!
     seat->priv->prev_dbus_observer = seat->priv->dbus_observer;
     seat->priv->dbus_observer = NULL;
     if (!_create_dbus_observer (seat,
             priv->default_active ? priv->default_user : username)) {
-        g_clear_object (&priv->session);
+        if (priv->session) {
+            DBG("Clear session_remote object");
+            g_clear_object (&priv->session);
+        }
         g_signal_emit (seat, signals[SIG_SESSION_ERROR],  0,
                 TLM_ERROR_DBUS_SERVER_START_FAILURE);
         return FALSE;
@@ -664,7 +702,6 @@ tlm_seat_terminate_session (TlmSeat *seat)
                 TLM_ERROR_SESSION_NOT_VALID);
         return FALSE;
     }
-
     return TRUE;
 }
 

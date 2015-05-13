@@ -554,12 +554,14 @@ _add_seat (TlmManager *manager, const gchar *seat_id, const gchar *seat_path)
 
     TlmManagerPrivate *priv = TLM_MANAGER_PRIV (manager);
 
+    // Do nothing if the seat is not active
     if (!tlm_config_get_boolean (priv->config,
                                  seat_id,
                                  TLM_CONFIG_SEAT_ACTIVE,
                                  TRUE))
         return;
 
+    // Check if the watching before seat creation is needed
     guint nwatch = tlm_config_get_uint (priv->config,
                                         seat_id,
                                         TLM_CONFIG_SEAT_NWATCH,
@@ -575,8 +577,7 @@ _add_seat (TlmManager *manager, const gchar *seat_id, const gchar *seat_path)
           g_free (watchx);
         }
         watch_items[nwatch] = NULL;
-        TlmSeatWatchClosure *watch_closure = 
-            g_new0 (TlmSeatWatchClosure, 1);
+        TlmSeatWatchClosure *watch_closure = g_new0 (TlmSeatWatchClosure, 1);
         watch_closure->manager = g_object_ref (manager);
         watch_closure->seat_id = g_strdup (seat_id);
         watch_closure->seat_path = g_strdup (seat_path);
@@ -587,10 +588,11 @@ _add_seat (TlmManager *manager, const gchar *seat_id, const gchar *seat_path)
         if (watch_id <= 0) {
             WARN ("Failed to add watch on seat %s", seat_id);
         } else {
+            // Watching success: Pass sync.seat creation
             return;
         }
     }
-
+    // create new session on the seat synchronously
     _create_seat (manager, seat_id, seat_path);
 }
 
@@ -697,7 +699,7 @@ _manager_on_seat_removed (GDBusConnection *connection,
         g_hash_table_remove (manager->priv->seats, id);
         g_signal_emit (manager, signals[SIG_SEAT_REMOVED], 0, id, NULL);
 
-    } 
+    }
     g_free (id);
     g_free (path);
 }
@@ -837,7 +839,7 @@ tlm_manager_setup_guest_user (TlmManager *manager, const gchar *user_name)
                     manager->priv->account_plugin, user_name, FALSE);
     }
     else {
-        DBG("Asking plugin to setup guest user '%s'", user_name); 
+        DBG("Asking plugin to setup guest user '%s'", user_name);
         return tlm_account_plugin_setup_guest_user_account (
                     manager->priv->account_plugin, user_name);
     }

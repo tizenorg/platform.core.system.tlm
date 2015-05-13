@@ -55,7 +55,7 @@ static GParamSpec *properties[N_PROPERTIES];
 
 struct _TlmSessionRemotePrivate
 {
-	TlmConfig *config;
+    TlmConfig *config;
     GDBusConnection *connection;
     TlmDbusSession *dbus_session_proxy;
     GPid cpid;
@@ -97,7 +97,7 @@ _on_child_down_cb (
 
     TlmSessionRemote *session = TLM_SESSION_REMOTE (data);
 
-    DBG ("Sessiond(%p) with pid (%d) closed with status %d", session, pid,
+    DBG ("Sessiond(%p) with pid (%d) died with status %d", session, pid,
             status);
 
     session->priv->is_sessiond_up = FALSE;
@@ -416,6 +416,7 @@ _on_session_terminated_cb (
         gpointer user_data)
 {
     g_return_if_fail (self && TLM_IS_SESSION_REMOTE (self));
+    DBG ("dbus-session-proxy got a session-terminated signal");
     if (self->priv->can_emit_signal)
         g_signal_emit (self, signals[SIG_SESSION_TERMINATED], 0);
 }

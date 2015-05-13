@@ -141,14 +141,19 @@ int main(int argc, char *argv[])
     main_loop = g_main_loop_new (NULL, FALSE);
 
     manager = tlm_manager_new (username);
-    _setup_unix_signal_handlers (manager);
-    tlm_manager_start (manager);
+    if (manager) {
+        _setup_unix_signal_handlers (manager);
 
-    g_main_loop_run (main_loop);
+        if (TRUE == tlm_manager_start (manager)) {
+            g_main_loop_run (main_loop);
+        }
 
-    g_object_unref (G_OBJECT(manager));
+        g_object_unref (G_OBJECT(manager));
 
-    DBG ("clean shutdown");
+        DBG ("clean shutdown");
+    } else {
+        ERR ("Cannot create tlm_manager object");
+    }
 
     tlm_log_close (NULL);
 
