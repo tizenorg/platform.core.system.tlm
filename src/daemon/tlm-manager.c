@@ -554,6 +554,7 @@ _add_seat (TlmManager *manager, const gchar *seat_id, const gchar *seat_path)
 
     TlmManagerPrivate *priv = TLM_MANAGER_PRIV (manager);
 
+    // Do nothing if the seat is not active
     if (!tlm_config_get_boolean (priv->config,
                                  seat_id,
                                  TLM_CONFIG_SEAT_ACTIVE,
@@ -575,7 +576,7 @@ _add_seat (TlmManager *manager, const gchar *seat_id, const gchar *seat_path)
           g_free (watchx);
         }
         watch_items[nwatch] = NULL;
-        TlmSeatWatchClosure *watch_closure = 
+        TlmSeatWatchClosure *watch_closure =
             g_new0 (TlmSeatWatchClosure, 1);
         watch_closure->manager = g_object_ref (manager);
         watch_closure->seat_id = g_strdup (seat_id);
@@ -587,7 +588,8 @@ _add_seat (TlmManager *manager, const gchar *seat_id, const gchar *seat_path)
         if (watch_id <= 0) {
             WARN ("Failed to add watch on seat %s", seat_id);
         } else {
-            return;
+            // NOTE: Do nothing here, to run _create_seat()
+            // return;
         }
     }
 
