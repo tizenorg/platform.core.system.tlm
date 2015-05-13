@@ -265,7 +265,7 @@ _handle_login_user (
         g_error_free (error);
         return TRUE;
     }
-    DBG ("seat_id %s username %s", seat_id, username);
+    DBG ("Emit login-user signal: seat_id=%s, username=%s", seat_id, username);
 
     g_signal_emit (self, signals[SIG_LOGIN_USER], 0, seat_id, username,
             password, environment, invocation);
@@ -292,7 +292,7 @@ _handle_logout_user (
         g_error_free (error);
         return TRUE;
     }
-    DBG ("seat_id %s", seat_id);
+    DBG ("Emit logout-user signal: seat_id=%s", seat_id);
 
     g_signal_emit (self, signals[SIG_LOGOUT_USER], 0, seat_id, invocation);
 
@@ -321,7 +321,7 @@ _handle_switch_user (
         g_error_free (error);
         return TRUE;
     }
-    DBG ("seat_id %s username %s", seat_id, username);
+    DBG ("Emit switch-user signal: seat_id=%s, username=%s", seat_id, username);
 
     g_signal_emit (self, signals[SIG_SWITCH_USER], 0, seat_id, username,
             password, environment, invocation);

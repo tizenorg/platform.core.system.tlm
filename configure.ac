@@ -79,7 +79,7 @@ fi
 
 # Define socket path
 AC_ARG_ENABLE(sockets-path,
-          [  --enable-sockets-path=path  enable dbus sockets path at location'
+          [  --enable-sockets-path=path  enable dbus sockets path at location
            "path" instead of default "/var/run/tlm"],
           [enable_sockets_path=$enableval],
           [enable_sockets_path="/var/run/tlm"])
