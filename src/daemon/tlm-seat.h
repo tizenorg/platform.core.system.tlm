@@ -67,6 +67,13 @@ tlm_seat_new (TlmConfig *config,
 const gchar *
 tlm_seat_get_id (TlmSeat *seat);
 
+/** Get the username who occupies the seat
+ * @return  The name of the user who holds the seat
+ * @return  NULL if nobody occupies the seat
+ */
+gchar *
+tlm_seat_get_occupying_username (TlmSeat* seat);
+
 gboolean
 tlm_seat_switch_user (TlmSeat *seat,
                       const gchar *service,

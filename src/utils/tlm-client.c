@@ -118,7 +118,7 @@ _setup_daemon ()
     }
     sleep (5); /* 5 seconds */
 
-    DBG ("Daemon PID = %d\n", daemon_pid);
+    ERR ("Daemon PID = %d\n", daemon_pid);
     return TRUE;
 }
 
@@ -153,6 +153,7 @@ _get_bus_connection (
     gchar address[128];
     g_snprintf (address, 127, "unix:path=%s/%s-%d", TLM_DBUS_SOCKET_PATH,
             seat_id, user_id);
+    DBG ("trying to connect socket:%s", address);
     return g_dbus_connection_new_for_address_sync (address,
             G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_CLIENT, NULL, NULL, error);
 }

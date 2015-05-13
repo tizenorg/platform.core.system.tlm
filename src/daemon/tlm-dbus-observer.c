@@ -287,9 +287,14 @@ _connect_dbus_adapter (
         TlmDbusObserver *self,
         TlmDbusLoginAdapter *adapter)
 {
-    if (self->priv->enable_flags & DBUS_OBSERVER_ENABLE_LOGIN_USER)
+    DBG("Connecting signals to signal handlers");
+    if (self->priv->enable_flags & DBUS_OBSERVER_ENABLE_LOGIN_USER) {
         g_signal_connect_swapped (G_OBJECT (adapter),
-                "login-user", G_CALLBACK(_handle_dbus_login_user), self);
+            "login-user", G_CALLBACK(_handle_dbus_login_user), self);
+        DBG("_handle_dbus_login_user() is connected to 'login-user' signal.");
+    } else {
+        DBG("'login-user' signal callback is not connected");
+    }
     if (self->priv->enable_flags & DBUS_OBSERVER_ENABLE_LOGOUT_USER)
         g_signal_connect_swapped (G_OBJECT (adapter),
                 "logout-user", G_CALLBACK(_handle_dbus_logout_user), self);
@@ -303,6 +308,7 @@ _disconnect_dbus_adapter (
         TlmDbusObserver *self,
         TlmDbusLoginAdapter *adapter)
 {
+    DBG("Disconnecting signals to signal handlers");
     if (self->priv->enable_flags & DBUS_OBSERVER_ENABLE_LOGIN_USER)
         g_signal_handlers_disconnect_by_func (G_OBJECT(adapter),
                 _handle_dbus_login_user, self);
@@ -403,6 +409,22 @@ _is_request_supported (
 }
 
 static gboolean
+_is_valid_switch_user_dbus_request(
+        TlmDbusRequest *dbus_request,
+        TlmSeat *seat)
+{
+    gchar *occupying_username = tlm_seat_get_occupying_username(seat);
+    gboolean ret = TRUE;
+
+    if (0 == g_strcmp0(dbus_request->username, occupying_username)) {
+        WARN("Cannot switch to same username");
+        ret = FALSE;
+    }
+    g_free(occupying_username);
+    return ret;
+}
+
+static gboolean
 _process_request (
         TlmDbusObserver *self)
 {
@@ -431,7 +453,15 @@ _process_request (
             goto _finished;
         }
 
-        seat = self->priv->seat;
+        // NOTE:
+        // The below code intends that the current seat of the TlmDbusObserver
+        // is always selected, even the given request has specifed ananother
+        // seat.  The TlmDbusRequest's seat is applied only when the current
+        // TlmDbusObserver is a default dbus socket(/var/run/dbus-sock), which
+        // has priv->seat as NULL.
+        // This means that only the root user(who can access the default dbus
+        // socket) can specify the seat in his TlmDbusRequest.
+        seat = self->priv->seat;  // observer's seat has high priority
         if (!seat && self->priv->manager) {
             seat = tlm_manager_get_seat (self->priv->manager,
                     dbus_req->seat_id);
@@ -463,8 +493,12 @@ _process_request (
             ret = tlm_seat_terminate_session (seat);
             break;
         case TLM_DBUS_REQUEST_TYPE_SWITCH_USER:
-            ret = tlm_seat_switch_user (seat, NULL, dbus_req->username,
+            // Refuse request if the request's username is same to
+            // the current user who occupies the seat.
+            if (_is_valid_switch_user_dbus_request(dbus_req, seat))
+                ret = tlm_seat_switch_user (seat, NULL, dbus_req->username,
                     dbus_req->password, dbus_req->environment);
+            else ret = FALSE;
             break;
         }
         if (!ret) {
@@ -478,7 +512,8 @@ _finished:
         _complete_request (self, req, err);
     }
 
-    return self->priv->active_request != NULL ? FALSE : TRUE;
+    return self->priv->active_request != NULL ?
+            G_SOURCE_REMOVE : G_SOURCE_CONTINUE;
 }
 
 static void
@@ -722,7 +757,7 @@ static void
 tlm_dbus_observer_init (TlmDbusObserver *dbus_observer)
 {
     TlmDbusObserverPrivate *priv = TLM_DBUS_OBSERVER_PRIV (dbus_observer);
-    
+
     priv->manager = NULL;
     priv->seat = NULL;
     priv->enable_flags = DBUS_OBSERVER_ENABLE_ALL;
@@ -753,7 +788,7 @@ tlm_dbus_observer_new (
      * seat is connected on per dbus request basis and then
      * disconnected when the dbus request is completed or aborted */
     if (seat) {
-        dbus_observer->priv->seat = seat;
+        dbus_observer->priv->seat = seat;  // Remember specified seat
         g_object_weak_ref (G_OBJECT (seat), (GWeakNotify)_on_seat_dispose,
                 dbus_observer);
     }
