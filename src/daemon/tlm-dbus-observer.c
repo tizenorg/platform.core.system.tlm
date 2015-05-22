@@ -33,6 +33,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
+
 #include "tlm-dbus-observer.h"
 #include "tlm-log.h"
 #include "tlm-utils.h"
@@ -43,6 +44,10 @@
 #include "tlm-seat.h"
 #include "tlm-manager.h"
 #include "common/tlm-error.h"
+
+#ifdef ENABLE_CYNARA_PRIVILEGE_CHECK
+#include "tlm-cynara-privilege-checker.h"
+#endif
 
 G_DEFINE_TYPE (TlmDbusObserver, tlm_dbus_observer, G_TYPE_OBJECT);
 
@@ -365,12 +370,12 @@ _abort_dbus_request (
 
 static void
 _complete_request (
-		TlmDbusObserver *self,
+        TlmDbusObserver *self,
         TlmRequest *request,
         GError *error)
 {
     _complete_dbus_request (request->dbus_request, error);
-	request->dbus_request = NULL;
+    request->dbus_request = NULL;
     _dispose_request (self, request);
 }
 
@@ -467,6 +472,7 @@ _process_request (
                     dbus_req->password, dbus_req->environment);
             break;
         }
+        // Dispose(clean up) the req(==active_request) if the request failed
         if (!ret) {
             _dispose_request (self, self->priv->active_request);
             self->priv->active_request = NULL;
@@ -579,6 +585,14 @@ _handle_seat_session_error (
     _process_next_request_in_idle (self);
 }
 
+#ifdef ENABLE_CYNARA_PRIVILEGE_CHECK
+static gboolean
+_has_privilege_on_dbus_adapter(GDBusMethodInvocation *invocation) {
+    return tlm_cynara_privilege_checker_check_privilege_from_g_dbus_method_invocation(
+        invocation);
+}
+#endif
+
 static void
 _handle_dbus_login_user (
         TlmDbusObserver *self,
@@ -593,6 +607,16 @@ _handle_dbus_login_user (
 
     DBG ("seat id %s, username %s", seat_id, username);
     g_return_if_fail (self && TLM_IS_DBUS_OBSERVER(self));
+#ifdef ENABLE_CYNARA_PRIVILEGE_CHECK
+    if (!_has_privilege_on_dbus_adapter(invocation)) {
+        tlm_dbus_login_adapter_complete_dbus_login(
+            TLM_DBUS_LOGIN_ADAPTER(dbus_adapter),
+            TLM_DBUS_REQUEST_TYPE_LOGIN_USER,
+            invocation,
+            NULL);
+        return;
+    }
+#endif
 
     request = tlm_dbus_utils_create_request (dbus_adapter, invocation,
             TLM_DBUS_REQUEST_TYPE_LOGIN_USER, seat_id, username, password,
@@ -611,6 +635,16 @@ _handle_dbus_logout_user (
 
     DBG ("seat id %s", seat_id);
     g_return_if_fail (self && TLM_IS_DBUS_OBSERVER(self));
+#ifdef ENABLE_CYNARA_PRIVILEGE_CHECK
+    if (!_has_privilege_on_dbus_adapter(invocation)) {
+        tlm_dbus_login_adapter_complete_dbus_login(
+            TLM_DBUS_LOGIN_ADAPTER(dbus_adapter),
+            TLM_DBUS_REQUEST_TYPE_LOGOUT_USER,
+            invocation,
+            NULL);
+        return;
+    }
+#endif
 
     request = tlm_dbus_utils_create_request (dbus_adapter, invocation,
             TLM_DBUS_REQUEST_TYPE_LOGOUT_USER, seat_id, NULL, NULL, NULL);
@@ -629,9 +663,19 @@ _handle_dbus_switch_user (
 {
     TlmDbusRequest *request = NULL;
 
-    DBG ("seat id %s, username %s", seat_id, username);
     g_return_if_fail (self && TLM_IS_DBUS_OBSERVER(self));
+#ifdef ENABLE_CYNARA_PRIVILEGE_CHECK
+    if (!_has_privilege_on_dbus_adapter(invocation)) {
+        tlm_dbus_login_adapter_complete_dbus_login(
+            TLM_DBUS_LOGIN_ADAPTER(dbus_adapter),
+            TLM_DBUS_REQUEST_TYPE_SWITCH_USER,
+            invocation,
+            NULL);
+        return;
+    }
+#endif
 
+    DBG ("SwitchUser request: seat id %s, username %s", seat_id, username);
     request = tlm_dbus_utils_create_request (dbus_adapter, invocation,
             TLM_DBUS_REQUEST_TYPE_SWITCH_USER, seat_id, username, password,
             environment);
@@ -722,7 +766,7 @@ static void
 tlm_dbus_observer_init (TlmDbusObserver *dbus_observer)
 {
     TlmDbusObserverPrivate *priv = TLM_DBUS_OBSERVER_PRIV (dbus_observer);
-    
+
     priv->manager = NULL;
     priv->seat = NULL;
     priv->enable_flags = DBUS_OBSERVER_ENABLE_ALL;

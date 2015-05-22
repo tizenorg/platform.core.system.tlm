@@ -48,11 +48,11 @@ AC_SUBST(TLM_CFLAGS)
 AC_SUBST(TLM_LIBS)
 
 # Enable debug
-AC_ARG_ENABLE(debug, [ --enable-debug enable debug features],  
+AC_ARG_ENABLE(debug, [  --enable-debug enable debug features],
                      [enable_debug=$enable_debug], [enable_debug="no"])
 if test "x$enable_debug" = "xyes" ; then
     AC_DEFINE(ENABLE_DEBUG, [1], [Enable debug features])
-    AC_ARG_ENABLE(tests, [ --enable-tests build unit tests],
+    AC_ARG_ENABLE(tests, [  --enable-tests build unit tests],
                   [enable_tests=$enable_tests], [enable_tests="no"])
     if test "x$enable_tests" = "xyes" ; then
         AC_DEFINE(ENABLE_TESTS, [1], [Build unit tests], [enable_tests=yes])
@@ -67,7 +67,7 @@ AC_SUBST(CHECK_LIBS)
 AM_CONDITIONAL(ENABLE_TESTS, [test "x$enable_tests" = "xyes"])
 
 # Enable examples
-AC_ARG_ENABLE(examples, [ --enable-examples enable examples],
+AC_ARG_ENABLE(examples, [  --enable-examples enable examples],
                      [enable_examples=$enable_examples], [enable_examples="no"])
 AM_CONDITIONAL(ENABLE_EXAMPLES, [test x$enable_examples = xyes])
 
@@ -79,7 +79,7 @@ fi
 
 # Define socket path
 AC_ARG_ENABLE(sockets-path,
-          [  --enable-sockets-path=path  enable dbus sockets path at location'
+          [  --enable-sockets-path=path  enable dbus sockets path at location
            "path" instead of default "/var/run/tlm"],
           [enable_sockets_path=$enableval],
           [enable_sockets_path="/var/run/tlm"])
@@ -104,6 +104,20 @@ if test "x$enable_gum" = "xyes" ; then
     AC_SUBST(ACCOUNT_PLUGIN_NAME, [gumd])
 else
     AC_SUBST(ACCOUNT_PLUGIN_NAME, [default])
+fi
+
+# Enable cynara privilege check
+PKG_CHECK_MODULES([CYNARA], [cynara-client cynara-creds-socket cynara-session], [have_cynara=yes], [have_cynara=no])
+AC_ARG_ENABLE(cynara, [  --enable-cynara-privilege-check Enables privilege check on TLM APIs by cynara], ,
+              [enable_cynara_privilege_check=yes])
+if test "x$enable_cynara_privilege_check" = "xyes"; then
+    if test "x$have_cynara" = "xno" ; then
+        AC_MSG_ERROR([with --enable-cynara-privilege-check option, cynara is required but not found])
+    fi
+    AM_CONDITIONAL(ENABLE_CYNARA_PRIVILEGE_CHECK, [test "x$have_cynara" = "xyes"])
+    AC_DEFINE(ENABLE_CYNARA_PRIVILEGE_CHECK, [1], [Enables cynara privilege check])
+    AC_SUBST(CYNARA_CFLAGS)
+    AC_SUBST(CYNARA_LIBS)
 fi
 
 AC_CONFIG_FILES([

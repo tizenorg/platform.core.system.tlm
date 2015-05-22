@@ -360,6 +360,37 @@ tlm_dbus_login_adapter_new_with_connection (
 }
 
 void
+tlm_dbus_login_adapter_complete_dbus_login (
+    TlmDbusLoginAdapter *adapter,
+    TlmDbusRequestType request_type,
+    GDBusMethodInvocation *invocation,
+    GError *error)
+{
+    g_return_if_fail(TLM_IS_DBUS_LOGIN_ADAPTER(adapter));
+
+    if (error) {
+        g_dbus_method_invocation_return_gerror(invocation, error);
+        return;
+    }
+
+    switch (request_type) {
+    case TLM_DBUS_REQUEST_TYPE_LOGIN_USER:
+        tlm_dbus_login_complete_login_user (adapter->priv->dbus_obj,
+                invocation);
+        break;
+    case TLM_DBUS_REQUEST_TYPE_LOGOUT_USER:
+        tlm_dbus_login_complete_logout_user (adapter->priv->dbus_obj,
+                invocation);
+        break;
+    case TLM_DBUS_REQUEST_TYPE_SWITCH_USER:
+        tlm_dbus_login_complete_switch_user (adapter->priv->dbus_obj,
+                invocation);
+        break;
+    }
+}
+
+
+void
 tlm_dbus_login_adapter_request_completed (
         TlmDbusRequest *request,
         GError *error)
@@ -369,23 +400,18 @@ tlm_dbus_login_adapter_request_completed (
 
     TlmDbusLoginAdapter *adapter = TLM_DBUS_LOGIN_ADAPTER (
             request->dbus_adapter);
-    if (error) {
-        g_dbus_method_invocation_return_gerror (request->invocation, error);
-        return;
-    }
 
-    switch (request->type) {
-    case TLM_DBUS_REQUEST_TYPE_LOGIN_USER:
-        tlm_dbus_login_complete_login_user (adapter->priv->dbus_obj,
-                request->invocation);
-        break;
-    case TLM_DBUS_REQUEST_TYPE_LOGOUT_USER:
-        tlm_dbus_login_complete_logout_user (adapter->priv->dbus_obj,
-                request->invocation);
-        break;
-    case TLM_DBUS_REQUEST_TYPE_SWITCH_USER:
-        tlm_dbus_login_complete_switch_user (adapter->priv->dbus_obj,
-                request->invocation);
-        break;
-    }
+    tlm_dbus_login_adapter_complete_dbus_login (adapter,
+            request->type,
+            request->invocation,
+            error);
+}
+
+
+GDBusConnection *
+tlm_dbus_login_adapter_get_g_dbus_connection (TlmDbusLoginAdapter *self)
+
+{
+    g_return_val_if_fail (self && TLM_IS_DBUS_LOGIN_ADAPTER(self), NULL);
+    return self->priv->connection;
 }

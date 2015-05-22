@@ -76,6 +76,15 @@ void
 tlm_dbus_login_adapter_request_completed (
         TlmDbusRequest *request,
         GError *error);
+void
+tlm_dbus_login_adapter_complete_dbus_login (
+    TlmDbusLoginAdapter *adapter,
+    TlmDbusRequestType request_type,
+    GDBusMethodInvocation *invocation,
+    GError *error);
+
+GDBusConnection *
+tlm_dbus_login_adapter_get_g_dbus_connection (TlmDbusLoginAdapter *self);
 
 G_END_DECLS
 
