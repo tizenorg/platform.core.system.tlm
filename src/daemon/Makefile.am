@@ -28,12 +28,17 @@ tlm_CFLAGS = \
 	$(TLM_CFLAGS) \
 	$(NULL)
 
-
 tlm_LDADD = \
 	$(TLM_LIBS) \
 	$(abs_top_builddir)/src/common/libtlm-common.la \
   $(abs_top_builddir)/src/daemon/dbus/libtlm-dbus.la \
 	$(NULL)
+
+if ENABLE_CYNARA_PRIVILEGE_CHECK
+tlm_SOURCES += tlm-cynara-privilege-checker.c
+tlm_CFLAGS += $(CYNARA_CFLAGS)
+tlm_LDADD += $(CYNARA_LIBS)
+endif
 
 EXTRA_DIST = \
       tlm.pc.in

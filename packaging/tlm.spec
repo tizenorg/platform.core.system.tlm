@@ -27,6 +27,7 @@ Requires(postun): /sbin/ldconfig
 Requires(postun): systemd
 Requires: gumd
 Requires: libsystemd
+Requires: cynara
 BuildRequires: pkgconfig(glib-2.0) >= 2.30
 BuildRequires: pkgconfig(gobject-2.0)
 BuildRequires: pkgconfig(gio-2.0)
@@ -34,6 +35,8 @@ BuildRequires: pkgconfig(gio-unix-2.0)
 BuildRequires: pkgconfig(gmodule-2.0)
 BuildRequires: pkgconfig(libgum)
 BuildRequires: pam-devel
+BuildRequires: pkgconfig(cynara-client)
+BuildRequires: pkgconfig(cynara-creds-gdbus)
 %if %{debug_build} == 1
 BuildRequires: gtk-doc
 %endif
@@ -173,6 +176,7 @@ cp %{SOURCE1001} .
 ./autogen.sh
 %endif
 %reconfigure --enable-gum \
+             --enable-cynara-privilege-check \
              %{?extra_config_options1:%extra_config_options1} \
              %{?extra_config_options2:%extra_config_options2}
 %__make %{?_smp_mflags}
