@@ -289,9 +289,15 @@ _connect_dbus_adapter (
 {
     DBG("Connecting signals to signal handlers");
     if (self->priv->enable_flags & DBUS_OBSERVER_ENABLE_LOGIN_USER) {
+#ifdef ENABLE_DEBUG
         int r = g_signal_connect_swapped (G_OBJECT (adapter),
                 "login-user", G_CALLBACK(_handle_dbus_login_user), self);
-        DBG("_handle_dbus_login_user() is connected to 'login-user' signal. return value=%d", r);
+        DBG("_handle_dbus_login_user is connected to 'login-user' signal."
+            "return value=%d", r);
+#else
+        g_signal_connect_swapped (G_OBJECT (adapter),
+                "login-user", G_CALLBACK(_handle_dbus_login_user), self);
+#endif
     } else {
         DBG("'login-user' signal callback is not connected");
     }
@@ -362,21 +368,21 @@ static void
 _abort_dbus_request (
         TlmDbusRequest *request)
 {
-	if (!request) return;
+    if (!request) return;
 
-	GError *error = TLM_GET_ERROR_FOR_ID (TLM_ERROR_DBUS_REQ_ABORTED,
+    GError *error = TLM_GET_ERROR_FOR_ID (TLM_ERROR_DBUS_REQ_ABORTED,
             "Dbus request aborted");
     _complete_dbus_request (request, error);
 }
 
 static void
 _complete_request (
-		TlmDbusObserver *self,
+        TlmDbusObserver *self,
         TlmRequest *request,
         GError *error)
 {
     _complete_dbus_request (request->dbus_request, error);
-	request->dbus_request = NULL;
+    request->dbus_request = NULL;
     _dispose_request (self, request);
 }
 
@@ -385,11 +391,11 @@ _clear_request (
         TlmRequest *request,
         TlmDbusObserver *self)
 {
-	if (!request) return;
+    if (!request) return;
 
-	_abort_dbus_request (request->dbus_request);
-	request->dbus_request = NULL;
-	_dispose_request (self, request);
+    _abort_dbus_request (request->dbus_request);
+    request->dbus_request = NULL;
+    _dispose_request (self, request);
 }
 
 static gboolean
@@ -430,11 +436,11 @@ _process_request (
     TlmRequest* req = NULL;
     TlmDbusRequest* dbus_req = NULL;
     TlmSeat *seat = NULL;
+    gboolean ret = FALSE;
 
     self->priv->request_id = 0;
 
     if (!self->priv->active_request) {
-        gboolean ret = FALSE;
 
         req = g_queue_pop_head (self->priv->request_queue);
         if (!req) {
@@ -452,12 +458,13 @@ _process_request (
 
         // NOTE:
         // The below code intends that the current seat of the TlmDbusObserver
-        // is always selected, even the given request has specifed ananother
-        // seat.  The TlmDbusRequest's seat is applied only when the current
+        // is always selected, even the given request has specifed another seat.
+        // The TlmDbusRequest's seat is applied only when the current
         // TlmDbusObserver is a default dbus socket(/var/run/dbus-sock), which
-        // has priv->seat as NULL.
+        // has priv->seat set to NULL.
         // This means that only the root user(who can access the default dbus
-        // socket) can specify the seat in his TlmDbusRequest.
+        // socket) can specify the seat in his TlmDbusRequest, because the
+        // default dbus socket is allowed only for root to access.
         seat = self->priv->seat;  // observer's seat has high priority
         if (!seat && self->priv->manager) {
             seat = tlm_manager_get_seat (self->priv->manager,
@@ -480,37 +487,51 @@ _process_request (
             goto _finished;
         }
 
+        if (req->seat && req->seat != seat) {
+            g_object_unref(req->seat);
+            req->seat = seat;
+            g_object_ref(req->seat);
+        }
         self->priv->active_request = req;
-        switch(dbus_req->type) {
-        case TLM_DBUS_REQUEST_TYPE_LOGIN_USER:
-            ret = tlm_seat_create_session (seat, NULL, dbus_req->username,
-                    dbus_req->password, dbus_req->environment);
-            break;
-        case TLM_DBUS_REQUEST_TYPE_LOGOUT_USER:
-            ret = tlm_seat_terminate_session (seat);
-            break;
-        case TLM_DBUS_REQUEST_TYPE_SWITCH_USER:
-            // Refuse request if the request's username is same to
-            // the current user who occupies the seat.
-            if (_is_valid_switch_user_dbus_request(dbus_req, seat))
-                ret = tlm_seat_switch_user (seat, NULL, dbus_req->username,
-                    dbus_req->password, dbus_req->environment);
-            else ret = FALSE;
-            break;
-        }
-        if (!ret) {
-            _dispose_request (self, self->priv->active_request);
-            self->priv->active_request = NULL;
-        }
     }
+
+    // Proceed self->priv->active_request
+    dbus_req = self->priv->active_request->dbus_request;
+    seat = self->priv->active_request->seat;
+    switch(dbus_req->type) {
+    case TLM_DBUS_REQUEST_TYPE_LOGIN_USER:
+        ret = tlm_seat_create_session (seat, NULL, dbus_req->username,
+                dbus_req->password, dbus_req->environment);
+        break;
+    case TLM_DBUS_REQUEST_TYPE_LOGOUT_USER:
+        ret = tlm_seat_terminate_session (seat);
+        break;
+    case TLM_DBUS_REQUEST_TYPE_SWITCH_USER:
+        // Refuse request if the request's username is same to
+        // the current user who occupies the seat.
+        if (_is_valid_switch_user_dbus_request(dbus_req, seat)) {
+            ret = tlm_seat_switch_user (seat, NULL, dbus_req->username,
+                dbus_req->password, dbus_req->environment);
+        } else {
+            ret = FALSE;
+        }
+        break;
+    }
+
+    // Clean up the active_request always
+    _dispose_request (self, self->priv->active_request);
+    self->priv->active_request = NULL;
 
 _finished:
     if (req && err) {
         _complete_request (self, req, err);
     }
 
-    return self->priv->active_request != NULL ?
-            G_SOURCE_REMOVE : G_SOURCE_CONTINUE;
+    if (ret) {
+        WARN("The request is not processed. Return value=%d", ret);
+    }
+
+    return G_SOURCE_REMOVE;
 }
 
 static void
