@@ -158,7 +158,7 @@ tlm_session_remote_get_property (
                         pspec->name, value);
             }
             break;
-		}
+        }
         default:
             G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
     }
