@@ -182,14 +182,14 @@ _get_tty_id (
     return id;
 }
 
-static gchar *
+static gint
 _get_host_address (
-        const gchar *hostname)
+        const gchar *hostname, gchar** hostaddress)
 {
-    gchar *hostaddress = NULL;
     struct addrinfo hints, *info = NULL;
+    gint sz_hostaddress = 0;
 
-    if (!hostname) return NULL;
+    if (!hostname) return 0;
 
     memset (&hints, 0, sizeof (hints));
     hints.ai_flags = AI_ADDRCONFIG;
@@ -198,18 +198,19 @@ _get_host_address (
         if (info) {
             if (info->ai_family == AF_INET) {
                 struct sockaddr_in *sa = (struct sockaddr_in *) info->ai_addr;
-                hostaddress = g_malloc0 (sizeof(struct in_addr));
-                memcpy (hostaddress, &(sa->sin_addr), sizeof (struct in_addr));
+                sz_hostaddress = sizeof(struct in_addr);
+                *hostaddress = g_malloc0 (sz_hostaddress);
+                memcpy (*hostaddress, &(sa->sin_addr), sz_hostaddress);
             } else if (info->ai_family == AF_INET6) {
                 struct sockaddr_in6 *sa = (struct sockaddr_in6 *) info->ai_addr;
-                hostaddress = g_malloc0 (sizeof(struct in6_addr));
-                memcpy (hostaddress, &(sa->sin6_addr),
-                        sizeof (struct in6_addr));
+                sz_hostaddress = sizeof(struct in6_addr);
+                *hostaddress = g_malloc0 (sz_hostaddress);
+                memcpy (*hostaddress, &(sa->sin6_addr), sz_hostaddress);
             }
             freeaddrinfo (info);
         }
     }
-    return hostaddress;
+    return sz_hostaddress;
 }
 
 static gboolean
@@ -254,13 +255,14 @@ tlm_utils_log_utmp_entry (const gchar *username)
     struct utmp ut_ent;
     struct utmp *ut_tmp = NULL;
     gchar *hostname = NULL, *hostaddress = NULL;
+    gint sz_hostaddress;
     const gchar *tty_name = NULL;
     gchar *tty_no_dev_name = NULL, *tty_id = NULL;
 
     DBG ("Log session entry to utmp/wtmp");
 
     hostname = _get_host_name ();
-    hostaddress = _get_host_address (hostname);
+    sz_hostaddress = _get_host_address (hostname, &hostaddress);
     tty_name = ttyname (0);
     if (tty_name) {
         tty_no_dev_name = g_strdup (strncmp(tty_name, "/dev/", 5) == 0 ?
@@ -295,7 +297,7 @@ tlm_utils_log_utmp_entry (const gchar *username)
     if (hostname)
         strncpy (ut_ent.ut_host, hostname, sizeof (ut_ent.ut_host));
     if (hostaddress)
-        memcpy (&ut_ent.ut_addr_v6, hostaddress, sizeof (ut_ent.ut_addr_v6));
+        memcpy (&ut_ent.ut_addr_v6, hostaddress, sz_hostaddress);
 
     ut_ent.ut_session = getsid (0);
     gettimeofday (&tv, NULL);
