@@ -281,7 +281,7 @@ _load_plugin_file (const gchar *file_path,
         return NULL;
     }
 
-    gchar* get_type_func = g_strdup_printf("tlm_%s_plugin_%s_get_type", 
+    gchar* get_type_func = g_strdup_printf("tlm_%s_plugin_%s_get_type",
                                            plugin_type,
                                            plugin_name);
     gpointer p;
@@ -413,7 +413,7 @@ tlm_manager_init (TlmManager *manager)
 {
     GError *error = NULL;
     TlmManagerPrivate *priv = TLM_MANAGER_PRIV (manager);
-    
+
     priv->config = tlm_config_new ();
     priv->connection = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
     if (!priv->connection) {
