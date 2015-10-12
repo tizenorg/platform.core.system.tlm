@@ -146,6 +146,7 @@ static void _tlm_launcher_process (TlmLauncher *l)
 
   while (fgets(str, sizeof(str) - 1, l->fp) != NULL) {
     char control = 0;
+    if (0 >= strlen(str)) continue;  /* Prevent: tainted scalar check */
     gchar *cmd = g_strstrip(str);
 
     if (!strlen(cmd) || cmd[0] == '#') /* comment */
@@ -158,6 +159,8 @@ static void _tlm_launcher_process (TlmLauncher *l)
       case 'M':
       case 'L':
         argv = tlm_utils_split_command_line (cmd);
+        if (!argv)
+          ERR("Getting argv failure");
         if ((child_pid = fork()) < 0) {
           ERR("fork() failed: %s", strerror (errno));
         } else if (child_pid == 0) {
@@ -168,6 +171,10 @@ static void _tlm_launcher_process (TlmLauncher *l)
             WARN("exec failed: %s", strerror (errno));
         } else if (control == 'M') {
           ChildInfo *info = g_slice_new0 (ChildInfo);
+          if (!info) {
+            CRITICAL("g_slice_new0 memory allocation failure");
+            break;
+          }
           info->pid = child_pid;
           info->watcher = g_child_watch_add (child_pid,
               (GChildWatchFunc)_on_child_down_cb, l);
