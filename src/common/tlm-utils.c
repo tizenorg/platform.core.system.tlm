@@ -200,11 +200,21 @@ _get_host_address (
                 struct sockaddr_in *sa = (struct sockaddr_in *) info->ai_addr;
                 sz_hostaddress = sizeof(struct in_addr);
                 *hostaddress = g_malloc0 (sz_hostaddress);
+                if (!hostaddress) {
+                    CRITICAL("g_malloc0 memory allocation failure");
+                    freeaddrinfo (info);
+                    return 0;
+                }
                 memcpy (*hostaddress, &(sa->sin_addr), sz_hostaddress);
             } else if (info->ai_family == AF_INET6) {
                 struct sockaddr_in6 *sa = (struct sockaddr_in6 *) info->ai_addr;
                 sz_hostaddress = sizeof(struct in6_addr);
                 *hostaddress = g_malloc0 (sz_hostaddress);
+                if (!hostaddress) {
+                    CRITICAL("g_malloc0 memory allocation failure");
+                    freeaddrinfo (info);
+                    return 0;
+                }
                 memcpy (*hostaddress, &(sa->sin6_addr), sz_hostaddress);
             }
             freeaddrinfo (info);
@@ -240,6 +250,10 @@ static gchar *
 _get_host_name ()
 {
     gchar *name = g_malloc0 (HOST_NAME_SIZE);
+    if (!name) {
+        CRITICAL("g_malloc0 memory allocation failure");
+        return NULL;
+    }
     if (gethostname (name, HOST_NAME_SIZE) != 0) {
         g_free (name);
         return NULL;
@@ -289,13 +303,13 @@ tlm_utils_log_utmp_entry (const gchar *username)
     ut_ent.ut_type = USER_PROCESS;
     ut_ent.ut_pid = pid;
     if (tty_id)
-        strncpy (ut_ent.ut_id, tty_id, sizeof (ut_ent.ut_id));
+        strncpy (ut_ent.ut_id, tty_id, sizeof (ut_ent.ut_id)-1);
     if (username)
-        strncpy (ut_ent.ut_user, username, sizeof (ut_ent.ut_user));
+        strncpy (ut_ent.ut_user, username, sizeof (ut_ent.ut_user)-1);
     if (tty_no_dev_name)
-        strncpy (ut_ent.ut_line, tty_no_dev_name, sizeof (ut_ent.ut_line));
+        strncpy (ut_ent.ut_line, tty_no_dev_name, sizeof (ut_ent.ut_line)-1);
     if (hostname)
-        strncpy (ut_ent.ut_host, hostname, sizeof (ut_ent.ut_host));
+        strncpy (ut_ent.ut_host, hostname, sizeof (ut_ent.ut_host)-1);
     if (hostaddress)
         memcpy (&ut_ent.ut_addr_v6, hostaddress, sz_hostaddress);
 
@@ -422,6 +436,10 @@ _watch_info_new (
     gpointer userdata)
 {
   WatchInfo *info = g_slice_new0 (WatchInfo);
+  if (!info) {
+      CRITICAL("g_slice_new0 memory allocation failure");
+      return NULL;
+  }
   info->ifd = ifd;
   info->cb = cb;
   info->userdata = userdata;
@@ -525,7 +543,7 @@ _add_watch (int ifd, char *file_path, WatchInfo *info) {
 remove_and_return:
   g_hash_table_remove (info->dir_table, (gconstpointer)dir);
   g_list_free_full (file_list, (GDestroyNotify)g_free);
-  
+
   return res;
 }
 
@@ -538,6 +556,11 @@ _inotify_watcher_cb (gint ifd, GIOCondition condition, gpointer userdata)
   guint nwatch = g_hash_table_size (info->wd_table);
 
   ie = (struct inotify_event *) g_slice_alloc0(size);
+  if (!ie) {
+    WARN("g_slice_alloc0 memory allocation failure");
+    return nwatch ? G_SOURCE_CONTINUE : G_SOURCE_REMOVE;
+  }
+
   while (nwatch &&
          read (ifd, ie, size) > (ssize_t)sizeof (struct inotify_event)) {
     GList *file_list = NULL;
@@ -634,7 +657,7 @@ _expand_file_path (const gchar *file_path)
       *tmp_item = g_strdup (env ? env : "");
     }
   }
-  
+
   expanded_path = g_strjoinv (G_DIR_SEPARATOR_S, items);
 
   g_strfreev(items);
@@ -752,6 +775,10 @@ tlm_authenticate_user (
         service = "system-auth";
 
     info = g_malloc0 (sizeof (*info));
+    if (!info) {
+        CRITICAL("g_malloc0 memory allocation failure");
+        return FALSE;
+    }
     info->username = strndup (username, PAM_MAX_RESP_SIZE - 1);
     info->password = strndup (password, PAM_MAX_RESP_SIZE - 1);
     const struct pam_conv conv = {func_conv, info};

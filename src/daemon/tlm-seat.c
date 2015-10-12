@@ -593,6 +593,10 @@ tlm_seat_create_session (TlmSeat *seat,
         if (priv->prev_count > 3) {
             WARN ("relogins spinning too fast, delay...");
             DelayClosure *delay_closure = g_slice_new0 (DelayClosure);
+            if (!delay_closure) {
+              CRITICAL("g_slice_new0 memory allication failure");
+              return FALSE;
+            }
             delay_closure->seat = g_object_ref (seat);
             delay_closure->service = g_strdup (service);
             delay_closure->username = g_strdup (username);
