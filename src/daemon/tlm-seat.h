@@ -68,10 +68,10 @@ const gchar *
 tlm_seat_get_id (TlmSeat *seat);
 
 /** Get the username who occupies the seat
- * @return  The name of the user who holds the seat
+ * @return  The name of the user who holds the seat (to be freed)
  * @return  NULL if nobody occupies the seat
  */
-const gchar *
+gchar *
 tlm_seat_get_occupying_username (TlmSeat* seat);
 
 gboolean
@@ -83,7 +83,7 @@ tlm_seat_switch_user (TlmSeat *seat,
 
 gboolean
 tlm_seat_create_session (TlmSeat *seat,
-                         const gchar *service, 
+                         const gchar *service,
                          const gchar *username,
                          const gchar *password,
                          GHashTable *environment);

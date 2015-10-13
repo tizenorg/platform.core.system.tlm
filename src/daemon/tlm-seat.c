@@ -455,7 +455,7 @@ tlm_seat_get_id (TlmSeat *seat)
     return (const gchar*) seat->priv->id;
 }
 
-const gchar *
+gchar *
 tlm_seat_get_occupying_username (TlmSeat *seat) {
     TlmSeatPrivate *priv = TLM_SEAT_PRIV (seat);
     if (!priv->session) return NULL;
