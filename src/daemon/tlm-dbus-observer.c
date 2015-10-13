@@ -419,12 +419,14 @@ _is_valid_switch_user_dbus_request(
         TlmDbusRequest *dbus_request,
         TlmSeat *seat)
 {
-    if (0 == g_strcmp0(dbus_request->username,
-            tlm_seat_get_occupying_username(seat))) {
+    gboolean ret = TRUE;
+    gchar *occupying_username = tlm_seat_get_occupying_username(seat);
+    if (0 == g_strcmp0(dbus_request->username,occupying_username)) {
         WARN("Cannot switch to same username");
-        return FALSE;
+        ret = FALSE;
     }
-    return TRUE;
+    g_free(occupying_username);
+    return ret;
 }
 
 static gboolean
