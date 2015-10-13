@@ -527,8 +527,8 @@ _finished:
         _complete_request (self, req, err);
     }
 
-    if (ret) {
-        WARN("The request is not processed. Return value=%d", ret);
+    if (ret != TRUE) {
+        WARN("The request is not processed well");
     }
 
     return G_SOURCE_REMOVE;
