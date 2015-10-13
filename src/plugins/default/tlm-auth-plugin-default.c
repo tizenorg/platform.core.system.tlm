@@ -169,11 +169,12 @@ tlm_auth_plugin_default_class_init (TlmAuthPluginDefaultClass *kls)
 static void
 tlm_auth_plugin_default_init (TlmAuthPluginDefault *self)
 {
-    struct sigaction sa = { 0 };
+    struct sigaction sa = {
+        .sa_handler = _on_signal_cb,
+    };
 
     g_weak_ref_init (&__self, self);
 
-    sa.sa_handler = _on_signal_cb;
     if (sigaction(SIGUSR1, &sa, NULL) != 0) {
         WARN ("assert(sigaction()) : %s", strerror(errno));
     }

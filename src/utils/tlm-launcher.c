@@ -139,7 +139,6 @@ static void _tlm_launcher_process (TlmLauncher *l)
 {
   char str[1024];
   gchar **argv = NULL;
-  gint wait = 0;
   pid_t child_pid = 0;
 
   if (!l || !l->fp) return;
