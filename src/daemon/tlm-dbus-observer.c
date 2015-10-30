@@ -419,6 +419,7 @@ _is_valid_switch_user_dbus_request(
         TlmDbusRequest *dbus_request,
         TlmSeat *seat)
 {
+    g_return_val_if_fail (seat && TLM_IS_SEAT(seat), FALSE);
     gboolean ret = TRUE;
     gchar *occupying_username = tlm_seat_get_occupying_username(seat);
     if (0 == g_strcmp0(dbus_request->username,occupying_username)) {
@@ -489,8 +490,9 @@ _process_request (
             goto _finished;
         }
 
-        if (req->seat && req->seat != seat) {
-            g_object_unref(req->seat);
+        if (req->seat != seat) {
+            if (req->seat)
+                g_object_unref(req->seat);
             req->seat = seat;
             g_object_ref(req->seat);
         }
