@@ -578,7 +578,7 @@ tlm_seat_create_session (TlmSeat *seat,
 
     // Ignore creating session if there is an existing session already
     if (priv->session != NULL) {
-        ERR("Session already exists on this seat(%s)", priv->id);
+        WARN("Session already exists on this seat(%s)", priv->id);
         g_signal_emit (seat, signals[SIG_SESSION_ERROR],  0,
                 TLM_ERROR_SESSION_ALREADY_EXISTS);
         return FALSE;
