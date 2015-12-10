@@ -169,6 +169,10 @@ cp %{SOURCE1001} .
 
 
 %build
+# for Address space layout randomization
+export CFLAGS="$CFLAGS -fPIE"
+export LDFLAGS="$LDFLAGS -pie"
+
 %if %{debug_build} == 1
 ./autogen.sh
 %endif
