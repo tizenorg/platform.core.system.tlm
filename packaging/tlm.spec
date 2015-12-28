@@ -27,6 +27,7 @@ Requires(postun): /sbin/ldconfig
 Requires(postun): systemd
 Requires: gumd
 Requires: libsystemd
+Requires: pam-modules-extra
 BuildRequires: pkgconfig(glib-2.0) >= 2.30
 BuildRequires: pkgconfig(gobject-2.0)
 BuildRequires: pkgconfig(gio-2.0)
