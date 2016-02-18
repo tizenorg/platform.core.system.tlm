@@ -65,8 +65,6 @@ Requires:   %{name} = %{version}-%{release}
 Documentation files for %{name}.
 
 
-%if "%{profile}" != "ivi"
-
 %package config-common
 Summary:    Configuration files for common-profile
 Group:      System/Service
@@ -86,7 +84,7 @@ Provides:   %{name}-config
 Tiny Login Manager configuration files for common-profile with
 signle seat.
 
-%else
+%if "%{profile}" == "ivi"
 
 %package config-ivi-singleseat
 Summary:    Configuration files for ivi-profile with single seat
@@ -203,10 +201,9 @@ install -m 755 -d %{buildroot}%{_sysconfdir}/udev/rules.d
 install -m 644 data/tizen-ivi/10-multiseat-vtc1010.rules %{buildroot}%{_sysconfdir}/udev/rules.d/
 install -m 755 -d %{buildroot}%{_sysconfdir}/profile.d
 install -m 644 data/tizen-ivi/etc/profile.d/* %{buildroot}%{_sysconfdir}/profile.d/
-%else
+%endif
 install -m 644 data/tizen-common/etc/tlm*.conf %{buildroot}%{_sysconfdir}
 install -m 755 data/tizen-common/etc/session.d/* %{buildroot}%{_sysconfdir}/session.d/
-%endif
 
 
 %post
@@ -215,8 +212,6 @@ install -m 755 data/tizen-common/etc/session.d/* %{buildroot}%{_sysconfdir}/sess
 
 %postun -p /sbin/ldconfig
 
-
-%if "%{profile}" != "ivi"
 
 %post config-common
 if [ ! -e /etc/tlm.conf ] || [ -h /etc/tlm.conf ]; then
@@ -255,7 +250,7 @@ if [ -h /etc/tlm.conf ] && [ $1 == 0 ]; then
 	rm -f /etc/tlm.conf
 fi
 
-%else
+%if "%{profile}" == "ivi"
 
 %post config-ivi-singleseat
 if [ ! -e /etc/tlm.conf ] || [ -h /etc/tlm.conf ]; then
@@ -386,8 +381,6 @@ fi
 %{_datadir}/gtk-doc/html/tlm/*
 
 
-%if "%{profile}" != "ivi"
-
 %files config-common
 %defattr(-,root,root,-)
 %manifest %{name}.manifest
@@ -399,7 +392,7 @@ fi
 %manifest %{name}.manifest
 %config(noreplace) %{_sysconfdir}/tlm-singleseat.conf
 
-%else
+%if "%{profile}" == "ivi"
 
 %files config-ivi-singleseat
 %defattr(-,root,root,-)
