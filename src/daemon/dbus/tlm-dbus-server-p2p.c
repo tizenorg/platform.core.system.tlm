@@ -455,8 +455,9 @@ tlm_dbus_server_p2p_new (
 
         if (g_mkdir_with_parents (base_path,
                 S_IRUSR |S_IWUSR |S_IXUSR |S_IXGRP |S_IXOTH) == -1) {
+            gchar strerr_buf[MAX_STRERROR_LEN] = {0,};
             WARN ("Could not create '%s', error: %s", base_path,
-                    strerror(errno));
+                    strerror_r(errno, strerr_buf, MAX_STRERROR_LEN));
             g_object_unref (server);
             server = NULL;
         }

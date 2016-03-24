@@ -37,7 +37,7 @@ G_BEGIN_DECLS
 void
 g_clear_string (gchar **);
 
-const gchar *
+gchar *
 tlm_user_get_name (uid_t user_id);
 
 uid_t
@@ -46,10 +46,10 @@ tlm_user_get_uid (const gchar *username);
 gid_t
 tlm_user_get_gid (const gchar *username);
 
-const gchar *
+gchar *
 tlm_user_get_home_dir (const gchar *username);
 
-const gchar *
+gchar *
 tlm_user_get_shell (const gchar *username);
 
 gboolean
