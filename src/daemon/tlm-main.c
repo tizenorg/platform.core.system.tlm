@@ -82,7 +82,10 @@ static void
 _setup_unix_signal_handlers (TlmManager *manager)
 {
     if (signal (SIGINT, SIG_IGN) == SIG_ERR)
-        WARN ("failed ignore SIGINT: %s", strerror(errno));
+    {
+        gchar strerr_buf[MAX_STRERROR_LEN] = {0,};
+        WARN ("failed ignore SIGINT: %s", strerror_r(errno, strerr_buf, MAX_STRERROR_LEN));
+    }
 
     g_unix_signal_add (SIGTERM, _on_sigterm_cb, (gpointer) manager);
     g_unix_signal_add (SIGHUP, _on_sighup_cb, (gpointer) manager);

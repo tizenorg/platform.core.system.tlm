@@ -348,7 +348,8 @@ tlm_auth_session_authenticate (TlmAuthSession *auth_session, GError **error)
 {
     int res;
     const char *pam_tty = NULL;
-    const char *pam_ruser = NULL;
+    char *pam_ruser = NULL;
+    gchar tty_name[TTY_NAME_MAX+1] = {0,};
     g_return_val_if_fail (auth_session &&
                 TLM_IS_AUTH_SESSION(auth_session), FALSE);
 
@@ -356,7 +357,10 @@ tlm_auth_session_authenticate (TlmAuthSession *auth_session, GError **error)
 
     pam_tty = getenv ("DISPLAY");
     if (!pam_tty)
-        pam_tty = ttyname (0);
+    {
+        if (0 == ttyname_r(0, tty_name, TTY_NAME_MAX+1))
+            pam_tty = tty_name;
+    }
     if (!pam_tty)
         pam_tty = priv->tty_name;
     if (pam_tty) {
@@ -370,6 +374,8 @@ tlm_auth_session_authenticate (TlmAuthSession *auth_session, GError **error)
     if (pam_set_item (priv->pam_handle, PAM_RUSER, pam_ruser) != PAM_SUCCESS) {
         WARN ("pam_set_item(PAM_RUSER, '%s')", pam_ruser);
     }
+    if (pam_ruser)
+        g_free(pam_ruser);
 
     if (pam_set_item (priv->pam_handle, PAM_RHOST, "localhost") !=
         PAM_SUCCESS) {

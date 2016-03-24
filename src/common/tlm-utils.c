@@ -58,64 +58,175 @@ g_clear_string (gchar **str)
     }
 }
 
-const gchar *
+gchar *
 tlm_user_get_name (uid_t user_id)
 {
     struct passwd *pwent;
+    struct passwd buf_pwent;
+    gchar *buf = NULL, *tmp = NULL, *pw_name = NULL;
+    gsize size = sysconf(_SC_GETPW_R_SIZE_MAX);
+    if (size <= sizeof(struct passwd))
+        size = 1024;
 
-    pwent = getpwuid (user_id);
-    if (!pwent)
-        return NULL;
+    for (; NULL != (tmp = g_realloc(buf, size)); size*=2)
+    {
+        buf = tmp;
 
-    return pwent->pw_name;
+        if (ERANGE == getpwuid_r(user_id, &buf_pwent, buf, size, &pwent))
+            continue;
+        break;
+    }
+
+    if (pwent)
+    {
+        pw_name = g_malloc(strlen(pwent->pw_name)+1);
+        if (pw_name)
+        {
+            memset(pw_name, 0, strlen(pwent->pw_name)+1);
+            strncpy(pw_name, pwent->pw_name, strlen(pwent->pw_name));
+        }
+    }
+
+    if (buf)
+        g_free(buf);
+
+    return pw_name;
 }
 
 uid_t
 tlm_user_get_uid (const gchar *username)
 {
     struct passwd *pwent;
+    struct passwd buf_pwent;
+    __uid_t pw_uid = -1;
+    int ret = -1;
+    gchar *buf = NULL, *tmp = NULL;
+    gsize size = sysconf(_SC_GETPW_R_SIZE_MAX);
+    if (size < sizeof(struct passwd))
+        size = 1024;
 
-    pwent = getpwnam (username);
-    if (!pwent)
-        return -1;
+    for (; NULL != (tmp = g_realloc(buf, size)); size*=2)
+    {
+        buf = tmp;
 
-    return pwent->pw_uid;
+        ret = getpwnam_r(username, &buf_pwent, buf, size, &pwent);
+        if (0 == ret)
+            pw_uid = pwent->pw_uid;
+        else if (ERANGE == ret)
+            continue;
+        else
+            pw_uid = -1;
+
+        break;
+    }
+
+    if (buf)
+        g_free(buf);
+
+    return pw_uid;
 }
 
 gid_t
 tlm_user_get_gid (const gchar *username)
 {
     struct passwd *pwent;
+    struct passwd buf_pwent;
+    __gid_t pw_gid = -1;
+    int ret = -1;
+    gchar *buf = NULL, *tmp = NULL;
+    gsize size = sysconf(_SC_GETPW_R_SIZE_MAX);
+    if (size <= sizeof(struct passwd))
+        size = 1024;
 
-    pwent = getpwnam (username);
-    if (!pwent)
-        return -1;
+    for (; NULL != (tmp = g_realloc(buf, size)); size*=2)
+    {
+        buf = tmp;
 
-    return pwent->pw_gid;
+        ret = getpwnam_r(username, &buf_pwent, buf, size, &pwent);
+        if (0 == ret)
+            pw_gid = pwent->pw_gid;
+        else if (ERANGE == ret)
+            continue;
+        else
+            pw_gid = -1;
+
+        break;
+    }
+
+    if (buf)
+        g_free(buf);
+
+    return pw_gid;
 }
 
-const gchar *
+gchar *
 tlm_user_get_home_dir (const gchar *username)
 {
     struct passwd *pwent;
+    struct passwd buf_pwent;
+    gchar *buf = NULL, *tmp = NULL, *pw_dir = NULL;
+    gsize size = sysconf(_SC_GETPW_R_SIZE_MAX);
+    if (size <= sizeof(struct passwd))
+        size = 1024;
 
-    pwent = getpwnam (username);
-    if (!pwent)
-        return NULL;
+    for (; NULL != (tmp = g_realloc(buf, size)); size*=2)
+    {
+        buf = tmp;
 
-    return pwent->pw_dir;
+        if (ERANGE == getpwnam_r(username, &buf_pwent, buf, size, &pwent))
+            continue;
+        break;
+    }
+
+    if (pwent)
+    {
+        pw_dir = g_malloc(strlen(pwent->pw_dir)+1);
+        if (pw_dir)
+        {
+            memset(pw_dir, 0, strlen(pwent->pw_dir)+1);
+            strncpy(pw_dir, pwent->pw_dir, strlen(pwent->pw_dir));
+        }
+    }
+
+    if (buf)
+        g_free(buf);
+
+    return pw_dir;
 }
 
-const gchar *
+gchar *
 tlm_user_get_shell (const gchar *username)
 {
     struct passwd *pwent;
+    struct passwd buf_pwent;
+    gchar *buf = NULL, *tmp = NULL, *pw_shell = NULL;
+    gsize size = sysconf(_SC_GETPW_R_SIZE_MAX);
+    if (size <= sizeof(struct passwd))
+        size = 1024;
 
-    pwent = getpwnam (username);
-    if (!pwent)
-        return NULL;
+    for (; NULL != (tmp = g_realloc(buf, size)); size*=2)
+    {
+        buf = tmp;
 
-    return pwent->pw_shell;
+        if (ERANGE == getpwnam_r(username, &buf_pwent, buf, size, &pwent))
+            continue;
+        break;
+    }
+
+    if (pwent)
+    {
+        pw_shell = g_malloc(strlen(pwent->pw_shell)+1);
+        if (pw_shell)
+        {
+            memset(pw_shell, 0, strlen(pwent->pw_shell)+1);
+            strncpy(pw_shell, pwent->pw_shell, strlen(pwent->pw_shell));
+        }
+    }
+
+    if (buf)
+        g_free(buf);
+
+    return pw_shell;
 }
 
 gboolean
@@ -272,12 +383,16 @@ tlm_utils_log_utmp_entry (const gchar *username)
     size_t sz_hostaddress;
     const gchar *tty_name = NULL;
     gchar *tty_no_dev_name = NULL, *tty_id = NULL;
+    gchar tty_name_buf[TTY_NAME_MAX+1] = {0,};
 
     DBG ("Log session entry to utmp/wtmp");
 
     hostname = _get_host_name ();
     sz_hostaddress = _get_host_address (hostname, &hostaddress);
-    tty_name = ttyname (0);
+
+    if (0 == ttyname_r(0, tty_name_buf, TTY_NAME_MAX+1))
+        tty_name = tty_name_buf;
+
     if (tty_name) {
         tty_no_dev_name = g_strdup (strncmp(tty_name, "/dev/", 5) == 0 ?
             tty_name + 5 : tty_name);
@@ -524,7 +639,8 @@ _add_watch (int ifd, char *file_path, WatchInfo *info) {
 
   DBG("Adding watch for file '%s' in dir '%s'", file_name, dir);
   if ((wd = inotify_add_watch (ifd, dir, IN_CREATE)) == -1) {
-    WARN ("failed to add inotify watch on %s: %s", dir, strerror (errno));
+    gchar strerr_buf[MAX_STRERROR_LEN] = {0,};
+    WARN ("failed to add inotify watch on %s: %s", dir, strerror_r(errno, strerr_buf, MAX_STRERROR_LEN));
     res = WATCH_FAILED;
     goto remove_and_return;
   }
@@ -678,7 +794,8 @@ tlm_utils_watch_for_files (
   if (!watch_list) return 0;
 
   if ((ifd = inotify_init1 (IN_NONBLOCK | IN_CLOEXEC)) < 0) {
-    WARN("Failed to start inotify: %s", strerror(errno));
+    gchar strerr_buf[MAX_STRERROR_LEN] = {0,};
+    WARN("Failed to start inotify: %s", strerror_r(errno, strerr_buf, MAX_STRERROR_LEN));
     return 0;
   }
 

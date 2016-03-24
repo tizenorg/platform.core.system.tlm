@@ -25,6 +25,7 @@
 
 #include <pwd.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <errno.h>
 #include <string.h>
 #include <glib.h>
@@ -94,8 +95,13 @@ _cleanup_guest_user (TlmAccountPlugin *plugin,
                      gboolean delete)
 {
     struct passwd *pwd_entry = NULL;
-    char *command = NULL;
+    struct passwd buf_pwd;
+    gchar *command = NULL;
     int res;
+    gchar *buf = NULL, *tmp = NULL;
+    gsize size = sysconf(_SC_GETPW_R_SIZE_MAX);
+    if (size < sizeof(struct passwd))
+        size = 1024;
 
     (void) delete;
 
@@ -106,16 +112,31 @@ _cleanup_guest_user (TlmAccountPlugin *plugin,
     /* clear error */
     errno = 0;
 
-    pwd_entry = getpwnam (user_name);
+    for (; NULL != (tmp = g_realloc(buf, size)); size*=2)
+    {
+        buf = tmp;
+
+        if (ERANGE == getpwnam_r(user_name, &buf_pwd, buf, size, &pwd_entry))
+            continue;
+        break;
+    }
 
     if (!pwd_entry) {
         DBG("Could not get info for user '%s', error : %s", 
             user_name, strerror(errno));
+
+        if (buf)
+            g_free(buf);
+
         return FALSE;
     }
 
     if (!pwd_entry->pw_dir) {
         DBG("No home folder entry found for user '%s'", user_name);
+
+        if (buf)
+            g_free(buf);
+
         return FALSE;
     }
 
@@ -125,6 +146,9 @@ _cleanup_guest_user (TlmAccountPlugin *plugin,
 
     g_free (command);
 
+    if (buf)
+        g_free(buf);
+
     return res != -1;
 }
 
@@ -132,6 +156,11 @@ static gboolean
 _is_valid_user (TlmAccountPlugin *plugin, const gchar *user_name)
 {
     struct passwd *pwd_entry = NULL;
+    struct passwd pwd_buf;
+    gchar *buf = NULL, *tmp = NULL;
+    gsize size = sysconf(_SC_GETPW_R_SIZE_MAX);
+    if (size < sizeof(struct passwd))
+        size = 1024;
 
     g_return_val_if_fail (plugin, FALSE);
     g_return_val_if_fail (TLM_IS_ACCOUNT_PLUGIN_DEFAULT(plugin), FALSE);
@@ -140,13 +169,26 @@ _is_valid_user (TlmAccountPlugin *plugin, const gchar *user_name)
     /* clear error */
     errno = 0;
 
-    pwd_entry = getpwnam (user_name);
+    for (; NULL != (tmp = g_realloc(buf, size)); size*=2)
+    {
+        buf = tmp;
+
+        if (ERANGE == getpwnam_r(user_name, &pwd_buf, buf, size, &pwd_entry))
+            continue;
+        break;
+    }
 
     if (!pwd_entry) {
+        gchar strerr_buf[MAX_STRERROR_LEN] = {0,};
         DBG("Could not get info for user '%s', error : %s",
-            user_name, strerror(errno));
+            user_name, strerror_r(errno, strerr_buf, MAX_STRERROR_LEN));
+        if (buf)
+            g_free(buf);
         return FALSE;
     }
+
+    if (buf)
+        g_free(buf);
 
     return TRUE;
 }

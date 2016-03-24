@@ -170,6 +170,7 @@ _terminate_timeout (gpointer user_data)
 {
     TlmSessionRemote *self = TLM_SESSION_REMOTE(user_data);
     TlmSessionRemotePrivate *priv = TLM_SESSION_REMOTE_PRIV(self);
+    gchar strerr_buf[MAX_STRERROR_LEN] = {0,};
 
     switch (priv->last_sig)
     {
@@ -177,18 +178,22 @@ _terminate_timeout (gpointer user_data)
             DBG ("child %u didn't respond to SIGHUP, sending SIGTERM",
                  priv->cpid);
             if (kill (priv->cpid, SIGTERM))
+            {
                 WARN ("kill(%u, SIGTERM): %s",
                       priv->cpid,
-                      strerror(errno));
+                      strerror_r(errno, strerr_buf, MAX_STRERROR_LEN));
+            }
             priv->last_sig = SIGTERM;
             return G_SOURCE_CONTINUE;
         case SIGTERM:
             DBG ("child %u didn't respond to SIGTERM, sending SIGKILL",
                  priv->cpid);
             if (kill (priv->cpid, SIGKILL))
+            {
                 WARN ("kill(%u, SIGKILL): %s",
                       priv->cpid,
-                      strerror(errno));
+                      strerror_r(errno, strerr_buf, MAX_STRERROR_LEN));
+            }
             priv->last_sig = SIGKILL;
             return G_SOURCE_CONTINUE;
         case SIGKILL:
@@ -558,7 +563,10 @@ tlm_session_remote_terminate (
 
     DBG ("Terminate child session process");
     if (kill (priv->cpid, SIGHUP) < 0)
-        WARN ("kill(%u, SIGHUP): %s", priv->cpid, strerror(errno));
+    {
+        gchar strerr_buf[MAX_STRERROR_LEN] = {0,};
+        WARN ("kill(%u, SIGHUP): %s", priv->cpid, strerror_r(errno, strerr_buf, MAX_STRERROR_LEN));
+    }
     priv->last_sig = SIGHUP;
     priv->timer_id = g_timeout_add_seconds (
             tlm_config_get_uint (priv->config, TLM_CONFIG_GENERAL,

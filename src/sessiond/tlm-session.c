@@ -297,12 +297,17 @@ _prepare_terminal (TlmSessionPrivate *priv)
 {
     int tty_fd = -1;
     struct stat tty_stat;
+    gchar strerr_buf[MAX_STRERROR_LEN] = {0,};
 
     DBG ("VTNR is %u", priv->vtnr);
     if (priv->vtnr > 0) {
         priv->tty_dev = g_strdup_printf ("/dev/tty%u", priv->vtnr);
     } else {
-        priv->tty_dev = g_strdup (ttyname (0));
+        gchar tty_name[TTY_NAME_MAX+1] = {0,};
+        if (0 == ttyname_r(0, tty_name, TTY_NAME_MAX+1))
+            priv->tty_dev = g_strdup (tty_name);
+        else
+		    priv->tty_dev = NULL;
     }
     DBG ("trying to setup TTY '%s'", priv->tty_dev);
     if (!priv->tty_dev) {
@@ -310,11 +315,11 @@ _prepare_terminal (TlmSessionPrivate *priv)
         goto term_exit;
     }
     if (access (priv->tty_dev, R_OK|W_OK)) {
-        WARN ("TTY not accessible: %s", strerror(errno));
+        WARN ("TTY not accessible: %s", strerror_r(errno, strerr_buf, MAX_STRERROR_LEN));
         goto term_exit;
     }
     if (lstat (priv->tty_dev, &tty_stat)) {
-        WARN ("lstat() failed: %s", strerror(errno));
+        WARN ("lstat() failed: %s", strerror_r(errno, strerr_buf, MAX_STRERROR_LEN));
         goto term_exit;
     }
     if (tty_stat.st_nlink > 1 ||
@@ -326,7 +331,7 @@ _prepare_terminal (TlmSessionPrivate *priv)
 
     tty_fd = open (priv->tty_dev, O_RDWR | O_NONBLOCK);
     if (tty_fd < 0) {
-        WARN ("open() failed: %s", strerror(errno));
+        WARN ("open() failed: %s", strerror_r(errno, strerr_buf, MAX_STRERROR_LEN));
         goto term_exit;
     }
     if (!isatty (tty_fd)) {
@@ -342,14 +347,14 @@ _prepare_terminal (TlmSessionPrivate *priv)
         priv->tty_gid = 0;
     }
     if (ioctl (tty_fd, TCGETS, &priv->tty_state) < 0)
-        WARN ("ioctl(TCGETS) failed: %s", strerror(errno));
+        WARN ("ioctl(TCGETS) failed: %s", strerror_r(errno, strerr_buf, MAX_STRERROR_LEN));
 
     if (fchown (tty_fd, tlm_user_get_uid (priv->username), -1)) {
         WARN ("Changing TTY access rights failed");
     }
 
     if (ioctl(tty_fd, KDGKBMODE, &priv->kb_mode) < 0) {
-        DBG ("ioctl(KDGKBMODE get) failed: %s", strerror(errno));
+        DBG("ioctl(KDGKBMODE get) failed: %s", strerror_r(errno, strerr_buf, MAX_STRERROR_LEN));
     } else {
         DBG ("ioctl(KDGKBMODE get) val: %d", priv->kb_mode);
     }
@@ -358,6 +363,7 @@ _prepare_terminal (TlmSessionPrivate *priv)
 
 term_exit:
     g_clear_string (&priv->tty_dev);
+
     return -1;
 }
 
@@ -365,16 +371,17 @@ static void
 _setup_terminal (TlmSessionPrivate *priv, int tty_fd)
 {
     pid_t tty_pgid;
+    gchar strerr_buf[MAX_STRERROR_LEN] = {0,};
 
     if (ioctl (tty_fd, TIOCSCTTY, 1) < 0)
-        WARN ("ioctl(TIOCSCTTY) failed: %s", strerror(errno));
+        WARN ("ioctl(TIOCSCTTY) failed: %s", strerror_r(errno, strerr_buf, MAX_STRERROR_LEN));
     tty_pgid = getpgid (getpid ());
     if (ioctl (tty_fd, TIOCSPGRP, &tty_pgid) < 0) {
-        WARN ("ioctl(TIOCSPGRP) failed: %s", strerror(errno));
+        WARN ("ioctl(TIOCSPGRP) failed: %s", strerror_r(errno, strerr_buf, MAX_STRERROR_LEN));
     }
 
     if (ioctl (tty_fd, KDSKBMODE, K_OFF) < 0) {
-        DBG ("ioctl(KDSKBMODE set) failed: %s", strerror(errno));
+        DBG ("ioctl(KDSKBMODE set) failed: %s", strerror_r(errno, strerr_buf, MAX_STRERROR_LEN));
     }
 
     dup2 (tty_fd, 0);
@@ -386,26 +393,28 @@ static void
 _reset_terminal (TlmSessionPrivate *priv)
 {
     int tty_fd = -1;
+    gchar strerr_buf[MAX_STRERROR_LEN] = {0,};
 
     if (!priv->tty_dev)
         return;
 
     tty_fd = open (priv->tty_dev, O_RDWR | O_NONBLOCK);
     if (tty_fd < 0) {
-        WARN ("open() failed: %s", strerror(errno));
+        WARN ("open() failed: %s", strerror_r(errno, strerr_buf, MAX_STRERROR_LEN));
         goto reset_exit;
     }
 
     if (priv->kb_mode >= 0 &&
         ioctl (tty_fd, KDSKBMODE, priv->kb_mode) < 0) {
-        DBG ("ioctl(KDSKBMODE reset) failed: %s", strerror(errno));
+        DBG ("ioctl(KDSKBMODE reset) failed: %s", strerror_r(errno, strerr_buf, MAX_STRERROR_LEN));
     }
     priv->kb_mode = -1;
 
     if (ioctl (tty_fd, TCFLSH, TCIOFLUSH) < 0)
-        DBG ("ioctl(TCFLSH) failed: %s", strerror(errno));
+        DBG ("ioctl(TCFLSH) failed: %s", strerror_r(errno, strerr_buf, MAX_STRERROR_LEN));
+
     if (ioctl (tty_fd, TCSETS, &priv->tty_state) < 0)
-        DBG ("ioctl(TCSETSF) failed: %s", strerror(errno));
+        DBG ("ioctl(TCSETSF) failed: %s", strerror_r(errno, strerr_buf, MAX_STRERROR_LEN));
 
     if (fchown (tty_fd, priv->tty_uid, priv->tty_gid))
         WARN ("Changing TTY access rights failed");
@@ -420,7 +429,7 @@ static gboolean
 _set_environment (TlmSessionPrivate *priv)
 {
 	gchar **envlist = tlm_auth_session_get_envlist(priv->auth_session);
-	const gchar *home_dir = NULL, *shell = NULL;
+    gchar *home_dir = NULL, *shell = NULL;
 
     if (envlist) {
         gchar **env = 0;
@@ -442,9 +451,17 @@ _set_environment (TlmSessionPrivate *priv)
     _setenv_to_session ("USER", priv->username, priv);
     _setenv_to_session ("LOGNAME", priv->username, priv);
     home_dir = tlm_user_get_home_dir (priv->username);
-    if (home_dir) _setenv_to_session ("HOME", home_dir, priv);
+    if (home_dir)
+    {
+        _setenv_to_session ("HOME", home_dir, priv);
+        g_free(home_dir);
+    }
     shell = tlm_user_get_shell (priv->username);
-    if (shell) _setenv_to_session ("SHELL", shell, priv);
+    if (shell)
+    {
+        _setenv_to_session ("SHELL", shell, priv);
+        g_free(shell);
+    }
 
     if (!tlm_config_has_key (priv->config,
                              TLM_CONFIG_GENERAL,
@@ -539,6 +556,7 @@ _exec_user_session (
     gchar **args = NULL;
     gchar **args_iter = NULL;
     TlmSessionPrivate *priv = session->priv;
+    gchar strerr_buf[MAX_STRERROR_LEN] = {0,};
 
     priv = session->priv;
     if (!priv->username)
@@ -584,9 +602,9 @@ _exec_user_session (
         if (chown (priv->xdg_runtime_dir,
                tlm_user_get_uid (priv->username),
                tlm_user_get_gid (priv->username)))
-            WARN ("chown(\"%s\"): %s", priv->xdg_runtime_dir, strerror(errno));
+            WARN ("chown(\"%s\"): %s", priv->xdg_runtime_dir, strerror_r(errno, strerr_buf, MAX_STRERROR_LEN));
         if (chmod (priv->xdg_runtime_dir, rtdir_perm))
-            WARN ("chmod(\"%s\"): %s", priv->xdg_runtime_dir, strerror(errno));
+            WARN ("chmod(\"%s\"): %s", priv->xdg_runtime_dir, strerror_r(errno, strerr_buf, MAX_STRERROR_LEN));
     } else {
         DBG ("not setting up XDG_RUNTIME_DIR");
     }
@@ -636,7 +654,7 @@ _exec_user_session (
     for (fd = 3; fd < open_max; fd++) {
         if (fcntl (fd, F_SETFD, FD_CLOEXEC) < -1) {
             WARN ("Failed to close desriptor '%d', error: %s",
-                fd, strerror(errno));
+                fd, strerror_r(errno, strerr_buf, MAX_STRERROR_LEN));
         }
     }
 
@@ -653,7 +671,7 @@ _exec_user_session (
 
     DBG ("old pgid=%u", getpgrp ());
     if (setsid () == (pid_t) -1)
-        WARN ("setsid() failed: %s", strerror (errno));
+        WARN ("setsid() failed: %s", strerror_r(errno, strerr_buf, MAX_STRERROR_LEN));
     DBG ("new pgid=%u", getpgrp());
 
     if (setup_terminal) {
@@ -662,11 +680,11 @@ _exec_user_session (
     }
 
     if (initgroups (priv->username, target_gid))
-        WARN ("initgroups() failed: %s", strerror(errno));
+        WARN ("initgroups() failed: %s", strerror_r(errno, strerr_buf, MAX_STRERROR_LEN));
     if (setregid (target_gid, target_gid))
-        WARN ("setregid() failed: %s", strerror(errno));
+        WARN ("setregid() failed: %s", strerror_r(errno, strerr_buf, MAX_STRERROR_LEN));
     if (setreuid (target_uid, target_uid))
-        WARN ("setreuid() failed: %s", strerror(errno));
+        WARN ("setreuid() failed: %s", strerror_r(errno, strerr_buf, MAX_STRERROR_LEN));
 
     int grouplist_len = NGROUPS_MAX;
     gid_t grouplist[NGROUPS_MAX];
@@ -684,7 +702,7 @@ _exec_user_session (
     if (home) {
         DBG ("changing directory to : %s", home);
         if (chdir (home) < 0)
-            WARN ("Failed to change directroy : %s", strerror (errno));
+            WARN ("Failed to change directroy : %s", strerror_r(errno, strerr_buf, MAX_STRERROR_LEN));
     } else WARN ("Could not get home directory");
 
     shell = tlm_config_get_string (priv->config,
@@ -712,7 +730,7 @@ _exec_user_session (
     }
 
     if (signal (SIGINT, SIG_DFL) == SIG_ERR)
-        WARN ("failed reset SIGINT: %s", strerror(errno));
+        WARN ("failed reset SIGINT: %s", strerror_r(errno, strerr_buf, MAX_STRERROR_LEN));
 
     DBG ("executing: ");
     args_iter = args;
@@ -723,7 +741,7 @@ _exec_user_session (
     execvp (args[0], args);
     /* we reach here only in case of error */
     g_strfreev (args);
-    DBG ("execl(): %s", strerror(errno));
+    DBG ("execl(): %s", strerror_r(errno, strerr_buf, MAX_STRERROR_LEN));
     exit (0);
 }
 
@@ -858,6 +876,7 @@ _terminate_timeout (gpointer user_data)
 {
     TlmSession *session = TLM_SESSION(user_data);
     TlmSessionPrivate *priv = TLM_SESSION_PRIV(session);
+    gchar strerr_buf[MAX_STRERROR_LEN] = {0,};
 
     switch (priv->last_sig)
     {
@@ -867,7 +886,7 @@ _terminate_timeout (gpointer user_data)
             if (killpg (getpgid (priv->child_pid), SIGTERM))
                 WARN ("killpg(%u, SIGTERM): %s",
                       getpgid (priv->child_pid),
-                      strerror(errno));
+                      strerror_r(errno, strerr_buf, MAX_STRERROR_LEN));
             priv->last_sig = SIGTERM;
             return G_SOURCE_CONTINUE;
         case SIGTERM:
@@ -876,7 +895,7 @@ _terminate_timeout (gpointer user_data)
             if (killpg (getpgid (priv->child_pid), SIGKILL))
                 WARN ("killpg(%u, SIGKILL): %s",
                       getpgid (priv->child_pid),
-                      strerror(errno));
+                      strerror_r(errno, strerr_buf, MAX_STRERROR_LEN));
             priv->last_sig = SIGKILL;
             return G_SOURCE_CONTINUE;
         case SIGKILL:
@@ -918,9 +937,12 @@ tlm_session_terminate (TlmSession *session)
     }
 
     if (killpg (getpgid (priv->child_pid), SIGHUP) < 0)
+    {
+        gchar strerr_buf[MAX_STRERROR_LEN] = {0,};
         WARN ("kill(%u, SIGHUP): %s",
               getpgid (priv->child_pid),
-              strerror(errno));
+              strerror_r(errno, strerr_buf, MAX_STRERROR_LEN));
+    }
     priv->last_sig = SIGHUP;
     priv->timer_id = g_timeout_add_seconds (
             tlm_config_get_uint (priv->config, TLM_CONFIG_GENERAL,

@@ -67,7 +67,10 @@ _install_sighandlers (GMainLoop *main_loop)
     GMainContext *ctx = g_main_loop_get_context (main_loop);
 
     if (signal (SIGINT, SIG_IGN) == SIG_ERR)
-        WARN ("failed to ignore SIGINT: %s", strerror(errno));
+    {
+        gchar strerr_buf[MAX_STRERROR_LEN] = {0,};
+        WARN ("failed to ignore SIGINT: %s", strerror_r(errno, strerr_buf, MAX_STRERROR_LEN));
+    }
 
     source = g_unix_signal_source_new (SIGTERM);
     g_source_set_callback (source,
@@ -91,13 +94,14 @@ int main (int argc, char **argv)
 {
     GMainLoop *main_loop = NULL;
     gint in_fd = 0, out_fd = 1;
+    gchar strerr_buf[MAX_STRERROR_LEN] = {0,};
 
     /* Duplicates stdin and stdout descriptors and point the descriptors
      * to /dev/null to avoid anyone writing to descriptors
      * */
     in_fd = dup(0);
     if (in_fd == -1) {
-        WARN ("Failed to dup stdin : %s(%d)", strerror(errno), errno);
+        WARN ("Failed to dup stdin : %s(%d)", strerror_r(errno, strerr_buf, MAX_STRERROR_LEN), errno);
         in_fd = 0;
     }
     if (!freopen("/dev/null", "r+", stdin)) {
@@ -106,7 +110,7 @@ int main (int argc, char **argv)
 
     out_fd = dup(1);
     if (out_fd == -1) {
-        WARN ("Failed to dup stdout : %s(%d)", strerror(errno), errno);
+        WARN ("Failed to dup stdout : %s(%d)", strerror_r(errno, strerr_buf, MAX_STRERROR_LEN), errno);
         out_fd = 1;
     }
 

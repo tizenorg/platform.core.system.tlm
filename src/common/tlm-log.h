@@ -52,6 +52,8 @@ void tlm_log_close (const gchar *domain);
 #define CRITICAL(frmt, args...) g_critical(EXPAND_LOG_MSG(frmt, ##args))
 #define ERR(frmt, args...)      g_error(EXPAND_LOG_MSG(frmt, ##args))
 
+#define MAX_STRERROR_LEN    256
+
 G_END_DECLS
 
 #endif /* _TLM_LOG_H */
