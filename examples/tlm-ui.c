@@ -822,6 +822,8 @@ elm_main (
     g_type_init ();
 #endif
 
+    elm_app_base_scale_set(2.0);
+
     win = elm_win_add(NULL, "tlmui", ELM_WIN_BASIC);
     elm_win_title_set(win, "Demo tlm-ui");
     elm_win_autodel_set(win, EINA_TRUE);
