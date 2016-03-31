@@ -10,7 +10,7 @@ tlm_ui_CPPFLAGS = \
     $(GMODULE_CFLAGS) \
     $(ELEMENTARY_CFLAGS) \
     $(DEPS_CFLAGS)
-	
+
 tlm_ui_LDADD = \
     $(GLIB_LIBS) \
     $(GIO_LIBS) \
@@ -18,7 +18,9 @@ tlm_ui_LDADD = \
     $(ELEMENTARY_LIBS) \
     $(DEPS_LIBS) \
     $(top_builddir)/src/common/.libs/libtlm_common_la-tlm-utils.o \
+    $(top_builddir)/src/common/.libs/libtlm_common_la-tlm-config.o \
     $(top_builddir)/src/daemon/dbus/libtlm-dbus.la \
-    $(top_builddir)/src/common/dbus/libtlm-dbus-glue.la
+    $(top_builddir)/src/common/dbus/libtlm-dbus-glue.la \
+    -lpam
 
 CLEANFILES = *.gcno *.gcda
