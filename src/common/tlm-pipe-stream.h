@@ -50,6 +50,11 @@ G_BEGIN_DECLS
                                              TLM_TYPE_PIPE_STREAM, \
                                              TlmPipeStreamClass))
 
+#ifndef EXPORT_API
+#define EXPORT_API
+#endif /* EXPORT_API */
+
+
 typedef struct _TlmPipeStreamPrivate TlmPipeStreamPrivate;
 
 typedef struct {
@@ -65,10 +70,10 @@ typedef struct {
 } TlmPipeStreamClass;
 
 /* used by TLM_TYPE_PIPE_STREAM */
-GType
+EXPORT_API GType
 tlm_pipe_stream_get_type (void);
 
-TlmPipeStream *
+EXPORT_API TlmPipeStream *
 tlm_pipe_stream_new (
         gint in_fd,
         gint out_fd,

@@ -43,6 +43,11 @@ G_BEGIN_DECLS
 #define TLM_SESSION_IS_CLASS(kls)  (G_TYPE_CHECK_CLASS_TYPE((kls), \
                                  TLM_TYPE_SESSION))
 
+#ifndef EXPORT_API
+#define EXPORT_API
+#endif /* EXPORT_API */
+
+
 typedef struct _TlmSession TlmSession;
 typedef struct _TlmSessionClass TlmSessionClass;
 typedef struct _TlmSessionPrivate TlmSessionPrivate;
@@ -59,17 +64,17 @@ struct _TlmSessionClass
     GObjectClass parent_class;
 };
 
-GType tlm_session_get_type(void);
+EXPORT_API GType tlm_session_get_type(void);
 
-TlmSession *
+EXPORT_API TlmSession *
 tlm_session_new ();
 
-gboolean
+EXPORT_API gboolean
 tlm_session_start (TlmSession *session,
                    const gchar *seat_id, const gchar *service,
                    const gchar *username, const gchar *password,
                    GHashTable *environment);
-void
+EXPORT_API void
 tlm_session_terminate (TlmSession *session);
 
 G_END_DECLS

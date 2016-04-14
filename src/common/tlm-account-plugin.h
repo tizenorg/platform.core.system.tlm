@@ -30,6 +30,11 @@
 
 G_BEGIN_DECLS
 
+#ifndef EXPORT_API
+#define EXPORT_API
+#endif /* EXPORT_API */
+
+
 typedef struct _TlmAccountPlugin          TlmAccountPlugin;
 typedef struct _TlmAccountPluginInterface TlmAccountPluginInterface;
 
@@ -57,17 +62,17 @@ struct _TlmAccountPluginInterface {
 };
 
 
-GType tlm_account_plugin_get_type (void);
+EXPORT_API GType tlm_account_plugin_get_type (void);
 
-gboolean
+EXPORT_API gboolean
 tlm_account_plugin_setup_guest_user_account (TlmAccountPlugin   *self,
                              const gchar *user_name);
 
-gboolean
+EXPORT_API gboolean
 tlm_account_plugin_is_valid_user (TlmAccountPlugin *self,
                           const gchar *user_name);
 
-gboolean
+EXPORT_API gboolean
 tlm_account_plugin_cleanup_guest_user (TlmAccountPlugin *self,
                                const gchar *user_name,
                                gboolean delete_account);

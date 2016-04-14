@@ -45,6 +45,11 @@ G_BEGIN_DECLS
 #define TLM_CONFIG_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS((obj), \
         TLM_TYPE_CONFIG, TlmConfigClass))
 
+#ifndef EXPORT_API
+#define EXPORT_API
+#endif /* EXPORT_API */
+
+
 typedef struct _TlmConfig TlmConfig;
 typedef struct _TlmConfigClass TlmConfigClass;
 typedef struct _TlmConfigPrivate TlmConfigPrivate;
@@ -62,91 +67,91 @@ struct _TlmConfigClass
     GObjectClass parent_class;
 };
 
-GType
+EXPORT_API GType
 tlm_config_get_type (void) G_GNUC_CONST;
 
-TlmConfig *
+EXPORT_API TlmConfig *
 tlm_config_new ();
 
-gint
+EXPORT_API gint
 tlm_config_get_int (
         TlmConfig *self,
         const gchar *group,
         const gchar *key,
         gint retval);
 
-void
+EXPORT_API void
 tlm_config_set_int (
         TlmConfig *self,
         const gchar *group,
         const gchar *key,
         gint value);
 
-guint
+EXPORT_API guint
 tlm_config_get_uint (
         TlmConfig *self,
         const gchar *group,
         const gchar *key,
         guint retval);
 
-void
+EXPORT_API void
 tlm_config_set_uint (
         TlmConfig *self,
         const gchar *group,
         const gchar *key,
         guint value);
 
-const gchar*
+EXPORT_API const gchar*
 tlm_config_get_string (
         TlmConfig *self,
         const gchar *group,
         const gchar *key);
 
-const gchar*
+EXPORT_API const gchar*
 tlm_config_get_string_default (
         TlmConfig *self,
         const gchar *group,
         const gchar *key,
         const gchar *value);
 
-void
+EXPORT_API void
 tlm_config_set_string (
         TlmConfig *self,
         const gchar *group,
         const gchar *key,
         const gchar *value);
 
-gboolean
+EXPORT_API gboolean
 tlm_config_get_boolean (
         TlmConfig *self,
         const gchar *group,
         const gchar *key,
         gboolean retval);
 
-void
+EXPORT_API void
 tlm_config_set_boolean (
         TlmConfig *self,
         const gchar *group,
         const gchar *key,
         gboolean value);
 
-gboolean
+EXPORT_API gboolean
 tlm_config_has_group (
         TlmConfig *self,
         const gchar *group);
 
-gboolean
+EXPORT_API gboolean
 tlm_config_has_key (
         TlmConfig *self,
         const gchar *group,
         const gchar *key);
 
-GHashTable *
+EXPORT_API GHashTable *
 tlm_config_get_group (
         TlmConfig *self,
         const gchar *group);
 
-void
+EXPORT_API void
 tlm_config_reload (
         TlmConfig *self);
 

@@ -31,6 +31,11 @@
 
 G_BEGIN_DECLS
 
+#ifndef EXPORT_API
+#define EXPORT_API
+#endif /* EXPORT_API */
+
+
 typedef enum
 {
     TLM_DBUS_REQUEST_TYPE_LOGIN_USER,
@@ -49,7 +54,7 @@ typedef struct
     GHashTable *environment;
 } TlmDbusRequest;
 
-TlmDbusRequest *
+EXPORT_API TlmDbusRequest *
 tlm_dbus_utils_create_request (
         GObject *object,
         GDBusMethodInvocation *invocation,
@@ -59,14 +64,14 @@ tlm_dbus_utils_create_request (
         const gchar *password,
         GVariant *environment);
 
-void
+EXPORT_API void
 tlm_dbus_utils_dispose_request (
         TlmDbusRequest *request);
 
-GVariant *
+EXPORT_API GVariant *
 tlm_dbus_utils_hash_table_to_variant (GHashTable *dict);
 
-GHashTable *
+EXPORT_API GHashTable *
 tlm_dbus_utils_hash_table_from_variant (GVariant *variant);
 
 G_END_DECLS

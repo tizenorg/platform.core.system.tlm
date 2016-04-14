@@ -41,6 +41,11 @@ G_BEGIN_DECLS
 #define TLM_AUTH_SESSION_IS_CLASS(kls)  (G_TYPE_CHECK_CLASS_TYPE((kls), \
                                  TLM_TYPE_AUTH_SESSION))
 
+#ifndef EXPORT_API
+#define EXPORT_API
+#endif /* EXPORT_API */
+
+
 typedef struct _TlmAuthSession TlmAuthSession;
 typedef struct _TlmAuthSessionClass TlmAuthSessionClass;
 typedef struct _TlmAuthSessionPrivate TlmAuthSessionPrivate;
@@ -57,35 +62,35 @@ struct _TlmAuthSessionClass
     GObjectClass parent_class;
 };
 
-GType tlm_auth_session_get_type(void);
+EXPORT_API GType tlm_auth_session_get_type(void);
 
-TlmAuthSession *
+EXPORT_API TlmAuthSession *
 tlm_auth_session_new (const gchar *service,
                       const gchar *username,
                       const gchar *password,
                       const gchar *tty_name);
 
-gboolean
+EXPORT_API gboolean
 tlm_auth_session_putenv (TlmAuthSession *auth_session,
                          const gchar *var,
                          const gchar *value);
 
-gboolean
+EXPORT_API gboolean
 tlm_auth_session_authenticate (TlmAuthSession *auth_session, GError **error);
 
-gboolean
+EXPORT_API gboolean
 tlm_auth_session_open (TlmAuthSession *auth_session, GError **error);
 
-const gchar *
+EXPORT_API const gchar *
 tlm_auth_session_get_username (TlmAuthSession *auth_session);
 
-const gchar *
+EXPORT_API const gchar *
 tlm_auth_session_get_sessionid (TlmAuthSession *auth_session);
 
-gchar **
+EXPORT_API gchar **
 tlm_auth_session_get_envlist (TlmAuthSession *auth_session);
 
-void
+EXPORT_API void
 tlm_auth_session_set_env (TlmAuthSession *auth_session, const gchar *key,
                           const gchar *value);
 

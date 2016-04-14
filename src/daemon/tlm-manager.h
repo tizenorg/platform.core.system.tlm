@@ -42,6 +42,11 @@ G_BEGIN_DECLS
 #define TLM_IS_MANAGER_CLASS(cls)   (G_TYPE_CHECK_CLASS_TYPE((cls), \
                                      TLM_TYPE_MANAGER))
 
+#ifndef EXPORT_API
+#define EXPORT_API
+#endif /* EXPORT_API */
+
+
 typedef struct _TlmManagerPrivate TlmManagerPrivate;
 
 struct _TlmManager
@@ -55,23 +60,23 @@ struct _TlmManagerClass
     GObjectClass parent_class;
 };
 
-GType tlm_manager_get_type (void);
+EXPORT_API GType tlm_manager_get_type (void);
 
-TlmManager * tlm_manager_new (const gchar *initial_user);
+EXPORT_API TlmManager * tlm_manager_new (const gchar *initial_user);
 
-gboolean
+EXPORT_API gboolean
 tlm_manager_start(TlmManager *manager);
 
-gboolean 
+EXPORT_API gboolean 
 tlm_manager_stop(TlmManager *manager);
 
-gboolean
+EXPORT_API gboolean
 tlm_manager_setup_guest_user (TlmManager *manager, const gchar *name);
 
-TlmSeat *
+EXPORT_API TlmSeat *
 tlm_manager_get_seat (TlmManager *manager, const gchar *seat_id);
 
-void
+EXPORT_API void
 tlm_manager_sighup_received (TlmManager *manager);
 
 G_END_DECLS

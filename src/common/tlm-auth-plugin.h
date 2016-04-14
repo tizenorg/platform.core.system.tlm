@@ -30,6 +30,11 @@
 
 G_BEGIN_DECLS
 
+#ifndef EXPORT_API
+#define EXPORT_API
+#endif /* EXPORT_API */
+
+
 typedef struct _TlmAuthPlugin          TlmAuthPlugin;
 typedef struct _TlmAuthPluginInterface TlmAuthPluginInterface;
 
@@ -48,9 +53,9 @@ struct _TlmAuthPluginInterface {
 };
 
 
-GType tlm_auth_plugin_get_type (void);
+EXPORT_API GType tlm_auth_plugin_get_type (void);
 
-gboolean
+EXPORT_API gboolean
 tlm_auth_plugin_start_authentication (TlmAuthPlugin *self,
                                       const gchar *seat_id, 
                                       const gchar *pam_service,

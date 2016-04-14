@@ -43,6 +43,11 @@ G_BEGIN_DECLS
 #define TLM_IS_ACCOUNT_PLUGIN_GUMD_CLASS(kls) \
     (G_TYPE_CHECK_CLASS_TYPE ((klass), TLM_TYPE_ACCOUNT_PLUGIN_GUMD))
 
+#ifndef EXPORT_API
+#define EXPORT_API
+#endif /* EXPORT_API */
+
+
 typedef struct _TlmAccountPluginGumd TlmAccountPluginGumd;
 typedef struct _TlmAccountPluginGumdClass TlmAccountPluginGumdClass;
 
@@ -57,7 +62,7 @@ struct _TlmAccountPluginGumdClass
     GObjectClass parent_class;
 };
 
-GType tlm_account_plugin_gumd_get_type ();
+EXPORT_API GType tlm_account_plugin_gumd_get_type ();
 
 G_END_DECLS
 

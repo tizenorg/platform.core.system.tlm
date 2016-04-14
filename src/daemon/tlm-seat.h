@@ -43,6 +43,11 @@ G_BEGIN_DECLS
 #define TLM_SEAT_IS_CLASS(kls)  (G_TYPE_CHECK_CLASS_TYPE((kls), \
                                  TLM_TYPE_SEAT))
 
+#ifndef EXPORT_API
+#define EXPORT_API
+#endif /* EXPORT_API */
+
+
 typedef struct _TlmSeatPrivate TlmSeatPrivate;
 
 struct _TlmSeat
@@ -57,38 +62,38 @@ struct _TlmSeatClass
     GObjectClass parent_class;
 };
 
-GType tlm_seat_get_type(void);
+EXPORT_API GType tlm_seat_get_type(void);
 
-TlmSeat *
+EXPORT_API TlmSeat *
 tlm_seat_new (TlmConfig *config,
               const gchar *id,
               const gchar *path);
 
-const gchar *
+EXPORT_API const gchar *
 tlm_seat_get_id (TlmSeat *seat);
 
 /** Get the username who occupies the seat
  * @return  The name of the user who holds the seat (to be freed)
  * @return  NULL if nobody occupies the seat
  */
-gchar *
+EXPORT_API gchar *
 tlm_seat_get_occupying_username (TlmSeat* seat);
 
-gboolean
+EXPORT_API gboolean
 tlm_seat_switch_user (TlmSeat *seat,
                       const gchar *service,
                       const gchar *username,
                       const gchar *password,
                       GHashTable *environment);
 
-gboolean
+EXPORT_API gboolean
 tlm_seat_create_session (TlmSeat *seat,
                          const gchar *service,
                          const gchar *username,
                          const gchar *password,
                          GHashTable *environment);
 
-gboolean
+EXPORT_API gboolean
 tlm_seat_terminate_session (TlmSeat *seat);
 
 G_END_DECLS

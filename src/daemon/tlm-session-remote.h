@@ -45,6 +45,11 @@ G_BEGIN_DECLS
     (G_TYPE_INSTANCE_GET_CLASS((obj), TLM_TYPE_SESSION_REMOTE, \
     TlmSessionRemoteClass))
 
+#ifndef EXPORT_API
+#define EXPORT_API
+#endif /* EXPORT_API */
+
+
 typedef struct _TlmSessionRemote TlmSessionRemote;
 typedef struct _TlmSessionRemoteClass TlmSessionRemoteClass;
 typedef struct _TlmSessionRemotePrivate TlmSessionRemotePrivate;
@@ -62,23 +67,23 @@ struct _TlmSessionRemoteClass
     GObjectClass parent_class;
 };
 
-GType
+EXPORT_API GType
 tlm_session_remote_get_type (void) G_GNUC_CONST;
 
-TlmSessionRemote *
+EXPORT_API TlmSessionRemote *
 tlm_session_remote_new (
         TlmConfig *config,
         const gchar *seat_id,
         const gchar *service,
         const gchar *username);
 
-void
+EXPORT_API void
 tlm_session_remote_create (
     TlmSessionRemote *session,
     const gchar *password,
     GHashTable *environment);
 
-gboolean
+EXPORT_API gboolean
 tlm_session_remote_terminate (
         TlmSessionRemote *session);
 

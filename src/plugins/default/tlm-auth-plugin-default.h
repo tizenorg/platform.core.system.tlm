@@ -43,6 +43,11 @@ G_BEGIN_DECLS
 #define TLM_IS_AUTH_PLUGIN_DEFAULT_CLASS(kls) \
     (G_TYPE_CHECK_CLASS_TYPE ((klass), TLM_TYPE_AUTH_PLUGIN_DEFAULT))
 
+#ifndef EXPORT_API
+#define EXPORT_API
+#endif /* EXPORT_API */
+
+
 typedef struct _TlmAuthPluginDefault TlmAuthPluginDefault;
 typedef struct _TlmAuthPluginDefaultClass TlmAuthPluginDefaultClass;
 
@@ -51,7 +56,7 @@ struct _TlmAuthPluginDefaultClass
     GObjectClass parent_class;
 };
 
-GType tlm_auth_plugin_default_get_type ();
+EXPORT_API GType tlm_auth_plugin_default_get_type ();
 
 G_END_DECLS
 

@@ -168,7 +168,7 @@ cp %{SOURCE1001} .
 
 %build
 # for Address space layout randomization
-export CFLAGS="$CFLAGS -fPIE -flto"
+export CFLAGS="$CFLAGS -fPIE -flto -fvisibility=hidden -DEXPORT_API=\"__attribute__((visibility(\\\"default\\\")))\" "
 export LDFLAGS="$LDFLAGS -pie"
 
 %if %{debug_build} == 1

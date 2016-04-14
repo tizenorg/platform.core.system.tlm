@@ -43,6 +43,11 @@ G_BEGIN_DECLS
 #define TLM_IS_ACCOUNT_PLUGIN_DEFAULT_CLASS(kls) \
     (G_TYPE_CHECK_CLASS_TYPE ((klass), TLM_TYPE_ACCOUNT_PLUGIN_DEFAULT))
 
+#ifndef EXPORT_API
+#define EXPORT_API
+#endif /* EXPORT_API */
+
+
 typedef struct _TlmAccountPluginDefault TlmAccountPluginDefault;
 typedef struct _TlmAccountPluginDefaultClass TlmAccountPluginDefaultClass;
 
@@ -51,7 +56,7 @@ struct _TlmAccountPluginDefaultClass
     GObjectClass parent_class;
 };
 
-GType tlm_account_plugin_default_get_type ();
+EXPORT_API GType tlm_account_plugin_default_get_type ();
 
 G_END_DECLS
 

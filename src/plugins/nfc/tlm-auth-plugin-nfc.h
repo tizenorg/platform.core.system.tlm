@@ -43,6 +43,11 @@ G_BEGIN_DECLS
 #define TLM_IS_AUTH_PLUGIN_NFC_CLASS(kls) \
     (G_TYPE_CHECK_CLASS_TYPE ((klass), TLM_TYPE_AUTH_PLUGIN_NFC))
 
+#ifndef EXPORT_API
+#define EXPORT_API
+#endif /* EXPORT_API */
+
+
 typedef struct _TlmAuthPluginNfc TlmAuthPluginNfc;
 typedef struct _TlmAuthPluginNfcClass TlmAuthPluginNfcClass;
 
@@ -51,7 +56,7 @@ struct _TlmAuthPluginNfcClass
     GObjectClass parent_class;
 };
 
-GType tlm_auth_plugin_nfc_get_type ();
+EXPORT_API GType tlm_auth_plugin_nfc_get_type ();
 
 G_END_DECLS
 

@@ -33,6 +33,11 @@ G_BEGIN_DECLS
 
 #define TLM_ERROR   (tlm_error_quark())
 
+#ifndef EXPORT_API
+#define EXPORT_API
+#endif /* EXPORT_API */
+
+
 typedef enum {
     TLM_ERROR_NONE,
 
@@ -60,14 +65,14 @@ typedef enum {
 #define TLM_GET_ERROR_FOR_ID(code, message, args...) \
     g_error_new (TLM_ERROR, code, message, ##args);
 
-GQuark
+EXPORT_API GQuark
 tlm_error_quark (void);
 
-GError *
+EXPORT_API GError *
 tlm_error_new_from_variant (
         GVariant *var);
 
-GVariant *
+EXPORT_API GVariant *
 tlm_error_to_variant (
         GError *error);
 

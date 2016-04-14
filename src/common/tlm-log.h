@@ -33,8 +33,13 @@
 
 G_BEGIN_DECLS
 
-void tlm_log_init (const gchar *domain);
-void tlm_log_close (const gchar *domain);
+#ifndef EXPORT_API
+#define EXPORT_API
+#endif /* EXPORT_API */
+
+
+EXPORT_API void tlm_log_init (const gchar *domain);
+EXPORT_API void tlm_log_close (const gchar *domain);
 
 #define EXPAND_LOG_MSG(frmt, args...) "%f %s +%d %s :" frmt, \
     g_get_monotonic_time()*1.0e-6, __FILE__, __LINE__, __PRETTY_FUNCTION__, \

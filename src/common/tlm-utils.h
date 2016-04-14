@@ -34,42 +34,47 @@
 
 G_BEGIN_DECLS
 
-void
+#ifndef EXPORT_API
+#define EXPORT_API
+#endif /* EXPORT_API */
+
+
+EXPORT_API void
 g_clear_string (gchar **);
 
-gchar *
+EXPORT_API gchar *
 tlm_user_get_name (uid_t user_id);
 
-uid_t
+EXPORT_API uid_t
 tlm_user_get_uid (const gchar *username);
 
-gid_t
+EXPORT_API gid_t
 tlm_user_get_gid (const gchar *username);
 
-gchar *
+EXPORT_API gchar *
 tlm_user_get_home_dir (const gchar *username);
 
-gchar *
+EXPORT_API gchar *
 tlm_user_get_shell (const gchar *username);
 
-gboolean
+EXPORT_API gboolean
 tlm_utils_delete_dir (const gchar *dir);
 
-void
+EXPORT_API void
 tlm_utils_log_utmp_entry (const gchar *username);
 
-gchar **
+EXPORT_API gchar **
 tlm_utils_split_command_line (const gchar *command);
 
-GList *
+EXPORT_API GList *
 tlm_utils_split_command_lines (const GList const *commands_list);
 
 typedef void (*WatchCb) (const gchar *found_item, gboolean is_final, GError *error, gpointer userdata);
 
-guint
+EXPORT_API guint
 tlm_utils_watch_for_files (const gchar **watch_list, WatchCb cb, gpointer userdata);
 
-gboolean
+EXPORT_API gboolean
 tlm_authenticate_user (TlmConfig *config, const gchar *username, const gchar *password);
 
 G_END_DECLS

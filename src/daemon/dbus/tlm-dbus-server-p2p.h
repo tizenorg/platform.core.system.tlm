@@ -44,6 +44,11 @@ G_BEGIN_DECLS
 #define TLM_DBUS_SERVER_P2P_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS((obj),\
         TLM_TYPE_DBUS_SERVER_P2P, TlmDbusServerP2PClass))
 
+#ifndef EXPORT_API
+#define EXPORT_API
+#endif /* EXPORT_API */
+
+
 typedef struct _TlmDbusServerP2P TlmDbusServerP2P;
 typedef struct _TlmDbusServerP2PClass TlmDbusServerP2PClass;
 typedef struct _TlmDbusServerP2PPrivate TlmDbusServerP2PPrivate;
@@ -61,10 +66,10 @@ struct _TlmDbusServerP2PClass
     GObjectClass parent_class;
 };
 
-GType
+EXPORT_API GType
 tlm_dbus_server_p2p_get_type();
 
-TlmDbusServerP2P *
+EXPORT_API TlmDbusServerP2P *
 tlm_dbus_server_p2p_new (
         const gchar *address,
         uid_t uid);

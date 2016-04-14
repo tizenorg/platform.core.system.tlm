@@ -43,6 +43,11 @@ G_BEGIN_DECLS
 #define TLM_SESSION_DAEMON_GET_CLASS(obj) (G_TYPE_INSTANCE_GET_CLASS((obj),\
         TLM_TYPE_SESSION_DAEMON, TlmSessionDaemonClass))
 
+#ifndef EXPORT_API
+#define EXPORT_API
+#endif /* EXPORT_API */
+
+
 typedef struct _TlmSessionDaemon TlmSessionDaemon;
 typedef struct _TlmSessionDaemonClass TlmSessionDaemonClass;
 typedef struct _TlmSessionDaemonPrivate TlmSessionDaemonPrivate;
@@ -60,9 +65,9 @@ struct _TlmSessionDaemonClass
     GObjectClass parent_class;
 };
 
-GType tlm_session_daemon_get_type();
+EXPORT_API GType tlm_session_daemon_get_type();
 
-TlmSessionDaemon *
+EXPORT_API TlmSessionDaemon *
 tlm_session_daemon_new (
         gint in_fd,
         gint out_fd);

@@ -49,6 +49,11 @@ G_BEGIN_DECLS
     (G_TYPE_INSTANCE_GET_CLASS((obj), TLM_TYPE_LOGIN_ADAPTER, \
             TlmDbusLoginAdapterClass))
 
+#ifndef EXPORT_API
+#define EXPORT_API
+#endif /* EXPORT_API */
+
+
 typedef struct _TlmDbusLoginAdapter TlmDbusLoginAdapter;
 typedef struct _TlmDbusLoginAdapterClass TlmDbusLoginAdapterClass;
 typedef struct _TlmDbusLoginAdapterPrivate TlmDbusLoginAdapterPrivate;
@@ -66,13 +71,13 @@ struct _TlmDbusLoginAdapterClass
     GObjectClass parent_class;
 };
 
-GType tlm_dbus_login_adapter_get_type (void) G_GNUC_CONST;
+EXPORT_API GType tlm_dbus_login_adapter_get_type (void) G_GNUC_CONST;
 
-TlmDbusLoginAdapter *
+EXPORT_API TlmDbusLoginAdapter *
 tlm_dbus_login_adapter_new_with_connection (
         GDBusConnection *connection);
 
-void
+EXPORT_API void
 tlm_dbus_login_adapter_request_completed (
         TlmDbusRequest *request,
         GError *error);

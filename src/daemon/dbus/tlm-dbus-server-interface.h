@@ -40,6 +40,11 @@ G_BEGIN_DECLS
 #define TLM_DBUS_SERVER_GET_INTERFACE(inst) (G_TYPE_INSTANCE_GET_INTERFACE ( \
         (inst), TLM_TYPE_DBUS_SERVER, TlmDbusServerInterface))
 
+#ifndef EXPORT_API
+#define EXPORT_API
+#endif /* EXPORT_API */
+
+
 typedef struct _TlmDbusServer TlmDbusServer; /* dummy object */
 typedef struct _TlmDbusServerInterface TlmDbusServerInterface;
 
@@ -65,23 +70,23 @@ struct _TlmDbusServerInterface {
             GDBusMethodInvocation *invocation);
 };
 
-GType
+EXPORT_API GType
 tlm_dbus_server_get_type();
 
-gboolean
+EXPORT_API gboolean
 tlm_dbus_server_start (
         TlmDbusServer *self);
 
-gboolean
+EXPORT_API gboolean
 tlm_dbus_server_stop (
         TlmDbusServer *self);
 
-pid_t
+EXPORT_API pid_t
 tlm_dbus_server_get_remote_pid (
         TlmDbusServer *self,
         GDBusMethodInvocation *invocation);
 
-TlmDbusServerBusType
+EXPORT_API TlmDbusServerBusType
 tlm_dbus_server_get_bus_type (
         TlmDbusServer *self);
 

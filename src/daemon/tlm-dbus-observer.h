@@ -42,6 +42,11 @@ G_BEGIN_DECLS
 #define TLM_DBUS_OBSERVER_IS_CLASS(kls)  (G_TYPE_CHECK_CLASS_TYPE((kls), \
             TLM_TYPE_DBUS_OBSERVER))
 
+#ifndef EXPORT_API
+#define EXPORT_API
+#endif /* EXPORT_API */
+
+
 typedef struct _TlmDbusObserver TlmDbusObserver;
 typedef struct _TlmDbusObserverClass TlmDbusObserverClass;
 typedef struct _TlmDbusObserverPrivate TlmDbusObserverPrivate;
@@ -65,9 +70,9 @@ typedef enum {
     DBUS_OBSERVER_ENABLE_ALL = 0x0F,
 } DbusObserverEnableFlags;
 
-GType tlm_dbus_observer_get_type(void);
+EXPORT_API GType tlm_dbus_observer_get_type(void);
 
-TlmDbusObserver *
+EXPORT_API TlmDbusObserver *
 tlm_dbus_observer_new (
         TlmManager *manager,
         TlmSeat *seat,
