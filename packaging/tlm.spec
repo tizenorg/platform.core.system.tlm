@@ -168,7 +168,7 @@ cp %{SOURCE1001} .
 
 %build
 # for Address space layout randomization
-export CFLAGS="$CFLAGS -fPIE"
+export CFLAGS="$CFLAGS -fPIE -flto"
 export LDFLAGS="$LDFLAGS -pie"
 
 %if %{debug_build} == 1
@@ -459,4 +459,3 @@ fi
 %config(noreplace) %{_sysconfdir}/profile.d/weston-env-ivi.sh
 
 %endif
-
