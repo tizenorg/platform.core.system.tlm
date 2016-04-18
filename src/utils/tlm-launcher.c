@@ -162,13 +162,15 @@ static void _tlm_launcher_process (TlmLauncher *l)
         if (!argv)
           ERR("Getting argv failure");
         if ((child_pid = fork()) < 0) {
-            ERR("fork() failed: %s", strerror_r(errno, strerr_buf, MAX_STRERROR_LEN));
+            strerror_r(errno, strerr_buf, MAX_STRERROR_LEN);
+            ERR("fork() failed: %s", strerr_buf);
         } else if (child_pid == 0) {
             /* child process */
             INFO("Launching command : %s, pid: %d, ppid: %d\n",
                 argv[0], getpid (), getppid ());
             execvp(argv[0], argv);
-            WARN("exec failed: %s", strerror_r(errno, strerr_buf, MAX_STRERROR_LEN));
+            strerror_r(errno, strerr_buf, MAX_STRERROR_LEN);
+            WARN("exec failed: %s", strerr_buf);
         } else if (control == 'M') {
           ChildInfo *info = g_slice_new0 (ChildInfo);
           if (!info) {
@@ -239,7 +241,8 @@ int main (int argc, char *argv[])
 
   if (!(launcher.fp = fopen(file, "r"))) {
     gchar strerr_buf[MAX_STRERROR_LEN] = {0,};
-    ERR("Failed to open file '%s':%s", file, strerror_r(errno, strerr_buf, MAX_STRERROR_LEN));
+    strerror_r(errno, strerr_buf, MAX_STRERROR_LEN);
+    ERR("Failed to open file '%s':%s", file, strerr_buf);
     _tlm_launcher_deinit (&launcher);
     return 0;
   }

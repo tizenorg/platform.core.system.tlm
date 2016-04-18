@@ -180,8 +180,9 @@ _is_valid_user (TlmAccountPlugin *plugin, const gchar *user_name)
 
     if (!pwd_entry) {
         gchar strerr_buf[MAX_STRERROR_LEN] = {0,};
+        strerror_r(errno, strerr_buf, MAX_STRERROR_LEN);
         DBG("Could not get info for user '%s', error : %s",
-            user_name, strerror_r(errno, strerr_buf, MAX_STRERROR_LEN));
+            user_name, strerr_buf);
         if (buf)
             g_free(buf);
         return FALSE;

@@ -177,7 +177,8 @@ tlm_auth_plugin_default_init (TlmAuthPluginDefault *self)
 
     if (sigaction(SIGUSR1, &sa, NULL) != 0) {
         gchar strerr_buf[MAX_STRERROR_LEN] = {0,};
-        WARN ("assert(sigaction()) : %s", strerror_r(errno, strerr_buf, MAX_STRERROR_LEN));
+        strerror_r(errno, strerr_buf, MAX_STRERROR_LEN);
+        WARN ("assert(sigaction()) : %s", strerr_buf);
     }
 
     tlm_log_init("TLM_AUTH_PLUGIN");
