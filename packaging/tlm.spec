@@ -15,7 +15,7 @@
 Name:    tlm
 Summary: Login manager for Tizen
 Version: 1.0.3
-Release: 0
+Release: 1
 Group:   System/Service
 License: LGPL-2.1+
 URL:     https://github.com/01org/tlm
@@ -25,6 +25,7 @@ Requires(post): /sbin/ldconfig
 Requires(post): systemd
 Requires(postun): /sbin/ldconfig
 Requires(postun): systemd
+Requires(post): tizen-platform-config
 Requires: gumd
 Requires: libsystemd
 Requires: pam-modules-extra
@@ -35,6 +36,7 @@ BuildRequires: pkgconfig(gio-unix-2.0)
 BuildRequires: pkgconfig(gmodule-2.0)
 BuildRequires: pkgconfig(libgum)
 BuildRequires: pam-devel
+BuildRequires:  pkgconfig(libtzplatform-config)
 %if %{debug_build} == 1
 BuildRequires: gtk-doc
 %endif
@@ -207,6 +209,11 @@ install -m 755 data/tizen-common/etc/session.d/* %{buildroot}%{_sysconfdir}/sess
 
 %post
 /sbin/ldconfig
+
+%posttrans
+if [ -z `getent passwd |  grep ^%{TZ_SYS_DEFAULT_USER}:` ]; then
+    gum-utils --offline --add-user --username="%{TZ_SYS_DEFAULT_USER}" --usertype=admin --usecret=tizen
+fi
 
 
 %postun -p /sbin/ldconfig
