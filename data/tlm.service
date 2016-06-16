@@ -5,6 +5,8 @@ Requires=dbus.socket
 
 [Service]
 ExecStart=/usr/bin/tlm
+CapabilityBoundingSet=~CAP_MAC_ADMIN
+CapabilityBoundingSet=~CAP_MAC_OVERRIDE
 #StandardInput=tty
 #StandardOutput=journal
 #StandardError=journal
