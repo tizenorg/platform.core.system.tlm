@@ -426,7 +426,12 @@ tlm_config_get_uint (
 {
     guint value;
     const gchar *str_value = tlm_config_get_string (self, group, key);
-    if (!str_value || sscanf (str_value, "%u", &value) <= 0) value = retval;
+
+    if (str_value && (*str_value == '-'))  {
+        value = retval;
+    } else  {
+        if (!str_value || sscanf (str_value, "%u", &value) <= 0) value = retval;
+    }
 
     return value;
 }
