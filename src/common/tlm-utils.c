@@ -844,6 +844,8 @@ static int func_conv(
 
     TlmLoginInfo *info = (TlmLoginInfo *)pdata;
     *resps = g_malloc0 (num_msg * sizeof(struct pam_response));
+    if (!*resps)
+        return PAM_CONV_ERR;
 
     for (i=0; i<num_msg; ++i) {
         struct pam_response *resp = *resps + i;
