@@ -648,10 +648,6 @@ CHECK_LIBS
 CHECK_CFLAGS
 TLM_LIBS
 TLM_CFLAGS
-HAVE_LIBTLM_NFC_FALSE
-HAVE_LIBTLM_NFC_TRUE
-LIBTLM_NFC_LIBS
-LIBTLM_NFC_CFLAGS
 GMODULE_LIBS
 GMODULE_CFLAGS
 GIO_LIBS
@@ -835,8 +831,6 @@ GIO_CFLAGS
 GIO_LIBS
 GMODULE_CFLAGS
 GMODULE_LIBS
-LIBTLM_NFC_CFLAGS
-LIBTLM_NFC_LIBS
 CHECK_CFLAGS
 CHECK_LIBS
 ELEMENTARY_CFLAGS
@@ -1478,7 +1472,7 @@ Optional Features:
  --enable-debug enable debug features
  --enable-tests build unit tests
  --enable-examples enable examples
-  --enable-sockets-path=path  enable dbus sockets path at location'
+  --enable-sockets-path=path  enable dbus sockets path at location
            "path" instead of default "/var/run/tlm"
   --enable-gum build for gumd plugin
 
@@ -1518,10 +1512,6 @@ Some influential environment variables:
               C compiler flags for GMODULE, overriding pkg-config
   GMODULE_LIBS
               linker flags for GMODULE, overriding pkg-config
-  LIBTLM_NFC_CFLAGS
-              C compiler flags for LIBTLM_NFC, overriding pkg-config
-  LIBTLM_NFC_LIBS
-              linker flags for LIBTLM_NFC, overriding pkg-config
   CHECK_CFLAGS
               C compiler flags for CHECK, overriding pkg-config
   CHECK_LIBS  linker flags for CHECK, overriding pkg-config
@@ -4936,8 +4926,7 @@ else
     ;;
   *)
     lt_cv_sys_max_cmd_len=`(getconf ARG_MAX) 2> /dev/null`
-    if test -n "$lt_cv_sys_max_cmd_len" && \
-	test undefined != "$lt_cv_sys_max_cmd_len"; then
+    if test -n "$lt_cv_sys_max_cmd_len"; then
       lt_cv_sys_max_cmd_len=`expr $lt_cv_sys_max_cmd_len \/ 4`
       lt_cv_sys_max_cmd_len=`expr $lt_cv_sys_max_cmd_len \* 3`
     else
@@ -5338,6 +5327,10 @@ freebsd* | dragonfly*)
   fi
   ;;
 
+gnu*)
+  lt_cv_deplibs_check_method=pass_all
+  ;;
+
 haiku*)
   lt_cv_deplibs_check_method=pass_all
   ;;
@@ -5376,11 +5369,11 @@ irix5* | irix6* | nonstopux*)
   ;;
 
 # This must be glibc/ELF.
-linux* | k*bsd*-gnu | kopensolaris*-gnu | gnu*)
+linux* | k*bsd*-gnu | kopensolaris*-gnu)
   lt_cv_deplibs_check_method=pass_all
   ;;
 
-netbsd* | netbsdelf*-gnu)
+netbsd*)
   if echo __ELF__ | $CC -E - | $GREP __ELF__ > /dev/null; then
     lt_cv_deplibs_check_method='match_pattern /lib[^/]+(\.so\.[0-9]+\.[0-9]+|_pic\.a)$'
   else
@@ -6458,7 +6451,7 @@ ia64-*-hpux*)
   rm -rf conftest*
   ;;
 
-x86_64-*kfreebsd*-gnu|x86_64-*linux*|powerpc*-*linux*| \
+x86_64-*kfreebsd*-gnu|x86_64-*linux*|ppc*-*linux*|powerpc*-*linux*| \
 s390*-*linux*|s390*-*tpf*|sparc*-*linux*)
   # Find out which ABI we are using.
   echo 'int i;' > conftest.$ac_ext
@@ -6474,19 +6467,9 @@ s390*-*linux*|s390*-*tpf*|sparc*-*linux*)
 	    LD="${LD-ld} -m elf_i386_fbsd"
 	    ;;
 	  x86_64-*linux*)
-	    case `/usr/bin/file conftest.o` in
-	      *x86-64*)
-		LD="${LD-ld} -m elf32_x86_64"
-		;;
-	      *)
-		LD="${LD-ld} -m elf_i386"
-		;;
-	    esac
+	    LD="${LD-ld} -m elf_i386"
 	    ;;
-	  powerpc64le-*)
-	    LD="${LD-ld} -m elf32lppclinux"
-	    ;;
-	  powerpc64-*)
+	  ppc64-*linux*|powerpc64-*linux*)
 	    LD="${LD-ld} -m elf32ppclinux"
 	    ;;
 	  s390x-*linux*)
@@ -6505,10 +6488,7 @@ s390*-*linux*|s390*-*tpf*|sparc*-*linux*)
 	  x86_64-*linux*)
 	    LD="${LD-ld} -m elf_x86_64"
 	    ;;
-	  powerpcle-*)
-	    LD="${LD-ld} -m elf64lppc"
-	    ;;
-	  powerpc-*)
+	  ppc*-*linux*|powerpc*-*linux*)
 	    LD="${LD-ld} -m elf64ppc"
 	    ;;
 	  s390*-*linux*|s390*-*tpf*)
@@ -8315,7 +8295,7 @@ lt_prog_compiler_static=
       lt_prog_compiler_static='-non_shared'
       ;;
 
-    linux* | k*bsd*-gnu | kopensolaris*-gnu | gnu*)
+    linux* | k*bsd*-gnu | kopensolaris*-gnu)
       case $cc_basename in
       # old Intel for x86_64 which still supported -KPIC.
       ecc*)
@@ -8793,9 +8773,6 @@ $as_echo_n "checking whether the $compiler linker ($LD) supports shared librarie
   openbsd*)
     with_gnu_ld=no
     ;;
-  linux* | k*bsd*-gnu | gnu*)
-    link_all_deplibs=no
-    ;;
   esac
 
   ld_shlibs=yes
@@ -9017,7 +8994,7 @@ _LT_EOF
       fi
       ;;
 
-    netbsd* | netbsdelf*-gnu)
+    netbsd*)
       if echo __ELF__ | $CC -E - | $GREP __ELF__ >/dev/null; then
 	archive_cmds='$LD -Bshareable $libobjs $deplibs $linker_flags -o $lib'
 	wlarc=
@@ -9194,7 +9171,6 @@ _LT_EOF
 	if test "$aix_use_runtimelinking" = yes; then
 	  shared_flag="$shared_flag "'${wl}-G'
 	fi
-	link_all_deplibs=no
       else
 	# not using gcc
 	if test "$host_cpu" = ia64; then
@@ -9648,7 +9624,7 @@ $as_echo "$lt_cv_irix_exported_symbol" >&6; }
       link_all_deplibs=yes
       ;;
 
-    netbsd* | netbsdelf*-gnu)
+    netbsd*)
       if echo __ELF__ | $CC -E - | $GREP __ELF__ >/dev/null; then
 	archive_cmds='$LD -Bshareable -o $lib $libobjs $deplibs $linker_flags'  # a.out
       else
@@ -10485,6 +10461,17 @@ freebsd* | dragonfly*)
   esac
   ;;
 
+gnu*)
+  version_type=linux # correct to gnu/linux during the next big refactor
+  need_lib_prefix=no
+  need_version=no
+  library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}${major} ${libname}${shared_ext}'
+  soname_spec='${libname}${release}${shared_ext}$major'
+  shlibpath_var=LD_LIBRARY_PATH
+  shlibpath_overrides_runpath=no
+  hardcode_into_libs=yes
+  ;;
+
 haiku*)
   version_type=linux # correct to gnu/linux during the next big refactor
   need_lib_prefix=no
@@ -10601,7 +10588,7 @@ linux*oldld* | linux*aout* | linux*coff*)
   ;;
 
 # This must be glibc/ELF.
-linux* | k*bsd*-gnu | kopensolaris*-gnu | gnu*)
+linux* | k*bsd*-gnu | kopensolaris*-gnu)
   version_type=linux # correct to gnu/linux during the next big refactor
   need_lib_prefix=no
   need_version=no
@@ -10663,18 +10650,6 @@ fi
   # people can always --disable-shared, the test was removed, and we
   # assume the GNU/Linux dynamic linker is in use.
   dynamic_linker='GNU/Linux ld.so'
-  ;;
-
-netbsdelf*-gnu)
-  version_type=linux
-  need_lib_prefix=no
-  need_version=no
-  library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}$major ${libname}${shared_ext}'
-  soname_spec='${libname}${release}${shared_ext}$major'
-  shlibpath_var=LD_LIBRARY_PATH
-  shlibpath_overrides_runpath=no
-  hardcode_into_libs=yes
-  dynamic_linker='NetBSD ld.elf_so'
   ;;
 
 netbsd*)
@@ -13193,87 +13168,10 @@ fi
 
 
 # Check for libtlm-nfc
-
-pkg_failed=no
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for LIBTLM_NFC" >&5
-$as_echo_n "checking for LIBTLM_NFC... " >&6; }
-
-if test -n "$LIBTLM_NFC_CFLAGS"; then
-    pkg_cv_LIBTLM_NFC_CFLAGS="$LIBTLM_NFC_CFLAGS"
- elif test -n "$PKG_CONFIG"; then
-    if test -n "$PKG_CONFIG" && \
-    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"libtlm-nfc\""; } >&5
-  ($PKG_CONFIG --exists --print-errors "libtlm-nfc") 2>&5
-  ac_status=$?
-  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
-  test $ac_status = 0; }; then
-  pkg_cv_LIBTLM_NFC_CFLAGS=`$PKG_CONFIG --cflags "libtlm-nfc" 2>/dev/null`
-		      test "x$?" != "x0" && pkg_failed=yes
-else
-  pkg_failed=yes
-fi
- else
-    pkg_failed=untried
-fi
-if test -n "$LIBTLM_NFC_LIBS"; then
-    pkg_cv_LIBTLM_NFC_LIBS="$LIBTLM_NFC_LIBS"
- elif test -n "$PKG_CONFIG"; then
-    if test -n "$PKG_CONFIG" && \
-    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"libtlm-nfc\""; } >&5
-  ($PKG_CONFIG --exists --print-errors "libtlm-nfc") 2>&5
-  ac_status=$?
-  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
-  test $ac_status = 0; }; then
-  pkg_cv_LIBTLM_NFC_LIBS=`$PKG_CONFIG --libs "libtlm-nfc" 2>/dev/null`
-		      test "x$?" != "x0" && pkg_failed=yes
-else
-  pkg_failed=yes
-fi
- else
-    pkg_failed=untried
-fi
-
-
-
-if test $pkg_failed = yes; then
-   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-
-if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
-        _pkg_short_errors_supported=yes
-else
-        _pkg_short_errors_supported=no
-fi
-        if test $_pkg_short_errors_supported = yes; then
-	        LIBTLM_NFC_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "libtlm-nfc" 2>&1`
-        else
-	        LIBTLM_NFC_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "libtlm-nfc" 2>&1`
-        fi
-	# Put the nasty error message in config.log where it belongs
-	echo "$LIBTLM_NFC_PKG_ERRORS" >&5
-
-	have_libtlm_nfc=no
-elif test $pkg_failed = untried; then
-     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-	have_libtlm_nfc=no
-else
-	LIBTLM_NFC_CFLAGS=$pkg_cv_LIBTLM_NFC_CFLAGS
-	LIBTLM_NFC_LIBS=$pkg_cv_LIBTLM_NFC_LIBS
-        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
-$as_echo "yes" >&6; }
-	have_libtlm_nfc=yes
-fi
-
-
- if test x$have_libtlm_nfc = xyes; then
-  HAVE_LIBTLM_NFC_TRUE=
-  HAVE_LIBTLM_NFC_FALSE='#'
-else
-  HAVE_LIBTLM_NFC_TRUE='#'
-  HAVE_LIBTLM_NFC_FALSE=
-fi
-
+#PKG_CHECK_MODULES([LIBTLM_NFC], [libtlm-nfc], [have_libtlm_nfc=yes], [have_libtlm_nfc=no])
+#AC_SUBST(LIBTLM_NFC_CFLAGS)
+#AC_SUBST(LIBTLM_NFC_LIBS)
+#AM_CONDITIONAL(HAVE_LIBTLM_NFC, [test x$have_libtlm_nfc = xyes])
 
 for ac_header in security/pam_appl.h
 do :
@@ -13673,7 +13571,7 @@ else
 
 fi
 
-ac_config_files="$ac_config_files Makefile docs/Makefile src/Makefile src/common/Makefile src/common/dbus/Makefile src/daemon/Makefile src/daemon/dbus/Makefile src/daemon/tlm.pc src/sessiond/Makefile src/utils/Makefile src/plugins/Makefile src/plugins/default/Makefile src/plugins/gumd/Makefile src/plugins/nfc/Makefile data/Makefile data/tlm.conf tests/Makefile tests/config/Makefile tests/daemon/Makefile tests/tlm-test.conf examples/Makefile"
+ac_config_files="$ac_config_files Makefile docs/Makefile src/Makefile src/common/Makefile src/common/dbus/Makefile src/daemon/Makefile src/daemon/dbus/Makefile src/daemon/tlm.pc src/sessiond/Makefile src/utils/Makefile src/plugins/Makefile src/plugins/default/Makefile src/plugins/gumd/Makefile data/Makefile data/tlm.conf tests/Makefile tests/config/Makefile tests/daemon/Makefile tests/tlm-test.conf examples/Makefile"
 
 
 cat >confcache <<\_ACEOF
@@ -13835,10 +13733,6 @@ Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${am__fastdepCC_TRUE}" && test -z "${am__fastdepCC_FALSE}"; then
   as_fn_error $? "conditional \"am__fastdepCC\" was never defined.
-Usually this means the macro was only invoked conditionally." "$LINENO" 5
-fi
-if test -z "${HAVE_LIBTLM_NFC_TRUE}" && test -z "${HAVE_LIBTLM_NFC_FALSE}"; then
-  as_fn_error $? "conditional \"HAVE_LIBTLM_NFC\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${ENABLE_TESTS_TRUE}" && test -z "${ENABLE_TESTS_FALSE}"; then
@@ -14738,7 +14632,6 @@ do
     "src/plugins/Makefile") CONFIG_FILES="$CONFIG_FILES src/plugins/Makefile" ;;
     "src/plugins/default/Makefile") CONFIG_FILES="$CONFIG_FILES src/plugins/default/Makefile" ;;
     "src/plugins/gumd/Makefile") CONFIG_FILES="$CONFIG_FILES src/plugins/gumd/Makefile" ;;
-    "src/plugins/nfc/Makefile") CONFIG_FILES="$CONFIG_FILES src/plugins/nfc/Makefile" ;;
     "data/Makefile") CONFIG_FILES="$CONFIG_FILES data/Makefile" ;;
     "data/tlm.conf") CONFIG_FILES="$CONFIG_FILES data/tlm.conf" ;;
     "tests/Makefile") CONFIG_FILES="$CONFIG_FILES tests/Makefile" ;;

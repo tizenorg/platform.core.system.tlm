@@ -27,9 +27,6 @@ DOC_SOURCE_DIR=$(top_srcdir)/src/common $(top_srcdir)/src/plugins/default
 if HAVE_LIBGUM
 DOC_SOURCE_DIR += $(top_srcdir)/src/plugins/gumd
 endif
-if HAVE_LIBTLM_NFC
-DOC_SOURCE_DIR += $(top_srcdir)/src/plugins/nfc
-endif
 
 # Extra options to pass to gtkdoc-scangobj. Not normally needed.
 SCANGOBJ_OPTIONS=
@@ -97,10 +94,6 @@ GTKDOC_LIBS=$(GLIB_LIBS) \
 
 if HAVE_LIBGUM
 GTKDOC_LIBS += $(LIBGUM_LIBS) $(top_builddir)/src/plugins/gumd/libtlm-plugin-gumd.la
-endif
-
-if HAVE_LIBTLM_NFC
-GTKDOC_LIBS += $(LIBTLM_NFC_CFLAGS) $(top_builddir)/src/plugins/nfc/libtlm-plugin-nfc.la
 endif
 
 # This includes the standard gtk-doc make rules, copied by gtkdocize.
