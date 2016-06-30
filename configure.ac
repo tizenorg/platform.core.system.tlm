@@ -34,10 +34,10 @@ AC_SUBST(GMODULE_CFLAGS)
 AC_SUBST(GMODULE_LIBS)
 
 # Check for libtlm-nfc
-PKG_CHECK_MODULES([LIBTLM_NFC], [libtlm-nfc], [have_libtlm_nfc=yes], [have_libtlm_nfc=no])
-AC_SUBST(LIBTLM_NFC_CFLAGS)
-AC_SUBST(LIBTLM_NFC_LIBS)
-AM_CONDITIONAL(HAVE_LIBTLM_NFC, [test x$have_libtlm_nfc = xyes])
+#PKG_CHECK_MODULES([LIBTLM_NFC], [libtlm-nfc], [have_libtlm_nfc=yes], [have_libtlm_nfc=no])
+#AC_SUBST(LIBTLM_NFC_CFLAGS)
+#AC_SUBST(LIBTLM_NFC_LIBS)
+#AM_CONDITIONAL(HAVE_LIBTLM_NFC, [test x$have_libtlm_nfc = xyes])
 
 AC_CHECK_HEADERS([security/pam_appl.h],,[AC_MSG_ERROR("pam-devel is required")])
 AC_CHECK_HEADERS([security/pam_misc.h],,[AC_MSG_ERROR("pam-misc is required")])
@@ -120,7 +120,6 @@ src/utils/Makefile
 src/plugins/Makefile
 src/plugins/default/Makefile
 src/plugins/gumd/Makefile
-src/plugins/nfc/Makefile
 data/Makefile
 data/tlm.conf
 tests/Makefile
