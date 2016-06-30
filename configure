@@ -13193,80 +13193,81 @@ fi
 
 
 # Check for libtlm-nfc
-
-pkg_failed=no
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for LIBTLM_NFC" >&5
-$as_echo_n "checking for LIBTLM_NFC... " >&6; }
-
-if test -n "$LIBTLM_NFC_CFLAGS"; then
-    pkg_cv_LIBTLM_NFC_CFLAGS="$LIBTLM_NFC_CFLAGS"
- elif test -n "$PKG_CONFIG"; then
-    if test -n "$PKG_CONFIG" && \
-    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"libtlm-nfc\""; } >&5
-  ($PKG_CONFIG --exists --print-errors "libtlm-nfc") 2>&5
-  ac_status=$?
-  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
-  test $ac_status = 0; }; then
-  pkg_cv_LIBTLM_NFC_CFLAGS=`$PKG_CONFIG --cflags "libtlm-nfc" 2>/dev/null`
-		      test "x$?" != "x0" && pkg_failed=yes
-else
-  pkg_failed=yes
-fi
- else
-    pkg_failed=untried
-fi
-if test -n "$LIBTLM_NFC_LIBS"; then
-    pkg_cv_LIBTLM_NFC_LIBS="$LIBTLM_NFC_LIBS"
- elif test -n "$PKG_CONFIG"; then
-    if test -n "$PKG_CONFIG" && \
-    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"libtlm-nfc\""; } >&5
-  ($PKG_CONFIG --exists --print-errors "libtlm-nfc") 2>&5
-  ac_status=$?
-  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
-  test $ac_status = 0; }; then
-  pkg_cv_LIBTLM_NFC_LIBS=`$PKG_CONFIG --libs "libtlm-nfc" 2>/dev/null`
-		      test "x$?" != "x0" && pkg_failed=yes
-else
-  pkg_failed=yes
-fi
- else
-    pkg_failed=untried
-fi
-
-
-
-if test $pkg_failed = yes; then
-   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-
-if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
-        _pkg_short_errors_supported=yes
-else
-        _pkg_short_errors_supported=no
-fi
-        if test $_pkg_short_errors_supported = yes; then
-	        LIBTLM_NFC_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "libtlm-nfc" 2>&1`
-        else
-	        LIBTLM_NFC_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "libtlm-nfc" 2>&1`
-        fi
-	# Put the nasty error message in config.log where it belongs
-	echo "$LIBTLM_NFC_PKG_ERRORS" >&5
-
-	have_libtlm_nfc=no
-elif test $pkg_failed = untried; then
-     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-	have_libtlm_nfc=no
-else
-	LIBTLM_NFC_CFLAGS=$pkg_cv_LIBTLM_NFC_CFLAGS
-	LIBTLM_NFC_LIBS=$pkg_cv_LIBTLM_NFC_LIBS
-        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
-$as_echo "yes" >&6; }
-	have_libtlm_nfc=yes
-fi
+#
+#pkg_failed=no
+#{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for LIBTLM_NFC" >&5
+#$as_echo_n "checking for LIBTLM_NFC... " >&6; }
+#
+#if test -n "$LIBTLM_NFC_CFLAGS"; then
+#    pkg_cv_LIBTLM_NFC_CFLAGS="$LIBTLM_NFC_CFLAGS"
+# elif test -n "$PKG_CONFIG"; then
+#    if test -n "$PKG_CONFIG" && \
+#    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"libtlm-nfc\""; } >&5
+#  ($PKG_CONFIG --exists --print-errors "libtlm-nfc") 2>&5
+#  ac_status=$?
+#  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+#  test $ac_status = 0; }; then
+#  pkg_cv_LIBTLM_NFC_CFLAGS=`$PKG_CONFIG --cflags "libtlm-nfc" 2>/dev/null`
+#		      test "x$?" != "x0" && pkg_failed=yes
+#else
+#  pkg_failed=yes
+#fi
+# else
+#    pkg_failed=untried
+#fi
+#if test -n "$LIBTLM_NFC_LIBS"; then
+#    pkg_cv_LIBTLM_NFC_LIBS="$LIBTLM_NFC_LIBS"
+# elif test -n "$PKG_CONFIG"; then
+#    if test -n "$PKG_CONFIG" && \
+#    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"libtlm-nfc\""; } >&5
+#  ($PKG_CONFIG --exists --print-errors "libtlm-nfc") 2>&5
+#  ac_status=$?
+#  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+#  test $ac_status = 0; }; then
+#  pkg_cv_LIBTLM_NFC_LIBS=`$PKG_CONFIG --libs "libtlm-nfc" 2>/dev/null`
+#		      test "x$?" != "x0" && pkg_failed=yes
+#else
+#  pkg_failed=yes
+#fi
+# else
+#    pkg_failed=untried
+#fi
 
 
- if test x$have_libtlm_nfc = xyes; then
+
+#if test $pkg_failed = yes; then
+#   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+#$as_echo "no" >&6; }
+#
+#if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
+#        _pkg_short_errors_supported=yes
+#else
+#        _pkg_short_errors_supported=no
+#fi
+#        if test $_pkg_short_errors_supported = yes; then
+#	        LIBTLM_NFC_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "libtlm-nfc" 2>&1`
+#        else
+#	        LIBTLM_NFC_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "libtlm-nfc" 2>&1`
+#        fi
+#	# Put the nasty error message in config.log where it belongs
+#	echo "$LIBTLM_NFC_PKG_ERRORS" >&5
+#
+#	have_libtlm_nfc=no
+#elif test $pkg_failed = untried; then
+#     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+#$as_echo "no" >&6; }
+#	have_libtlm_nfc=no
+#else
+#	LIBTLM_NFC_CFLAGS=$pkg_cv_LIBTLM_NFC_CFLAGS
+#	LIBTLM_NFC_LIBS=$pkg_cv_LIBTLM_NFC_LIBS
+#        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+#$as_echo "yes" >&6; }
+#	have_libtlm_nfc=yes
+#fi
+
+
+have_libtlm_nfc = no
+if test x$have_libtlm_nfc = xyes; then
   HAVE_LIBTLM_NFC_TRUE=
   HAVE_LIBTLM_NFC_FALSE='#'
 else
@@ -14738,7 +14739,6 @@ do
     "src/plugins/Makefile") CONFIG_FILES="$CONFIG_FILES src/plugins/Makefile" ;;
     "src/plugins/default/Makefile") CONFIG_FILES="$CONFIG_FILES src/plugins/default/Makefile" ;;
     "src/plugins/gumd/Makefile") CONFIG_FILES="$CONFIG_FILES src/plugins/gumd/Makefile" ;;
-    "src/plugins/nfc/Makefile") CONFIG_FILES="$CONFIG_FILES src/plugins/nfc/Makefile" ;;
     "data/Makefile") CONFIG_FILES="$CONFIG_FILES data/Makefile" ;;
     "data/tlm.conf") CONFIG_FILES="$CONFIG_FILES data/tlm.conf" ;;
     "tests/Makefile") CONFIG_FILES="$CONFIG_FILES tests/Makefile" ;;

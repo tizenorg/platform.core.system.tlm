@@ -120,7 +120,6 @@ src/utils/Makefile
 src/plugins/Makefile
 src/plugins/default/Makefile
 src/plugins/gumd/Makefile
-src/plugins/nfc/Makefile
 data/Makefile
 data/tlm.conf
 tests/Makefile

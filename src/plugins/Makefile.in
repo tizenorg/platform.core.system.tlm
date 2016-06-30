@@ -78,7 +78,6 @@ POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
 @HAVE_LIBGUM_TRUE@am__append_1 = gumd
-@HAVE_LIBTLM_NFC_TRUE@am__append_2 = nfc
 subdir = src/plugins
 DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/Makefile.am
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
