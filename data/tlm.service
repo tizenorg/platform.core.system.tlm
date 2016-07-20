@@ -4,6 +4,7 @@ After=systemd-user-sessions.service systemd-logind.service
 Requires=dbus.socket
 
 [Service]
+SmackProcessLabel=System
 ExecStart=/usr/bin/tlm
 CapabilityBoundingSet=~CAP_MAC_ADMIN
 CapabilityBoundingSet=~CAP_MAC_OVERRIDE
